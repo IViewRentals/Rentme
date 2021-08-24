@@ -90,14 +90,15 @@ public class BaseController {
 ////        String datetype=request.getParameter("datetype"));
 ////        String date=request.getParameter("date");
 //
-//        int minbedrooms = Integer.parseInt(request.getParameter("minbedrooms"));
-//        int maxbedrooms = Integer.parseInt(request.getParameter("maxbedrooms"));
+
+       /* int minbedrooms = Integer.parseInt(request.getParameter("minbedrooms"));
+        int maxbedrooms = Integer.parseInt(request.getParameter("maxbedrooms"));*/
 //
-//        int minbathrooms = Integer.parseInt(request.getParameter("minbathrooms"));
-//        int maxbathrooms = Integer.parseInt(request.getParameter("maxbathrooms"));
+      /*   int minbathrooms = Integer.parseInt(request.getParameter("minbathrooms"));
+        int maxbathrooms = Integer.parseInt(request.getParameter("maxbathrooms"));
 //
-//        int minparkings = Integer.parseInt(request.getParameter("minparking"));
-//        int maxparkings = Integer.parseInt(request.getParameter("maxparking"));
+        int minparkings = Integer.parseInt(request.getParameter("minparking"));
+        int maxparkings = Integer.parseInt(request.getParameter("maxparking"));*/
 //
 //        int minlandsize = Integer.parseInt(request.getParameter("minlandsize"));
 //        int maxlandsize = Integer.parseInt(request.getParameter("maxlandsize"));
@@ -119,11 +120,44 @@ public class BaseController {
 //        para.getFilters().getPrice().setMin(minprice);
 //        para.getFilters().getPrice().setMax(maxprice);
 
-        //设置床数
-//        RentRequestParaForAllhomes.FiltersBean.BedsBean bedsBean = new RentRequestParaForAllhomes.FiltersBean.BedsBean();
-//        para.getFilters().setBeds(bedsBean);
-//        para.getFilters().getBeds().setMin(minbedrooms);
-//        para.getFilters().getBeds().setMax(maxbedrooms);
+        if (null != request.getParameter("Bedrooms") && StringUtils.isNotEmpty(request.getParameter("Bedrooms"))) {
+            //设置床数
+            RentRequestParaForAllhomes.FiltersBean.BedsBean bedsBean = new RentRequestParaForAllhomes.FiltersBean.BedsBean();
+            para.getFilters().setBeds(bedsBean);
+
+            para.getFilters().getBeds().setMin(Integer.parseInt(request.getParameter("Bedrooms")));
+            if ("5".equals(request.getParameter("Bedrooms"))) {
+                para.getFilters().getBeds().setMax(null);
+            } else {
+                para.getFilters().getBeds().setMax(Integer.parseInt(request.getParameter("Bedrooms")));
+            }
+
+        }
+        if (null != request.getParameter("Bathrooms") && StringUtils.isNotEmpty(request.getParameter("Bathrooms"))) {
+            //设置床数
+            RentRequestParaForAllhomes.FiltersBean.BathsBean bedsBean = new RentRequestParaForAllhomes.FiltersBean.BathsBean();
+            para.getFilters().setBaths(bedsBean);
+            para.getFilters().getBaths().setMin(Integer.parseInt(request.getParameter("Bathrooms")));
+            if ("5".equals(request.getParameter("Bathrooms"))) {
+                para.getFilters().getBaths().setMax(null);
+            } else {
+                para.getFilters().getBaths().setMax(Integer.parseInt(request.getParameter("Bathrooms")));
+            }
+
+        }
+
+        if (null != request.getParameter("Parking") && StringUtils.isNotEmpty(request.getParameter("Parking"))) {
+            //设置床数
+            RentRequestParaForAllhomes.FiltersBean.ParkingBean bedsBean = new RentRequestParaForAllhomes.FiltersBean.ParkingBean();
+            para.getFilters().setParking(bedsBean);
+            para.getFilters().getParking().setMin(Integer.parseInt(request.getParameter("Parking")));
+            if ("5".equals(request.getParameter("Parking"))) {
+                para.getFilters().getParking().setMax(null);
+            } else {
+                para.getFilters().getParking().setMax(Integer.parseInt(request.getParameter("Parking")));
+            }
+
+        }
 
         //设置浴室
 //        RentRequestParaForAllhomes.FiltersBean.BathsBean bathsBean = new RentRequestParaForAllhomes.FiltersBean.BathsBean();
@@ -212,6 +246,7 @@ public class BaseController {
 
 
         //设置propertyTypes
+        // propertyTypes: ["HOUSE", "TOWNHOUSE"]
         if(null!= propertyTypes && propertyTypes.length >0) {
             List<String> propertiesList = Arrays.asList(propertyTypes);
             para.getFilters().setPropertyTypes(null);
@@ -233,7 +268,7 @@ public class BaseController {
         // https://www.domain.com.au/rent/canberra-act/apartment/?bedrooms=1-any&price=100-2000&keywords=test
         // https://www.domain.com.au/rent/canberra-act/?ptype=apartment-unit-flat,block-of-units,new-apartments,pent-house,studio,town-house&bedrooms=1-any&price=100-2000&keywords=test
         //para
-       // String region = request.getParameter("region");
+        // String region = request.getParameter("region");
 //        String district=request.getParameter("DISTRICT");
 
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -272,7 +307,21 @@ public class BaseController {
             //组装地区参数
             para.append(region.split("-")[0].replaceAll(" ","").replace(",","-").trim().toLowerCase() + "/?page="+currentPage);
         } else {
-            para.append("/?page="+currentPage);
+            // propertyTypes: ["HOUSE", "TOWNHOUSE"]
+            if(null!= propertyTypes && propertyTypes.length >0) {
+                String propertyTypeTmp= StringUtils.join(propertyTypes, ",");
+                if (!propertyTypeTmp.contains("Apartment")) {
+                    para.append("/apartment/?page="+currentPage);
+                } else if (!propertyTypeTmp.contains("House")) {
+                    para.append("/house/?page="+currentPage);
+                } else if (!propertyTypeTmp.contains("Townhouse")) {
+                    para.append("/town-house/?page="+currentPage);
+                }
+
+            } else {
+                para.append("/?page="+currentPage);
+            }
+
         }
 
 
@@ -284,9 +333,9 @@ public class BaseController {
 //        List<String> propertiesList = Arrays.asList(propertyTypes);
 //        if (!propertiesList.contains("__ALL__")) {
 //            //only test
-//            para.append("ptype=apartment-unit-flat,block-of-units,duplex,free-standing,new-apartments,new-home-designs,new-house-land,pent-house,semi-detached,studio,terrace,town-house,villa&excludedeposittaken=1");
+//          //  para.append("ptype=apartment-unit-flat,block-of-units,duplex,free-standing,new-apartments,new-home-designs,new-house-land,pent-house,semi-detached,studio,terrace,town-house,villa&excludedeposittaken=1");
 //        } else {
-//            para.append("ptype=apartment-unit-flat,block-of-units,duplex,free-standing,new-apartments,new-home-designs,new-house-land,pent-house,semi-detached,studio,terrace,town-house,villa&excludedeposittaken=1");
+//           // para.append("ptype=apartment-unit-flat,block-of-units,duplex,free-standing,new-apartments,new-home-designs,new-house-land,pent-house,semi-detached,studio,terrace,town-house,villa&excludedeposittaken=1");
 //        }
 //        para.append("&");
 
@@ -414,6 +463,9 @@ public class BaseController {
 //        para.append("area__lte=" + maxlandsize);
 //        para.append("&");
 
+        // categories: House,Unit,Apartment
+
+        // categories: House,Unit,Apartment,Townhouse,Villa,Studio,Flat,Warehouse,DuplexSemi-detached,Dual_occupancy,Land,Rural,MixedFarming,Alpine,AcreageSemi-rural,Retirement,BlockOfUnits,Terrace,ServicedApartment,Other
         //设置关键字
         String keywords = request.getParameter("keywords");
         if (keywords.length()!=0){
@@ -460,11 +512,32 @@ public class BaseController {
             //String regiontmp = region.split("-")[0];
             //para.append("&address_suburb="+regiontmp.split(",")[0]+","+regiontmp.split(",")[2]+","+regiontmp.split(",")[1]);
         }
+        String query="";
+        if(null!= propertyTypes && propertyTypes.length >0) {
+            String propertyTypeTmp= StringUtils.join(propertyTypes, ",");
+            if (!propertyTypeTmp.contains("Apartment")) {
+                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"unit apartment\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
 
-        String query = "{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\"channel\":\"rent\",\"page\":"+currentPage+",\"pageSize\":25,\"filters\":{\"surroundingSuburbs\":false,\"excludeNoSalePrice\":false,\"ex-under-contract\":false,\"furnished\":false,\"petsAllowed\":false,\"hasScheduledAuction\":false},\"localities\":[{\"searchLocation\":\""+region.split("-")[0]+"\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
-         query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+            } else if (!propertyTypeTmp.contains("House")) {
+                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"house\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+
+            } else if (!propertyTypeTmp.contains("Townhouse")) {
+                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"townhouse\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+
+            }
+
+        } else {
+            query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+
+        }
+        //String test ="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"unit apartment\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\"canberra - greater region, act\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+
+        // {"channel":"rent","page":1,"pageSize":25,"filters":{"propertyTypes":["house","unit apartment","townhouse","villa"],"surroundingSuburbs":false,"excludeNoSalePrice":false,"ex-under-contract":false,"furnished":false,"petsAllowed":false,"hasScheduledAuction":false},"localities":[{"searchLocation":"canberra - greater region, act"}]}
+        //{"channel":"rent","page":1,"pageSize":25,"filters":{"propertyTypes":["house","unit apartment"],"surroundingSuburbs":false,"excludeNoSalePrice":false,"ex-under-contract":false,"furnished":false,"petsAllowed":false,"hasScheduledAuction":false},"localities":[{"searchLocation":"canberra - greater region, act"}]}
+        // String query = "{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\"channel\":\"rent\",\"page\":"+currentPage+",\"pageSize\":25,\"filters\":{\"surroundingSuburbs\":false,\"excludeNoSalePrice\":false,\"ex-under-contract\":false,\"furnished\":false,\"petsAllowed\":false,\"hasScheduledAuction\":false},\"localities\":[{\"searchLocation\":\""+region.split("-")[0]+"\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+        //  query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false,\"propertyTypes\":[\"house\",\"unit apartment\",\"townhouse\",\"villa\"]},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
         //variables.setQuery(query);
-       // para.setVariables(variables);
+        // para.setVariables(variables);
 
 
 
