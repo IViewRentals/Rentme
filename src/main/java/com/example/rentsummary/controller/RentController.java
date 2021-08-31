@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -186,10 +187,14 @@ public class RentController extends BaseController {
     public AjaxResult getZangoList(HttpServletRequest httpServletRequest, String keywords, String type) throws UnsupportedEncodingException {
 
         String queryParaForDomain = parseParaForZango(httpServletRequest,type);
-
+        String[] propertyTypes = httpServletRequest.getParameterValues("propertyTypes");
+        String categories="";
+        if(null!= propertyTypes && propertyTypes.length >0) {
+            categories = "&categories="+StringUtils.join(propertyTypes, ",");
+        }
         int currentPage = Integer.parseInt(httpServletRequest.getParameter("currentPage"));
         // 根据解析参数获取数据
-        String result = RentContextGet.getRentFromzango(queryParaForDomain,currentPage);
+        String result = RentContextGet.getRentFromzango(queryParaForDomain,currentPage,categories);
 
         // 判断返回数据，进行处理
         if (StringUtils.isNotEmpty(result)) {
@@ -294,6 +299,12 @@ public class RentController extends BaseController {
     public String toIndex(){
 
         return "index.html";
+    }
+
+    @GetMapping(value = "/rentme")
+    public String rentme(){
+
+        return "rentme.html";
     }
 
     @GetMapping(value = "/test")

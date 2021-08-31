@@ -1,0 +1,16 @@
+server:
+  #端口号
+  port: 8888
+
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5 #允许不太严格的HTML格式
+    cache: false  #开发时关闭缓存,不然没法看到实时页面
+  mvc:
+    view:
+      prefix: html/
+      suffix: .html
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: classpath:templates/,classpath:static/

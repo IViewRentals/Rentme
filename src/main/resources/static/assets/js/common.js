@@ -15,13 +15,13 @@ function initPage(element,currentPage,numberOfPages,totalPages,tabid){
             //图标的更改显示可以在这里修改。
             switch (type) {
                 case "first":
-                    return "Home";
+                    return "首页";
                 case "prev":
-                    return "Previous Page";
+                    return "上一页";
                 case "next":
-                    return "Next Page";
+                    return "下一页";
                 case "last":
-                    return "Last Page";
+                    return "末页";
                 case "page":
                     return  page;
             }
@@ -30,15 +30,15 @@ function initPage(element,currentPage,numberOfPages,totalPages,tabid){
             //如果想要去掉页码数字上面的预览功能，则在此操作。例如：可以直接return。
             switch (type) {
                 case "first":
-                    return "Jump to Start";
+                    return "跳转到首页";
                 case "prev":
-                    return "Jump to Previous";
+                    return "跳转到上一页";
                 case "next":
-                    return "Jump to Next";
+                    return "跳转到下一页";
                 case "last":
-                    return "Jump to Last";
+                    return "跳转到最后一页";
                 case "page":
-                    return (page === current) ? "Current " + page : "to " + page;
+                    return (page === current) ? "当前页 " + page : "跳转到 " + page;
             }
         },
         onPageClicked: function (e, originalEvent, type, page) {
@@ -80,12 +80,33 @@ function  initBasic() {
 
         //默认展开条件数
         "expandRow": 2,
-        //Conditions
+        //查询条件
         "searchBoxs": [
+            // {
+            //     "id": "region",
+            //     "title": "region",
+            //     //"isMultiple":false,
+            //     "isShowAll": false,//是否显示全部
+            //     "data": [
+            //         { "value": "391", "text": "Canberra, ACT" }
+            //     ],
+            //     "defaults": ['391']
+            // },
+           // /* {
+           //      "id": "domain",
+           //      "title": "domain",
+           //      //"isMultiple":false,
+           //      "isShowAll": false,//是否显示全部
+           //      "data": [
+           //          { "value": "allhomes", "text": "www.allhomes.com.au" },
+           //          { "value": "domain", "text": "www.domain.com.au" }
+           //      ],
+           //      "defaults": ['391']
+           //  },*/
             {
                 "id": "propertyTypes",
                 "title": "allhomes(Types)",
-                "isShowAll": false,//Display all
+                "isShowAll": false,//是否显示全部
                 "data": [
                     {"value": "__ALL__", "text": "ALL"},
                     {"value": "HOUSE", "text": "House"},
@@ -105,7 +126,7 @@ function  initBasic() {
 
 
 
-// www.domain.com.au
+// 加载www.domain.com.au数据
 function initDomainData(paramList,currentPage,id,name,type){
     var ps= {};
     for(var i=0;i<paramList.length;i++){
@@ -142,7 +163,7 @@ function initDomainData(paramList,currentPage,id,name,type){
         },
         success: function (result) {
 
-            // Return Success
+            // 返回成功的处理
             if (result.code == 0) {
                 var obj = $.parseJSON(result.data);
                 // 总的页码数

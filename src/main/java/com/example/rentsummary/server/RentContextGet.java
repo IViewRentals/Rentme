@@ -243,7 +243,7 @@ public class RentContextGet {
         post.setHeader("Accept-Encoding", "gzip, deflate, br");
         post.setHeader("Accept", "*/*");
 //        post.setHeader("Accept-Language", "zh-CN,zh;q=0.9");
-//        post.setHeader("origin", "https://www.realestate.com.au");
+    //        post.setHeader("origin", "https://www.realestate.com.au");
 //        post.setHeader("referer", "https://www.realestate.com.au/");
 //
 //        post.setHeader("sec-ch-ua", " Not A;Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google Chrome\";v=\"90\"");
@@ -289,13 +289,13 @@ public class RentContextGet {
         return "Pending";
     }
 
-    public static String getRentFromzango(String queryPara,int currentPage) throws UnsupportedEncodingException {
+    public static String getRentFromzango(String queryPara,int currentPage, String categories) throws UnsupportedEncodingException {
         //1.生成httpclient，相当于该打开一个浏览器
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
         //2.创建get请求，相当于在浏览器地址栏输入 order_by 网址current,underOffer,includePrivate
         String url="https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease"+
-                "&surrounding=true&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&view_as=list&address_suburb=";
+                "&surrounding=true&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&view_as=list"+categories+"&address_suburb=";
         url=url+java.net.URLEncoder.encode(queryPara,"utf-8")+"&page="+currentPage;
 
         // https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&address_suburb=Acton%2C+2601%2C+ACT&surrounding=true&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&page=1
