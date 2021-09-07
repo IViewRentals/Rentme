@@ -264,7 +264,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12">
-                        <div class="searchbox" id="basic_searchbox" style=" display:none; font-size: 14px;"></div>
+                        <div class="searchbox" id="basic_searchbox" style="  font-size: 14px;"></div>
 
                     </div>
                 </div>
@@ -275,7 +275,7 @@
     <!-- banner end -->
 
 
-    <!-- navigation -->
+    <!-- 导航区 -->
 
 
     <!-- feature properties begin -->
@@ -285,25 +285,25 @@
                 <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="home"
                        aria-selected="true" >
-                        <h6 style="margin: 0px">Allhomes</h6>
+                        <h6 style="margin: 0px">www.allhomes.com.au</h6>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="profile"
                        aria-selected="false" >
-                        <h6 style="margin: 0px">Domain</h6>
+                        <h6 style="margin: 0px">www.domain.com.au</h6>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="zango-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="profile"
                        aria-selected="false" >
-                        <h6 style="margin: 0px">Zango</h6>
+                        <h6 style="margin: 0px">zango.com.au</h6>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="realestate-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="profile"
                        aria-selected="false" >
-                        <h6 style="margin: 0px">RealEstate</h6>
+                        <h6 style="margin: 0px">www.realestate.com.au</h6>
                     </a>
                 </li>
             </ul>
@@ -561,7 +561,7 @@
     <script src="static/assets/js/common.js"></script>
     <script>
 
-       var _currentPage=1;// current page number
+       var _currentPage=1;//当前页数
         // $(window).on('load',function(){
         //     //======================================
         //     //====== preloader ========
@@ -592,9 +592,9 @@
 
            /* $( '#searchInput' ).autocomplete({
                 source: function (query,process){
-                    var matchCount = this .options.items; // the max number of allowed returned result sets
+                    var matchCount = this .options.items; //允许返回结果集最大数量
                     $.get( "https://www.allhomes.com.au/wsvc/locality/searchallbyname?st=ACT&n=" ,{}, function (respData){
-                        respData = $.parseJSON(respData); // analyse returned data
+                        respData = $.parseJSON(respData); //解析返回的数据
                         return process(respData);
                     });
                 },
@@ -613,24 +613,23 @@
                 searchField : "name",
                 data : '/searchallbyname',
                 focusDropList:false,
-                // close the button of the point-down triangle
+                //关闭向下的三角尖按钮
                 dropButton : false,
-                // set the number of displayed records in each page
+                //设置每页显示记录数
                 pageSize : 10,
-                // the numer of displayed project under the condition when pages are closed
-                // other projects are displayed in the scroll bar (the default number of projects is 10)
+                //关闭分页的状态下，列表显示的项目个数，其它的项目以滚动条滚动方式展现（默认10个）
                 listSize : 15,
-                // activate the multi-selection model
+                //启用多选模式
                 multiple : true,
-                // a maximum of three projects can be selected
+                //限制最多选中三个项目
                 maxSelectLimit : 1,
                 pagination : false,
                 selectToCloseList:true,
-                // format displayed projects and provide raw data to use
+                //格式化显示项目，提供源数据进行使用
                 formatItem : function(data){
                     return data.name + '-' + data.type;
                 },
-                //data：select the raw data objects in lines
+                //data：选中行的原始数据对象
                 eSelect : function(data){
                   //  $('#callbackLog').append(data.desc + '(' + data.name + ')<br/>');
                    // alert($('#searchInput').selectPageText());
@@ -646,8 +645,8 @@
                         $('#hidType').val());
                 },
                // params : function(){return {'name':'aa','sex':1};},
-                // process the returned data sent from ajax server after requisition
-                // the returned data must contains list (Array) and total row (number|string)
+                //ajax请求后服务端返回的数据格式处理
+                //返回的数据里必须包含list（Array）和totalRow（number|string）两个节点
                 eAjaxSuccess : function(rs){
                     var result;
                     if(rs.code==0) result = rs.data.gridResult;
@@ -659,7 +658,7 @@
          //  initDomainData($("#basic_searchbox").getParamList(),1);
         });
 
-        // searching processing
+        // 查询处理
         function searchHref(paramList,currentPage,id,name,type){
             var ps= {};
             // if(paramList[0].ValueList.length==0){
@@ -693,14 +692,14 @@
                     // },
                     url: '/getList',
                     beforeSend:function(XMLHttpRequest){
-                        //alert('Remote call starts...');
+                        //alert('远程调用开始...');
                         //$("#loading").html("<img src='/jqueryStu/images/loading.gif' />");
                       //  var h = document.body.scrollHeight;
                       //  var w = document.body.scrollWidth;
                       //  var h = $("#tab1").height();
                       //  var w = $("#tab1").width();
                         //$("<div class=\"mask\"></div>").css({ display: "block", width: w, height: h }).appendTo("#tab1");
-                        /*$("<div class=\"mask-msg\"></div>").html("Please wait while data is loading......").appendTo("#tab1").css({
+                        /*$("<div class=\"mask-msg\"></div>").html("正在加载数据，请稍候......").appendTo("#tab1").css({
                             display: "block",
                             left:  $("#tab1").offset().left+100,//($(document.body).outerWidth(true) - 190) / 2
                             top: $("#tab1").offset().top+100
@@ -720,19 +719,19 @@
 
                         var obj = $.parseJSON(result.data);
 
-                        // processing when the return is successful
+                        // 返回成功的处理
                         if (result.code == 0) {
 
-                            // total page number
+                            // 总的页码数
                             var  numPages =obj.numPages;
-                            // total record number
+                            // 总记录数
                             var totalHits =obj.totalHits;
 
                             if (totalHits==0) {
                                 $("#page404").css({ display: "block"})
                             }
 
-                            // initialize paging module
+                            // 分页组件初始化
                             if (currentPage ==1&&numPages>0) {
 
 
@@ -803,7 +802,7 @@
                         }
                     },
                     complete:function(XMLHttpRequest,textStatus){
-                        // alert('Remote call succeeded，status result text：'+textStatus);
+                        // alert('远程调用成功，状态文本值：'+textStatus);
                         //$("#loading").empty();
                         $("#loading-mask").remove();
                         $("#loading").remove();
@@ -812,7 +811,7 @@
                         // });
                     },
                     error:function(XMLHttpRequest,textStatus,errorThrown){
-                        alert('Error...status result text：'+textStatus+" Error message："+errorThrown);
+                        alert('error...状态文本值：'+textStatus+" 异常信息："+errorThrown);
                         //$("#loading").empty();
                         $("#loading-mask").remove();
                         $("#loading").remove();

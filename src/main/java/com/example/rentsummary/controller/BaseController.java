@@ -268,7 +268,7 @@ public class BaseController {
         // https://www.domain.com.au/rent/canberra-act/apartment/?bedrooms=1-any&price=100-2000&keywords=test
         // https://www.domain.com.au/rent/canberra-act/?ptype=apartment-unit-flat,block-of-units,new-apartments,pent-house,studio,town-house&bedrooms=1-any&price=100-2000&keywords=test
         //para
-        // String region = request.getParameter("region");
+       // String region = request.getParameter("region");
 //        String district=request.getParameter("DISTRICT");
 
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -309,7 +309,7 @@ public class BaseController {
         } else {
             // propertyTypes: ["HOUSE", "TOWNHOUSE"]
             if(null!= propertyTypes && propertyTypes.length >0) {
-                String propertyTypeTmp= StringUtils.join(propertyTypes, ",");
+               String propertyTypeTmp= StringUtils.join(propertyTypes, ",");
                 if (!propertyTypeTmp.contains("Apartment")) {
                     para.append("/apartment/?page="+currentPage);
                 } else if (!propertyTypeTmp.contains("House")) {
@@ -534,10 +534,10 @@ public class BaseController {
 
         // {"channel":"rent","page":1,"pageSize":25,"filters":{"propertyTypes":["house","unit apartment","townhouse","villa"],"surroundingSuburbs":false,"excludeNoSalePrice":false,"ex-under-contract":false,"furnished":false,"petsAllowed":false,"hasScheduledAuction":false},"localities":[{"searchLocation":"canberra - greater region, act"}]}
         //{"channel":"rent","page":1,"pageSize":25,"filters":{"propertyTypes":["house","unit apartment"],"surroundingSuburbs":false,"excludeNoSalePrice":false,"ex-under-contract":false,"furnished":false,"petsAllowed":false,"hasScheduledAuction":false},"localities":[{"searchLocation":"canberra - greater region, act"}]}
-        // String query = "{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\"channel\":\"rent\",\"page\":"+currentPage+",\"pageSize\":25,\"filters\":{\"surroundingSuburbs\":false,\"excludeNoSalePrice\":false,\"ex-under-contract\":false,\"furnished\":false,\"petsAllowed\":false,\"hasScheduledAuction\":false},\"localities\":[{\"searchLocation\":\""+region.split("-")[0]+"\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
-        //  query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false,\"propertyTypes\":[\"house\",\"unit apartment\",\"townhouse\",\"villa\"]},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+       // String query = "{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\"channel\":\"rent\",\"page\":"+currentPage+",\"pageSize\":25,\"filters\":{\"surroundingSuburbs\":false,\"excludeNoSalePrice\":false,\"ex-under-contract\":false,\"furnished\":false,\"petsAllowed\":false,\"hasScheduledAuction\":false},\"localities\":[{\"searchLocation\":\""+region.split("-")[0]+"\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+       //  query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false,\"propertyTypes\":[\"house\",\"unit apartment\",\"townhouse\",\"villa\"]},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
         //variables.setQuery(query);
-        // para.setVariables(variables);
+       // para.setVariables(variables);
 
 
 
