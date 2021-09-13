@@ -360,6 +360,30 @@ public class BaseController {
         para.append("landsize=" + minlandsize + "-any");
         para.append("&");*/
 
+        // 设置排序标准
+        String sortBy = request.getParameter("sort_by");
+        String order = request.getParameter("order");
+
+        if(StringUtils.isNotEmpty(sortBy)) {
+            if(sortBy.equals("inspection")){
+                para.append("/inspection-times");
+            }else {
+                para.append("/?sort=");
+                if(sortBy.equals("publish")){
+                    para.append("dateupdated-desc");
+                }else {
+                    para.append("price-");
+                    if(order.equals("desc")){
+                        para.append("desc");
+                    }else{
+                        para.append("asc");
+                    }
+                }
+            }
+        }else {
+            para.append("/?sort=price-asc");
+        }
+
         //设置关键字
         if (StringUtils.isNotEmpty(keywords)) {
             para.append("&keywords=" + keywords);
