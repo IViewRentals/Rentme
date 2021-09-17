@@ -83,6 +83,8 @@ public class BaseController {
 
         String[] propertyTypes = request.getParameterValues("propertyTypes");
 
+        String sort = request.getParameter("sort");
+
 //        int minprice = Integer.parseInt(request.getParameter("minprice"));
 //        int maxprice = Integer.parseInt(request.getParameter("maxprice"));
 //
@@ -196,7 +198,7 @@ public class BaseController {
 //            }
 //        }
 
-        //设置地区
+        // 设置地区
         List<RentRequestParaForAllhomes.FiltersBean.LocalitiesBean> localitiesBeanslist = new ArrayList<RentRequestParaForAllhomes.FiltersBean.LocalitiesBean>();
         para.getFilters().setLocalities(localitiesBeanslist);
    /*     RentRequestParaForAllhomes.FiltersBean.LocalitiesBean localitiesBean = new RentRequestParaForAllhomes.FiltersBean.LocalitiesBean();
@@ -244,7 +246,6 @@ public class BaseController {
             para.getFilters().getLocalities().add(localitiesBean1);*//*
         }*/
 
-
         //设置propertyTypes
         // propertyTypes: ["HOUSE", "TOWNHOUSE"]
         if(null!= propertyTypes && propertyTypes.length >0) {
@@ -253,7 +254,24 @@ public class BaseController {
             if (!propertiesList.contains("__ALL__")) {
                 para.getFilters().setPropertyTypes(propertiesList);
             }
+        }
 
+        RentRequestParaForAllhomes.SortBean sortBean = new RentRequestParaForAllhomes.SortBean();
+        para.setSort(sortBean);
+
+        if (null != sort && StringUtils.isNotEmpty(sort)) {
+            para.append("/?sort=");
+            if (sort.equals("inspection")){
+                para.append("inspectiontime-asc");
+            } else if (sort.equals("publish")) {
+                para.append("newest-listing");
+            } else if (sort.equals("price")) {
+                if (order.equals("desc")) {
+                    para.append("highest-price");
+                }
+            }
+         } else {
+            para.getSort().
         }
 
         return para;
@@ -264,12 +282,11 @@ public class BaseController {
     //解析请求参数
     public String parseParaForDomain(HttpServletRequest request) {
 
-
         // https://www.domain.com.au/rent/canberra-act/apartment/?bedrooms=1-any&price=100-2000&keywords=test
         // https://www.domain.com.au/rent/canberra-act/?ptype=apartment-unit-flat,block-of-units,new-apartments,pent-house,studio,town-house&bedrooms=1-any&price=100-2000&keywords=test
-        //para
-       // String region = request.getParameter("region");
-//        String district=request.getParameter("DISTRICT");
+        // para
+        // String region = request.getParameter("region");
+        // String district = request.getParameter("DISTRICT");
 
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
@@ -298,13 +315,13 @@ public class BaseController {
 
         String keywords = request.getParameter("keywords");
 
-        //拼装get请求参数
+        // 拼装get请求参数
         StringBuffer para = new StringBuffer();
 
         String region = request.getParameter("name");
 
         if(StringUtils.isNotEmpty(region)) {
-            //组装地区参数
+            // 组装地区参数
             para.append(region.split("-")[0].replaceAll(" ","").replace(",","-").trim().toLowerCase() + "/?page="+currentPage);
         } else {
             // propertyTypes: ["HOUSE", "TOWNHOUSE"]
@@ -317,17 +334,13 @@ public class BaseController {
                 } else if (!propertyTypeTmp.contains("Townhouse")) {
                     para.append("/town-house/?page="+currentPage);
                 }
-
             } else {
                 para.append("/?page="+currentPage);
             }
-
         }
-
 
         //组装房屋类型为所有类型
         //不传参即可
-
 
         //设置propertyTypes
 //        List<String> propertiesList = Arrays.asList(propertyTypes);
@@ -361,15 +374,15 @@ public class BaseController {
         para.append("&");*/
 
         // 设置排序标准
-        String sortBy = request.getParameter("sort_by");
+        String sort = request.getParameter("sort");
         String order = request.getParameter("order");
 
-        if(StringUtils.isNotEmpty(sortBy)) {
-            if(sortBy.equals("inspection")){
+        if(StringUtils.isNotEmpty(sort)) {
+            if(sort.equals("inspection")){
                 para.append("/inspection-times");
             }else {
                 para.append("/?sort=");
-                if(sortBy.equals("publish")){
+                if(sort.equals("publish")){
                     para.append("dateupdated-desc");
                 }else {
                     para.append("price-");
@@ -409,21 +422,25 @@ public class BaseController {
 //        int minbedrooms = Integer.parseInt(request.getParameter("minbedrooms"));
 //        int maxbedrooms = Integer.parseInt(request.getParameter("maxbedrooms"));
 //
-//        int minbathrooms = Integer.parseInt(request.getParameter("minbathrooms"));
-//        int maxbathrooms = Integer.parseInt(request.getParameter("maxbathrooms"));
+      /*   int minbathrooms = Integer.parseInt(request.getParameter("minbathrooms"));
+        int maxbathrooms = Integer.parseInt(request.getParameter("maxbathrooms"));
 //
-//        int minparkings = Integer.parseInt(request.getParameter("minparking"));
-//        int maxparkings = Integer.parseInt(request.getParameter("maxparking"));
+        int minparkings = Integer.parseInt(request.getParameter("minparking"));
+        int maxparkings = Integer.parseInt(request.getParameter("maxparking"));*/
 //
 //        int minlandsize = Integer.parseInt(request.getParameter("minlandsize"));
 //        int maxlandsize = Integer.parseInt(request.getParameter("maxlandsize"));
 
+        // Create sort parameter
+        // https://zango.com.au/rent/search/?property_class=rental&listing_type=lease&address_suburb=Acton,%202601,
+        // %20ACT&surrounding=true&order_by=-created&property_status_groups=current,underOffer,includePrivate&
+        // region=act&page=1&view_as=list
+        String sort = request.getParameter("sort");
+        String order = request.getParameter("order");
 
         //拼装get请求参数
         StringBuffer para = new StringBuffer();
         String region = request.getParameter("name");
-
-
 
         if(StringUtils.isNotEmpty(region)) {
             //组装地区参数
@@ -440,19 +457,16 @@ public class BaseController {
 //        para.append("&page="+currentPage);
         //para.append("&address_suburb=ACT+%26+Surrounds");
 
-
-
         //组装房屋类型为所有类型
         //不传参即可
-
 
         //设置propertyTypes
 //        List<String> propertiesList = Arrays.asList(propertyTypes);
 //        if (!propertiesList.contains("__ALL__")) {
 //            //only test
-//            para.append("ptype=apartment-unit-flat,block-of-units,duplex,free-standing,new-apartments,new-home-designs,new-house-land,pent-house,semi-detached,studio,terrace,town-house,villa&excludedeposittaken=1");
+//          //  para.append("ptype=apartment-unit-flat,block-of-units,duplex,free-standing,new-apartments,new-home-designs,new-house-land,pent-house,semi-detached,studio,terrace,town-house,villa&excludedeposittaken=1");
 //        } else {
-//            para.append("ptype=apartment-unit-flat,block-of-units,duplex,free-standing,new-apartments,new-home-designs,new-house-land,pent-house,semi-detached,studio,terrace,town-house,villa&excludedeposittaken=1");
+//           // para.append("ptype=apartment-unit-flat,block-of-units,duplex,free-standing,new-apartments,new-home-designs,new-house-land,pent-house,semi-detached,studio,terrace,town-house,villa&excludedeposittaken=1");
 //        }
 //        para.append("&");
 
@@ -490,6 +504,31 @@ public class BaseController {
         // categories: House,Unit,Apartment
 
         // categories: House,Unit,Apartment,Townhouse,Villa,Studio,Flat,Warehouse,DuplexSemi-detached,Dual_occupancy,Land,Rural,MixedFarming,Alpine,AcreageSemi-rural,Retirement,BlockOfUnits,Terrace,ServicedApartment,Other
+
+        // Splice sort URL
+        if (StringUtils.isNotEmpty(sort)) {
+            para.append("&order_by=");
+            if (sort.equals("publish")) {
+                para.append("-created");
+            } else if (sort.equals("price")){
+                if (order.equals("desc")) {
+                    para.append("-price");
+                } else {
+                    para.append("price");
+                }
+            }
+        }
+
+        // Create inspection parameter
+        String inspection = request.getParameter("inspection");
+
+        // Splice inspection URL
+        if (StringUtils.isNotEmpty(inspection)) {
+            if (inspection.equals("view_as")) {
+                para.append("&view_as=inspection");
+            }
+        }
+
         //设置关键字
         String keywords = request.getParameter("keywords");
         if (keywords.length()!=0){
@@ -510,6 +549,9 @@ public class BaseController {
         String[] propertyTypes = request.getParameterValues("propertyTypes");
 
         String keywords = request.getParameter("keywords");
+
+        String sort = request.getParameter("sort");
+        String order = request.getParameter("order");
 
 //        // 组装RealestateRequest
 //        RealestateRequest para = new RealestateRequest();
@@ -563,7 +605,21 @@ public class BaseController {
         //variables.setQuery(query);
        // para.setVariables(variables);
 
-
+//        // Splice sort URL
+//        if (StringUtils.isNotEmpty(sort)) {
+//            para.append("?activeSort=");
+//            if (sort.equals("inspection")){
+//                para.append("next-inspection-time");
+//            } else if (sort.equals("publish")){
+//                para.append("list-date");
+//            } else if (sort.equals("price")){
+//                if(order.equals("desc")){
+//                    para.append("price-desc");
+//                }else{
+//                    para.append("price-asc");
+//                }
+//            }
+//        }
 
         return query;
 
