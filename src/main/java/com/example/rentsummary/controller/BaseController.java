@@ -259,20 +259,20 @@ public class BaseController {
         RentRequestParaForAllhomes.SortBean sortBean = new RentRequestParaForAllhomes.SortBean();
         para.setSort(sortBean);
 
-        if (null != sort && StringUtils.isNotEmpty(sort)) {
-            para.append("/?sort=");
-            if (sort.equals("inspection")){
-                para.append("inspectiontime-asc");
-            } else if (sort.equals("publish")) {
-                para.append("newest-listing");
-            } else if (sort.equals("price")) {
-                if (order.equals("desc")) {
-                    para.append("highest-price");
-                }
-            }
-         } else {
-            para.getSort().
-        }
+//        if (null != sort && StringUtils.isNotEmpty(sort)) {
+//            para.append("/?sort=");
+//            if (sort.equals("inspection")){
+//                para.append("inspectiontime-asc");
+//            } else if (sort.equals("publish")) {
+//                para.append("newest-listing");
+//            } else if (sort.equals("price")) {
+//                if (order.equals("desc")) {
+//                    para.append("highest-price");
+//                }
+//            }
+//         } else {
+//            para.getSort().
+//        }
 
         return para;
 
