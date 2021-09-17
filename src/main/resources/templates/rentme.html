@@ -20,13 +20,14 @@
     <link rel="stylesheet" href="static/css/filterMore.min.css">
 
     <style>
+        .container {
+	    background-image: url(../static/img/simple-background.jpg);}
 
         h1{
-            background: #2B6695;
+	        text-align: center;
+            background-color:cornflowerblue;
             border-radius: 6px 6px 6px 6px;
-            box-shadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
-            color: #FFFFFF;
-            font-size: 17px;
+            font-size: 24px;
             font-weight: bold;
             line-height: 25px;
             margin: 15px 0 !important;
@@ -65,11 +66,17 @@
            font: normal 18px arial,tahoma,sans-serif;
        }
        /* .pContent{font-size: 16px;text-indent: 2em;}*/
+      
+       /* Button Style */
+       .button-div {
+	       margin: auto;
+	       text-align: center;
+           padding: 10px;
+           }
 
-       .custom-button {
-           text-align: center; }
-       .custom-button button {
+       #searchBtn  {
            color: #fff;
+           transition: all 0.5s ease-in-out;
            font-weight: 600;
            text-transform: uppercase;
            background-color: #29aae3;
@@ -79,7 +86,6 @@
            -webkit-transition: 0.4s;
            -moz-transition: 0.4s;
            -o-transition: 0.4s;
-           transition: 0.4s;
            height: 38px;
            border: 1px solid #29aae3;
            outline: none;
@@ -87,10 +93,16 @@
            width: 210px;
            font-size: 15px;
            cursor: pointer; }
-       .custom-button button:hover {
-           background: #fff;
-           color: #29aae3;
-           border: 1px solid #29aae3; }
+
+        #searchBtn:hover {
+           background-color: green ;
+           transition: all 0.5s ease-in-out;}
+
+        #searchBtn a {
+	       color: #fff;
+           transition: all 0.5s ease-in-out;
+        }
+
         /*preloader*/
         .loader{
             overflow: hidden;
@@ -111,9 +123,22 @@
         #searchitem_propertyTypes_c{
             padding-left: 147px;
         }
+        
+        /*Input Placeholder*/
+        .input-box {
+	        margin: auto;
+            width: 50%;  
+        }
+        .form-control {
+	        border-radius: 12px 12px 12px 12px;
+	    }
+        #searchInput {
+	        border: thin;
+        }
 
         /*404 page*/
         .page404 {
+	        padding-top: 150px;
             height: 100vh;
             background-size: cover;
             background-position: center;
@@ -155,44 +180,6 @@
         <div class="loader">Loading...</div>
     </div>-->
     <!-- preloader end -->
-    <!-- topbar -->
-    <div class="topbar bg-custom-black">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="left-side ">
-                        <ul class="custom">
-                            <li>
-                                <a href="#" class="text-custom-white" data-toggle="modal" data-target="#login-register"><i class="fas fa-user text-custom-blue"></i> Login & Register</a>
-                            </li>
-                            <li>
-                                <a href="mailto:info@domain.com" class="text-custom-white"><i class="fas fa-envelope text-custom-blue"></i> info@domain.com</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="right-side">
-                        <ul class="custom">
-                            <li>
-                                <a href="#" class="text-custom-white"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-custom-white"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-custom-white"><i class="fab fa-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-custom-white"><i class="fab fa-pinterest-p"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- topbar -->
 
     <!-- navigation -->
   <header class="menu-style">
@@ -203,53 +190,23 @@
             <div class="col-12">
                 <div class="slider-search">
                     <h1 class="text-custom-white search-title">FIND YOUR DREAM HOME</h1>
-                    <div class="search-form mb-xl-20">
-                            <div class="row">
-                                <div class="col-lg-5 col-sm-4">
-                                    <div class="form-group">
-
-                                        <input type="text"
-                                               id="searchInput" name="searchInput" class="form-control form-control-custom bg-custom-white"
-                                               placeholder="Street, Suburb or Postcode">
-                                        <input type="hidden" id="hidType">
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-sm-4">
-                                    <div class="form-group">
-                                        <div class="location-box">
-                                            <input type="text"
-                                                   id="keywords" name="keywords" class="form-control form-control-custom bg-custom-white"
-                                                   placeholder="eg. waterfront, views, street name">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-sm-4">
-                                    <div class="form-group">
-                                        <button  id="searchBtn"  class="btn-first btn-submit full-width">Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- navigation -->
     <!-- End Header -->
   </header>
 
-
     <!-- banner begin -->
     <div class="banner-area" >
-
         <!-- selection board begin -->
         <div class="selection-board">
-
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12">
                         <div class="searchbox" id="basic_searchbox" style="  font-size: 14px;"></div>
-
                     </div>
                 </div>
             </div>
@@ -258,39 +215,45 @@
     </div>
     <!-- banner end -->
 
-
     <!-- 导航区 -->
-
-
     <!-- feature properties begin -->
     <div class="feature-properties">
         <div id="container" class="container">
             <div id="page404"  class="page404">
+                <div class="search-form mb-xl-20">
+                     <div class="input-box">
+                          <div class="form-group">
+                               <input type="text" id="searchInput" name="searchInput" class="form-control form-control-custom bg-custom-white"
+                                      placeholder="Street, Suburb or Postcode">
+                               <input type="hidden" id="hidType">
+                          </div>
+           
+                          <div class="form-group">
+                               <div class="location-box">
+                                    <input type="text" id="keywords" name="keywords" class="form-control form-control-custom bg-custom-white"
+                                           placeholder="eg. waterfront, views, street name">
+                                </div>
+                          </div>
+                     
+                          <div class="button-div">
+                                <button  id="searchBtn"  class="btn-first btn-submit full-width">
+                                     <a href=""><span>Search</span></a>
+                                </button>
+                          </div>
+                    </div>
+                </div>
+
                 <section>
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
                                 <div class="caption">
-                                    <h5 class="text-custom-white full-width">Data Not Found. Try Again</a></h5>
+                                    <!-- <h5 class="text-custom-white full-width">Data Not Found. Try Again</a></h5> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-            </div>
-            <div class="row" id="objDiv">
-
-            </div>
-            <div class="row" id="objTab2Div" >
-
-            </div>
-
-            <div class="row" id="objTab3Div" >
-
-            </div>
-
-            <div class="row" id="objTab4Div" >
-
             </div>
 
             <div id='loading-mask' style="display: none"></div>
@@ -311,18 +274,6 @@
     <div class="copyright">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                   <!-- <div class="payment-logo mb-md-20">
-                        <span class="text-custom-white fs-14 mr-3">We are accept</span>
-                        <div class="payemt-icon">
-                            <img src="assets/images/card01.png" alt="#">
-                            <img src="assets/images/card02.png" alt="#">
-                            <img src="assets/images/card03.png" alt="#">
-                            <img src="assets/images/card04.png" alt="#">
-                        </div>
-                    </div>-->
-                </div>
-                <div class="col-lg-6">
                     <p class="text-custom-white no-margin">Copyright &copy; 2021.Company name All rights reserved.</p>
                 </div>
             </div>
