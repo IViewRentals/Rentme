@@ -322,20 +322,42 @@ public class BaseController {
 
         if(StringUtils.isNotEmpty(region)) {
             // 组装地区参数
-            para.append(region.split("-")[0].replaceAll(" ","").replace(",","-").trim().toLowerCase() + "/?page="+currentPage);
-        } else {
+            para.append(region.split("-")[0].replaceAll(" ","").replace(",","-").trim().toLowerCase());
+
             // propertyTypes: ["HOUSE", "TOWNHOUSE"]
             if(null!= propertyTypes && propertyTypes.length >0) {
-               String propertyTypeTmp= StringUtils.join(propertyTypes, ",");
-                if (!propertyTypeTmp.contains("Apartment")) {
-                    para.append("/apartment/?page="+currentPage);
-                } else if (!propertyTypeTmp.contains("House")) {
-                    para.append("/house/?page="+currentPage);
-                } else if (!propertyTypeTmp.contains("Townhouse")) {
-                    para.append("/town-house/?page="+currentPage);
+                String propertyTypeTmp= StringUtils.join(propertyTypes, ",");
+                if (propertyTypeTmp.toLowerCase().contains("apartment")) {
+                    para.append("/apartment");
+                } else if (propertyTypeTmp.toLowerCase().contains("townhouse")) {
+                    para.append("/town-house");
+                } else if (propertyTypeTmp.toLowerCase().contains("house")) {
+                    para.append("/house");
                 }
-            } else {
-                para.append("/?page="+currentPage);
+            }
+
+            // 设置排序标准
+            String sort = request.getParameter("sort");
+            String order = request.getParameter("order");
+
+            if(StringUtils.isNotEmpty(sort)) {
+                if(sort.equals("inspection")){
+                    para.append("/inspection-times");
+                }else {
+                    para.append("/?sort=");
+                    if(sort.equals("publish")){
+                        para.append("dateupdated-desc");
+                    }else {
+                        para.append("price-");
+                        if(order.equals("desc")){
+                            para.append("desc");
+                        }else{
+                            para.append("asc");
+                        }
+                    }
+                }
+            }else {
+                para.append("/?sort=price-asc");
             }
         }
 
@@ -372,30 +394,6 @@ public class BaseController {
         //设置区域大小
         para.append("landsize=" + minlandsize + "-any");
         para.append("&");*/
-
-        // 设置排序标准
-        String sort = request.getParameter("sort");
-        String order = request.getParameter("order");
-
-        if(StringUtils.isNotEmpty(sort)) {
-            if(sort.equals("inspection")){
-                para.append("/inspection-times");
-            }else {
-                para.append("/?sort=");
-                if(sort.equals("publish")){
-                    para.append("dateupdated-desc");
-                }else {
-                    para.append("price-");
-                    if(order.equals("desc")){
-                        para.append("desc");
-                    }else{
-                        para.append("asc");
-                    }
-                }
-            }
-        }else {
-            para.append("/?sort=price-asc");
-        }
 
         //设置关键字
         if (StringUtils.isNotEmpty(keywords)) {
