@@ -551,6 +551,32 @@ public class BaseController {
         String sort = request.getParameter("sort");
         String order = request.getParameter("order");
 
+        String sortType = "";
+
+        if(StringUtils.isNotEmpty(sort)) {
+            if(sort.equals("inspection")){
+                sortType = "next-inspection-time";
+            }else {
+                if(sort.equals("publish")){
+                    sortType = "new-";
+                    if(order.equals("desc")){
+                        sortType = sortType + "desc";
+                    }else{
+                        sortType = sortType + "asc";
+                    }
+                }else {
+                    sortType = "price-";
+                    if(order.equals("desc")){
+                        sortType = sortType + "desc";
+                    }else{
+                        sortType = sortType + "asc";
+                    }
+                }
+            }
+        }else {
+            sortType = "price-asc";
+        }
+
 //        // 组装RealestateRequest
 //        RealestateRequest para = new RealestateRequest();
 //
@@ -580,18 +606,18 @@ public class BaseController {
         if(null!= propertyTypes && propertyTypes.length >0) {
             String propertyTypeTmp= StringUtils.join(propertyTypes, ",");
             if (!propertyTypeTmp.contains("Apartment")) {
-                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"unit apartment\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"sortType\\\":\\\""+sortType+"\\\",\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"unit apartment\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
 
             } else if (!propertyTypeTmp.contains("House")) {
-                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"house\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"sortType\\\":\\\""+sortType+"\\\",\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"house\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
 
             } else if (!propertyTypeTmp.contains("Townhouse")) {
-                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"townhouse\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"sortType\\\":\\\""+sortType+"\\\",\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"townhouse\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
 
             }
 
         } else {
-            query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+            query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"sortType\\\":\\\""+sortType+"\\\",\\\"filters\\\":{\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
 
         }
         //String test ="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"unit apartment\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\"canberra - greater region, act\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";

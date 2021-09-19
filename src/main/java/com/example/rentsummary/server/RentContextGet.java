@@ -270,6 +270,7 @@ public class RentContextGet {
                 HttpEntity httpEntity = response.getEntity();
                 String html = EntityUtils.toString(httpEntity, "utf-8");
                 System.out.println("Realestate get!!!");
+                System.out.println(realestateRequest);
                 return html;
             } else {
                 //如果返回状态不是200，比如404（页面不存在）等，根据情况做处理，这里略
