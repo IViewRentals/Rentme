@@ -82,8 +82,9 @@ public class BaseController {
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
         String[] propertyTypes = request.getParameterValues("propertyTypes");
-
         String sort = request.getParameter("sort");
+        String order = request.getParameter("order");
+
 
 //        int minprice = Integer.parseInt(request.getParameter("minprice"));
 //        int maxprice = Integer.parseInt(request.getParameter("maxprice"));
@@ -133,8 +134,8 @@ public class BaseController {
             } else {
                 para.getFilters().getBeds().setMax(Integer.parseInt(request.getParameter("Bedrooms")));
             }
-
         }
+
         if (null != request.getParameter("Bathrooms") && StringUtils.isNotEmpty(request.getParameter("Bathrooms"))) {
             //设置床数
             RentRequestParaForAllhomes.FiltersBean.BathsBean bedsBean = new RentRequestParaForAllhomes.FiltersBean.BathsBean();
@@ -145,7 +146,6 @@ public class BaseController {
             } else {
                 para.getFilters().getBaths().setMax(Integer.parseInt(request.getParameter("Bathrooms")));
             }
-
         }
 
         if (null != request.getParameter("Parking") && StringUtils.isNotEmpty(request.getParameter("Parking"))) {
@@ -248,7 +248,7 @@ public class BaseController {
 
         //设置propertyTypes
         // propertyTypes: ["HOUSE", "TOWNHOUSE"]
-        if(null!= propertyTypes && propertyTypes.length >0) {
+        if(null!= propertyTypes && propertyTypes.length > 0) {
             List<String> propertiesList = Arrays.asList(propertyTypes);
             para.getFilters().setPropertyTypes(null);
             if (!propertiesList.contains("__ALL__")) {
@@ -259,24 +259,28 @@ public class BaseController {
         RentRequestParaForAllhomes.SortBean sortBean = new RentRequestParaForAllhomes.SortBean();
         para.setSort(sortBean);
 
-//        if (null != sort && StringUtils.isNotEmpty(sort)) {
-//            para.append("/?sort=");
-//            if (sort.equals("inspection")){
-//                para.append("inspectiontime-asc");
-//            } else if (sort.equals("publish")) {
-//                para.append("newest-listing");
-//            } else if (sort.equals("price")) {
-//                if (order.equals("desc")) {
-//                    para.append("highest-price");
-//                }
-//            }
-//         } else {
-//            para.getSort().
-//        }
+        if (StringUtils.isNotEmpty(sort)) {
+            // 设置Sort
+            if ("inspection".equalsIgnoreCase(sort)) {
+                para.getSort().setCriteria("INSPECTION");
+                para.getSort().setOrder("ASC");
+            } else if ("publish".equalsIgnoreCase(sort)) {
+                para.getSort().setCriteria("DATEUPDATED");
+                para.getSort().setOrder("DESC");
+            } else if ("price".equalsIgnoreCase(sort)) {
+                para.getSort().setCriteria("PRICE");
+                if ("desc".equals(order)) {
+                    para.getSort().setOrder("DESC");
+                } else {
+                    para.getSort().setOrder("ASC");
+                }
+            }
+        } else {
+            para.getSort().setCriteria("PRICE");
+            para.getSort().setOrder("ASC");
+        }
 
         return para;
-
-
     }
 
     //解析请求参数

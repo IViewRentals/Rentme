@@ -36,13 +36,12 @@ public class RentController extends BaseController {
     @GetMapping(value = "getrent")
     public String getRent(Model model,String keywords) {
 
-
        // model.addAttribute("allhomes",RentContextGet.getRentFromAllHomes(keywords));
-//       model.addAttribute("domain",RentContextGet.getRentFromDomain());
+//        model.addAttribute("domain",RentContextGet.getRentFromDomain());
 //        model.addAttribute("zango",RentContextGet.getRentFromzango());
 //        model.addAttribute("realestate",RentContextGet.getRentFromRealestate());
 
-        return "rentsummary";
+          return "rentsummary";
 //        return RentContextGet.getRent();
 //        return RentContextGet.getRent();
 //        return RentContextGet.getRentFromAllHomes();
@@ -146,7 +145,7 @@ public class RentController extends BaseController {
      */
     @PostMapping("/getList")
     @ResponseBody
-    public AjaxResult getList(HttpServletRequest httpServletRequest, int currentPage,String id, String name, String type) {
+    public AjaxResult getList(HttpServletRequest httpServletRequest, int currentPage, String id, String name, String type) {
 
         // 解析参数
         RentRequestParaForAllhomes rentRequestParaForAllhomes = parseParaForAllhomes(httpServletRequest,id,name,type);

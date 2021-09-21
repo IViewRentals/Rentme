@@ -60,8 +60,8 @@ public class RentRequestParaForAllhomes {
 
     public static class SortBean {
         /**
-         * criteria : PRICE
-         * order : ASC
+         * sort: ["Inspection", "Price", "PUBLISH"]
+         * order: ["ASC", "DESC"]
          */
 
         private String criteria="PRICE";
