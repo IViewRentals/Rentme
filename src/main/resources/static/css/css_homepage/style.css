@@ -718,7 +718,7 @@ main {
   position: relative;
   height: 0;
   overflow: hidden;
-  background: #ffffff url(../images/lazy-loader.gif) no-repeat center center;
+  background: #ffffff url(../img/images_homepage/lazy-loader.gif) no-repeat center center;
 }
 .lazy-img img {
   position: absolute;
