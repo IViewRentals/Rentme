@@ -633,22 +633,6 @@ public class BaseController {
         //variables.setQuery(query);
        // para.setVariables(variables);
 
-//        // Splice sort URL
-//        if (StringUtils.isNotEmpty(sort)) {
-//            para.append("?activeSort=");
-//            if (sort.equals("inspection")){
-//                para.append("next-inspection-time");
-//            } else if (sort.equals("publish")){
-//                para.append("list-date");
-//            } else if (sort.equals("price")){
-//                if(order.equals("desc")){
-//                    para.append("price-desc");
-//                }else{
-//                    para.append("price-asc");
-//                }
-//            }
-//        }
-
         return query;
 
 
