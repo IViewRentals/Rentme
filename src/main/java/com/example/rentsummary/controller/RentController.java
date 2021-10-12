@@ -15,6 +15,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.internal.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,16 +25,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class RentController extends BaseController {
+
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @GetMapping(value = "getrent")
     public String getRent(Model model,String keywords) {
@@ -189,9 +193,41 @@ public class RentController extends BaseController {
         String queryParaForDomain = parseParaForZango(httpServletRequest,type);
         String[] propertyTypes = httpServletRequest.getParameterValues("propertyTypes");
         String categories="";
+
+        int minprice = Integer.parseInt(httpServletRequest.getParameter("minprice"));
+        int maxprice = Integer.parseInt(httpServletRequest.getParameter("maxprice"));
+
         if(null!= propertyTypes && propertyTypes.length >0) {
+
+            //  bedrooms__gte=1&bathrooms__gte=1&parking__gte=1
+
             categories = "&categories="+StringUtils.join(propertyTypes, ",");
         }
+
+        if (null != httpServletRequest.getParameter("Bedrooms") && StringUtils.isNotEmpty(httpServletRequest.getParameter("Bedrooms"))) {
+            int minbedrooms = Integer.parseInt(httpServletRequest.getParameter("Bedrooms"));
+            //设置床数
+            categories+="&bedrooms__gte=" + minbedrooms + "&bedrooms__lte="+minbedrooms;
+        }
+
+        //设置浴室
+        if (null != httpServletRequest.getParameter("Bathrooms") && StringUtils.isNotEmpty(httpServletRequest.getParameter("Bathrooms"))) {
+            int bathrooms = Integer.parseInt(httpServletRequest.getParameter("Bathrooms"));
+            //设置床数
+            categories+="&bathrooms__gte=" + bathrooms + "&bathrooms__lte="+bathrooms;
+        }
+
+        //设置车位
+        if (null != httpServletRequest.getParameter("Parking") && StringUtils.isNotEmpty(httpServletRequest.getParameter("Parking"))) {
+            int Parking = Integer.parseInt(httpServletRequest.getParameter("Parking"));
+            //设置床数
+            categories+="&parking__gte="+ Parking + "&parking__lte="+Parking;
+        }
+
+        // price__gte=50&price__lte=450
+        categories+="&price__gte=" + minprice + "&price__lte="+maxprice;
+
+
         int currentPage = Integer.parseInt(httpServletRequest.getParameter("currentPage"));
         // 根据解析参数获取数据
         String result = RentContextGet.getRentFromzango(queryParaForDomain,currentPage,categories);
@@ -222,6 +258,7 @@ public class RentController extends BaseController {
         return   AjaxResult.error();
 
     }
+
 
 //    @PostMapping("/getList")
 //    @ResponseBody
@@ -298,11 +335,11 @@ public class RentController extends BaseController {
     @GetMapping(value = "/")
     public String toIndex(){
 
-        return "index.html";
+        return "homepage.html";
     }
 
     @GetMapping(value = "/rentme")
-    public String rentme(){
+    public String rentme(HttpServletRequest httpServletRequest, String hidType){
 
         return "rentme.html";
     }

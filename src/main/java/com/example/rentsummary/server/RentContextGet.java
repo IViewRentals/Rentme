@@ -294,6 +294,9 @@ public class RentContextGet {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
         //2.创建get请求，相当于在浏览器地址栏输入 order_by 网址current,underOffer,includePrivate
+
+        // bedrooms__gte=1&bathrooms__gte=1&parking__gte=1
+
         String url="https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease"+
                 "&surrounding=true&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&view_as=list"+categories+"&address_suburb=";
         url=url+java.net.URLEncoder.encode(queryPara,"utf-8")+"&page="+currentPage;

@@ -83,8 +83,8 @@ public class BaseController {
 
         String[] propertyTypes = request.getParameterValues("propertyTypes");
 
-//        int minprice = Integer.parseInt(request.getParameter("minprice"));
-//        int maxprice = Integer.parseInt(request.getParameter("maxprice"));
+        int minprice = Integer.parseInt(request.getParameter("minprice"));
+        int maxprice = Integer.parseInt(request.getParameter("maxprice"));
 //
 ////        String anydate=request.getParameter("anydate"));
 ////        String datetype=request.getParameter("datetype"));
@@ -114,11 +114,13 @@ public class BaseController {
 
         RentRequestParaForAllhomes.FiltersBean filtersBean = new RentRequestParaForAllhomes.FiltersBean();
         para.setFilters(filtersBean);
+
+
         //设置租金
-//        RentRequestParaForAllhomes.FiltersBean.PriceBean priceBean = new RentRequestParaForAllhomes.FiltersBean.PriceBean();
-//        para.getFilters().setPrice(priceBean);
-//        para.getFilters().getPrice().setMin(minprice);
-//        para.getFilters().getPrice().setMax(maxprice);
+        RentRequestParaForAllhomes.FiltersBean.PriceBean priceBean = new RentRequestParaForAllhomes.FiltersBean.PriceBean();
+        para.getFilters().setPrice(priceBean);
+        para.getFilters().getPrice().setMin(minprice);
+        para.getFilters().getPrice().setMax(maxprice);
 
         if (null != request.getParameter("Bedrooms") && StringUtils.isNotEmpty(request.getParameter("Bedrooms"))) {
             //设置床数
@@ -275,8 +277,9 @@ public class BaseController {
 
         String[] propertyTypes = request.getParameterValues("propertyTypes");
 
-     /*   int minprice = Integer.parseInt(request.getParameter("minprice"));
-        int maxprice = Integer.parseInt(request.getParameter("maxprice"));*/
+        int minprice = Integer.parseInt(request.getParameter("minprice"));
+        int maxprice = Integer.parseInt(request.getParameter("maxprice"));
+
 
 //        String anydate=request.getParameter("anydate"));
 //        String datetype=request.getParameter("datetype"));
@@ -341,23 +344,35 @@ public class BaseController {
 
 
         //设置租金
-      /*  para.append("price=" + minprice + "-any");
-        para.append("&");
+        para.append("&price=" + minprice + "-"+maxprice);
 
-        //设置床数
-        para.append("bedrooms=" + minbedrooms + "-any");
-        para.append("&");
+        if (null != request.getParameter("Bedrooms") && StringUtils.isNotEmpty(request.getParameter("Bedrooms"))) {
+            int minbedrooms = Integer.parseInt(request.getParameter("Bedrooms"));
+            //设置床数
+            para.append("&bedrooms=" + minbedrooms + "-"+minbedrooms);
+        }
+
 
         //设置浴室
-        para.append("bathrooms=" + minbathrooms + "-any");
-        para.append("&");
+        if (null != request.getParameter("Bathrooms") && StringUtils.isNotEmpty(request.getParameter("Bathrooms"))) {
+            int bathrooms = Integer.parseInt(request.getParameter("Bathrooms"));
+            //设置床数
+            para.append("&bathrooms=" + bathrooms + "-"+bathrooms);
+        }
 
         //设置车位
-        para.append("carspaces=" + minparkings + "-any");
-        para.append("&");
+        if (null != request.getParameter("Parking") && StringUtils.isNotEmpty(request.getParameter("Parking"))) {
+            int Parking = Integer.parseInt(request.getParameter("Parking"));
+            //设置床数
+            para.append("&carspaces="+ Parking + "-"+Parking);
+        }
+
+
+
+
 
         //设置区域大小
-        para.append("landsize=" + minlandsize + "-any");
+      /*  para.append("landsize=" + minlandsize + "-any");
         para.append("&");*/
 
         //设置关键字
@@ -375,8 +390,8 @@ public class BaseController {
 
 //        String[] propertyTypes = request.getParameterValues("propertyTypes");
 //
-//        int minprice = Integer.parseInt(request.getParameter("minprice"));
-//        int maxprice = Integer.parseInt(request.getParameter("maxprice"));
+        int minprice = Integer.parseInt(request.getParameter("minprice"));
+        int maxprice = Integer.parseInt(request.getParameter("maxprice"));
 //
 ////        String anydate=request.getParameter("anydate"));
 ////        String datetype=request.getParameter("datetype"));
@@ -434,10 +449,40 @@ public class BaseController {
 
 
         //设置租金
-//        para.append("price__gte="+ minprice);
-//        para.append("&");
-//        para.append("price__lte=" + maxprice);
-//        para.append("&");
+        para.append("price__gte="+ minprice);
+        para.append("&");
+        para.append("price__lte=" + maxprice);
+        para.append("&");
+
+
+        if (null != request.getParameter("Bedrooms") && StringUtils.isNotEmpty(request.getParameter("Bedrooms"))) {
+            //设置床数
+             para.append("&bedrooms__gte=" + Integer.parseInt(request.getParameter("Bedrooms")));
+            if (!"5".equals(request.getParameter("Bedrooms"))) {
+              para.append("&bedrooms__lte=" + Integer.parseInt(request.getParameter("Bedrooms")));
+            }
+
+        }
+        if (null != request.getParameter("Bathrooms") && StringUtils.isNotEmpty(request.getParameter("Bathrooms"))) {
+
+            //设置浴室
+            para.append("&bathrooms__gte=" + Integer.parseInt(request.getParameter("Bathrooms")));
+            if (!"5".equals(request.getParameter("Bathrooms"))) {
+               para.append("&bathrooms__lte=" + Integer.parseInt(request.getParameter("Bathrooms")));
+            }
+
+        }
+
+        if (null != request.getParameter("Parking") && StringUtils.isNotEmpty(request.getParameter("Parking"))) {
+            //设置床数
+            RentRequestParaForAllhomes.FiltersBean.ParkingBean bedsBean = new RentRequestParaForAllhomes.FiltersBean.ParkingBean();
+            para.append("&parking__gte=" + Integer.parseInt(request.getParameter("Parking")));
+            if (!"5".equals(request.getParameter("Parking"))) {
+                para.append("&parking__lte=" + Integer.parseInt(request.getParameter("Parking")));
+            }
+        }
+
+
 //
 //        //设置床数
 //        para.append("bedrooms__gte=" + minbedrooms);
@@ -512,22 +557,55 @@ public class BaseController {
             //String regiontmp = region.split("-")[0];
             //para.append("&address_suburb="+regiontmp.split(",")[0]+","+regiontmp.split(",")[2]+","+regiontmp.split(",")[1]);
         }
+
+        // query: "{\"channel\":\"rent\",\"page\":1,\"pageSize\":25,\"filters\":{\"bedroomsRange\":{\"minimum\":\"1\",\"maximum\":\"1\"},\"minimumBathroom\":\"1\",\"minimumCars\":\"1\",\"surroundingSuburbs\":true,\"excludeNoSalePrice\":false,\"ex-under-contract\":false,\"ex-deposit-taken\":false,\"furnished\":false,\"petsAllowed\":false,\"hasScheduledAuction\":false},\"localities\":[]}"
         String query="";
+        String querytmp="";
+        // \\\"bedroomsRange\\\":{\\\"minimum\\\":\\\""+Integer.parseInt(request.getParameter("Bedrooms"))+"\\\",\\\"maximum\\\":\\\""+Integer.parseInt(request.getParameter("Bedrooms"))+"\\\"},\\\"maximumBathroom\\\":\\\"1\\\",\\\"maximumCars\\\":\\\"1\\\",
+        if (null != request.getParameter("Bedrooms") && StringUtils.isNotEmpty(request.getParameter("Bedrooms"))) {
+            //设置床数
+            querytmp+="\\\"bedroomsRange\\\":{\\\"minimum\\\":\\\""+Integer.parseInt(request.getParameter("Bedrooms"))+"\\\",\\\"maximum\\\":\\\""+Integer.parseInt(request.getParameter("Bedrooms"))+"\\\"},";
+
+          //  querytmp+="{\\\"bedroomsRange\\\":{\\\"minimum\\\":\\\""+Integer.parseInt(request.getParameter("Bedrooms"))+"\\\",\\\"maximum\\\":\\\""+Integer.parseInt(request.getParameter("Bedrooms"))+"\\\"},";
+        }
+        if (null != request.getParameter("Bathrooms") && StringUtils.isNotEmpty(request.getParameter("Bathrooms"))) {
+
+            //设置浴室
+            //querytmp+="\\\"maximumBathroom\\\":"+Integer.parseInt(request.getParameter("Bathrooms")) +",";
+            //  querytmp+="\\\"bathroomsRange\\\":{\"minimum\":"+Integer.parseInt(request.getParameter("Bathrooms"))+",\"maximum\":"+Integer.parseInt(request.getParameter("Bathrooms"))+"},";
+            querytmp+="\\\"maximumBathroom\\\":\\\""+Integer.parseInt(request.getParameter("Bathrooms"))+"\\\",";
+        }
+
+        if (null != request.getParameter("Parking") && StringUtils.isNotEmpty(request.getParameter("Parking"))) {
+            //设置床数
+           // querytmp+="\\\"maxnimumCars\\\":\\\""+request.getParameter("Parking")+"\\\"" +",";
+            querytmp+="\\\"maxnimumCars\\\":\\\""+Integer.parseInt(request.getParameter("Parking"))+"\\\",";
+          //  querytmp+="\\\"carsRange\\\":{\"minimum\":"+Integer.parseInt(request.getParameter("Parking"))+",\"maximum\":"+Integer.parseInt(request.getParameter("Parking"))+"},";
+
+        }
+
         if(null!= propertyTypes && propertyTypes.length >0) {
             String propertyTypeTmp= StringUtils.join(propertyTypes, ",");
+
+            // \"bedroomsRange\":{\"minimum\":\"1\",\"maximum\":\"1\"},\"minimumBathroom\":\"1\",\"minimumCars\":\"1\"
+
+
             if (!propertyTypeTmp.contains("Apartment")) {
-                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"unit apartment\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{ "+ querytmp +"\\\"propertyTypes\\\":[\\\"unit apartment\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
 
             } else if (!propertyTypeTmp.contains("House")) {
-                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"house\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{ "+ querytmp +"\\\"propertyTypes\\\":[\\\"house\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
 
             } else if (!propertyTypeTmp.contains("Townhouse")) {
-                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"townhouse\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+                query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{ "+ querytmp +"\\\"propertyTypes\\\":[\\\"townhouse\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
 
             }
 
         } else {
-            query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+
+           query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":50,\\\"filters\\\":{ "+ querytmp +"\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+            // query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":50,\\\"filters\\\":{ \\\"surroundingSuburbs\\\":true,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"ex-deposit-taken\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[]}\",\"testListings\":false,\"nullifyOptionals\":false,\"testId\":\"RentResults\",\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+
 
         }
         //String test ="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{\\\"propertyTypes\\\":[\\\"unit apartment\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\"canberra - greater region, act\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";

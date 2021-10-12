@@ -203,6 +203,8 @@ function initDomainData(paramList,currentPage,id,name,type){
     ps["id"]= id;
     ps["name"]= name;
     ps["type"]= type;
+    ps["minprice"]= $(".current-min").val();
+    ps["maxprice"]= $(".current-max").val();
     var objHtml=[];
 
     $.ajax({
@@ -339,6 +341,8 @@ function initZangoData(paramList,currentPage,id,name,type){
     ps["id"]= id;
     ps["name"]= name;
     ps["type"]= type;
+    ps["minprice"]= $(".current-min").val();
+    ps["maxprice"]= $(".current-max").val();
     var objHtml=[];
 
     $.ajax({
@@ -481,6 +485,8 @@ function initRealestateData(paramList,currentPage,id,name,type){
     ps["id"]= id;
     ps["name"]= name;
     ps["type"]= type;
+    ps["minprice"]= $(".current-min").val();
+    ps["maxprice"]= $(".current-max").val();
     var objHtml=[];
 
     $.ajax({

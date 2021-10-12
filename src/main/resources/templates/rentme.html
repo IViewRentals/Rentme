@@ -145,6 +145,116 @@
             text-decoration: underline;
             text-underline-position: under;
         }
+
+
+        .range-slider {
+            margin-top: 15px;
+            margin-bottom: 30px;
+        }
+
+        .range-slider .ui-slider {
+            position: relative;
+            text-align: left;
+        }
+
+        .range-slider label {
+            font-size: 13px;
+            color: #535353;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .range-slider .ui-slider .ui-slider-handle {
+            position: absolute;
+            z-index: 2;
+            width: 14px;
+            height: 14px;
+            border-radius: 0;
+            border: 2px solid #66676b;
+            cursor: w-resize;
+            outline: none;
+            top: -5px;
+            margin-left: -8px;
+            box-shadow: none !important;
+        }
+
+        .range-slider .ui-slider .ui-slider-range {
+            position: absolute;
+            z-index: 1;
+            display: block;
+            border: 0;
+            background-position: 0 0;
+        }
+
+        .range-slider .ui-slider .ui-slider-handle {
+        }
+
+        .range-slider .ui-widget-content {
+            background-color: #ccc;
+        }
+
+        .range-slider .ui-widget-header {
+        }
+
+        .range-slider .ui-slider.ui-state-disabled .ui-slider-handle, .range-slider .ui-slider.ui-state-disabled .ui-slider-range {
+            filter: inherit;
+        }
+
+        .range-slider .ui-slider-horizontal {
+            height: 4px;
+            border-radius: 10px;
+            width: calc(100% - 16px);
+            margin-left: 8px;
+        }
+
+        .range-slider .ui-slider-horizontal .ui-slider-range {
+            top: 0;
+            height: 100%;
+        }
+
+        .range-slider .ui-slider-horizontal .ui-slider-range-min {
+            left: 0;
+        }
+
+        .range-slider .ui-slider-horizontal .ui-slider-range-max {
+            right: 0;
+        }
+
+        .min-value:focus, .max-value:focus, .min-value, .max-value {
+            width: 40%;
+            display: inline-block;
+            border: 0;
+            background-color: transparent;
+            padding: 0;
+            margin: 12px 0 0 0;
+            cursor: default;
+        }
+
+        .min-value {
+            float: left;
+            margin-left: -8px;
+            width: 40%;
+            margin-right: -8px;
+            font-size: 12px;
+            color: #535353;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .max-value {
+            float: right;
+            width: 60%;
+            text-align: right;
+            margin-right: -8px;
+            font-size: 12px;
+            color: #535353;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .sidebar .recent-properties-box .detail header {
+            padding-bottom: 0;
+        }
     </style>
 </head>
 
@@ -209,7 +319,7 @@
                                     <div class="form-group">
 
                                         <input type="text"
-                                               id="searchInput" name="searchInput" class="form-control form-control-custom bg-custom-white"
+                                               id="searchInput"   name="searchInput" class="form-control form-control-custom bg-custom-white"
                                                placeholder="Street, Suburb or Postcode">
                                         <input type="hidden" id="hidType">
                                     </div>
@@ -248,10 +358,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12">
-                        <div class="searchbox" id="basic_searchbox" style="  font-size: 14px;"></div>
-
+                        <div class="searchbox" id="basic_searchbox" style="font-size: 14px;"></div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="range-slider">
+                            <label>Price</label>
+                            <div data-min="0" data-max="5000"
+                                 data-min-name="min_price"
+                                 data-max-name="max_price" data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <!-- selection board end -->
@@ -339,7 +460,7 @@
     <!-- Popper -->
     <script src="static/assets/js/popper.min.js"></script>
     <!-- Bootstrap -->
-    <script src="static/assets/js/bootstrap.min.js"></script>
+    <script src="static/assets/js/bootstrap.min.js"></script>0
     <!-- Range Slider -->
     <script src="static/assets/js/jquery-ui.js"></script>
 
@@ -355,6 +476,13 @@
     <script src="static/assets/js/rentme.js"></script>
     <script>
 
+        //获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+
        var _currentPage=1;//当前页数
         // $(window).on('load',function(){
         //     //======================================
@@ -367,19 +495,70 @@
         jQuery(document).ready(function($){
 
 
+            $(".range-slider-ui").each(function () {
+                var minRangeValue = $(this).attr('data-min');
+                var maxRangeValue = $(this).attr('data-max');
+                var minName = $(this).attr('data-min-name');
+                var maxName = $(this).attr('data-max-name');
+                var unit = $(this).attr('data-unit');
+
+                $(this).append("" +
+                    "<span class='min-value'></span> " +
+                    "<span class='max-value'></span>" +
+                    "<input class='current-min' type='hidden' name='"+minName+"'>" +
+                    "<input class='current-max' type='hidden' name='"+maxName+"'>"
+                );
+                $(this).slider({
+                    range: true,
+                    min: minRangeValue,
+                    max: maxRangeValue,
+                    values: [minRangeValue, maxRangeValue],
+                    slide: function (event, ui) {
+                        event = event;
+                        var currentMin = parseInt(ui.values[0], 10);
+                        var currentMax = parseInt(ui.values[1], 10);
+                        $(this).children(".min-value").text( currentMin + " " + unit);
+                        $(this).children(".max-value").text(currentMax + " " + unit);
+                        $(this).children(".current-min").val(currentMin);
+                        $(this).children(".current-max").val(currentMax);
+                    }
+                });
+
+                var currentMin = parseInt($(this).slider("values", 0), 10);
+                var currentMax = parseInt($(this).slider("values", 1), 10);
+                $(this).children(".min-value").text( currentMin + " " + unit);
+                $(this).children(".max-value").text(currentMax + " " + unit);
+                $(this).children(".current-min").val(currentMin);
+                $(this).children(".current-max").val(currentMax);
+            });
+
+
             initBasic();
+            var searchInput = getUrlParam("searchInput");
+            if (searchInput) {
+                $('#hidType').val(getUrlParam("hidType"));
+                var area = getUrlParam("area");
+                searchHref($("#basic_searchbox").getParamList(),1,searchInput,area,  $('#hidType').val());
+                initDomainData($("#basic_searchbox").getParamList(),1,searchInput,area,
+                    $('#hidType').val());
+                initZangoData($("#basic_searchbox").getParamList(),1,searchInput,area,
+                    $('#hidType').val());
+                initRealestateData($("#basic_searchbox").getParamList(),1,searchInput,area,
+                    $('#hidType').val());
+
+            }
+
 
             $("#searchBtn").click(function(){
               //  alert($('#searchInput').selectPageText());
-              //  allhome
-                                  searchHref($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
+                  searchHref($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
                       $('#hidType').val());
 
                 initDomainData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
                     $('#hidType').val());
 
-                initZangoData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
-                    $('#hidType').val());
+                 initZangoData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
+                     $('#hidType').val());
 
                 initRealestateData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
                     $('#hidType').val());
@@ -433,18 +612,20 @@
                     initDomainData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
                         $('#hidType').val());
 
-                    initZangoData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
-                        $('#hidType').val());
+                     initZangoData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
+                         $('#hidType').val());
 
-                    initRealestateData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
-                        $('#hidType').val());
+                     initRealestateData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
+                         $('#hidType').val());
                 },
                // params : function(){return {'name':'aa','sex':1};},
                 //ajax请求后服务端返回的数据格式处理
                 //返回的数据里必须包含list（Array）和totalRow（number|string）两个节点
                 eAjaxSuccess : function(rs){
                     var result;
-                    if(rs.code==0) result = rs.data.gridResult;
+                    if(rs.code==0) {
+                        result = rs.data.gridResult;
+                    }
                     else result = undefined;
                     return result;
                 }
@@ -472,6 +653,8 @@
                 ps["id"]= id;
                 ps["name"]= name;
                 ps["type"]= type;
+                ps["minprice"]= $(".current-min").val();
+                ps["maxprice"]= $(".current-max").val();
                 var objHtml=[];
 
                 $.ajax({
