@@ -5,33 +5,33 @@ import com.example.rentsummary.utils.StringUtils;
 import java.util.HashMap;
 
 /**
- * 操作消息提醒
+ * operation message remind
  *
- * @author ruoyi
+ * @author rentme
  */
 public class AjaxResult extends HashMap<String, Object>
 {
     private static final long serialVersionUID = 1L;
 
-    /** 状态码 */
+    /** state code */
     public static final String CODE_TAG = "code";
 
-    /** 返回内容 */
+    /** return content */
     public static final String MSG_TAG = "msg";
 
-    /** 数据对象 */
+    /** data object */
     public static final String DATA_TAG = "data";
 
     /**
-     * 状态类型
+     * state type
      */
     public enum Type
     {
-        /** 成功 */
+        /** SUCCESS */
         SUCCESS(0),
-        /** 警告 */
+        /** WARN */
         WARN(301),
-        /** 错误 */
+        /** ERROR */
         ERROR(500);
         private final int value;
 
@@ -47,17 +47,17 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 初始化一个新创建的 AjaxResult 对象，使其表示一个空消息。
+     * Initialize a newly created Ajax result object to represent an empty message
      */
     public AjaxResult()
     {
     }
 
     /**
-     * 初始化一个新创建的 AjaxResult 对象
+     * nitialize a newly created Ajax result object
      *
-     * @param type 状态类型
-     * @param msg 返回内容
+     * @param type state type
+     * @param msg return content
      */
     public AjaxResult(Type type, String msg)
     {
@@ -66,11 +66,11 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 初始化一个新创建的 AjaxResult 对象
+     * nitialize a newly created Ajax result object
      *
-     * @param type 状态类型
-     * @param msg 返回内容
-     * @param data 数据对象
+     * @param type state content
+     * @param msg return content
+     * @param data data object
      */
     public AjaxResult(Type type, String msg, Object data)
     {
@@ -83,11 +83,11 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 方便链式调用
+     * Convenient chain call
      *
-     * @param key 键
-     * @param value 值
-     * @return 数据对象
+     * @param key
+     * @param value
+     * @return data object
      */
     @Override
     public AjaxResult put(String key, Object value)
@@ -97,9 +97,9 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 返回成功消息
+     * return success message
      *
-     * @return 成功消息
+     * @return Success message
      */
     public static AjaxResult success()
     {
@@ -107,9 +107,9 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 返回成功数据
+     * return success message
      *
-     * @return 成功消息
+     * @return Success message
      */
     public static AjaxResult success(Object data)
     {
@@ -117,10 +117,10 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 返回成功消息
+     * return uccess message
      *
-     * @param msg 返回内容
-     * @return 成功消息
+     * @param msg return content
+     * @return Success message
      */
     public static AjaxResult success(String msg)
     {
@@ -128,11 +128,11 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 返回成功消息
+     * return uccess message
      *
-     * @param msg 返回内容
-     * @param data 数据对象
-     * @return 成功消息
+     * @param msg return content
+     * @param data data object
+     * @return Success message
      */
     public static AjaxResult success(String msg, Object data)
     {
@@ -140,10 +140,10 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 返回警告消息
+     * return warn message
      *
-     * @param msg 返回内容
-     * @return 警告消息
+     * @param msg return content
+     * @return warn message
      */
     public static AjaxResult warn(String msg)
     {
@@ -151,11 +151,11 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 返回警告消息
+     * return warn message
      *
-     * @param msg 返回内容
-     * @param data 数据对象
-     * @return 警告消息
+     * @param msg return content
+     * @param data data object
+     * @return warn message
      */
     public static AjaxResult warn(String msg, Object data)
     {
@@ -163,7 +163,7 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 返回错误消息
+     * return error message
      *
      * @return
      */
@@ -173,10 +173,10 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 返回错误消息
+     * return error message
      *
-     * @param msg 返回内容
-     * @return 警告消息
+     * @param msg return content
+     * @return error message
      */
     public static AjaxResult error(String msg)
     {
@@ -184,11 +184,11 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     /**
-     * 返回错误消息
+     * return error message
      *
-     * @param msg 返回内容
-     * @param data 数据对象
-     * @return 警告消息
+     * @param msg return content
+     * @param data data object
+     * @return error message
      */
     public static AjaxResult error(String msg, Object data)
     {
