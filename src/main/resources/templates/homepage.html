@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Bootstrap -->
+<!--    <link href="static/assets/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    &lt;!&ndash; Fontawesome &ndash;&gt;
+    <link href="static/assets/css/font-awesome.css" rel="stylesheet">
+    &lt;!&ndash; Icon Font &ndash;&gt;
+    <link href="static/assets/css/font/flaticon.css" rel="stylesheet">
+    &lt;!&ndash; Custom Stylesheet &ndash;&gt;
+    <link href="static/assets/css/style.css" rel="stylesheet">
+    &lt;!&ndash; Custom Responsive &ndash;&gt;
+    <link href="static/assets/css/responsive.css" rel="stylesheet">-->
+
+    <link rel="stylesheet" href="../static/home/css/grid.css">
+    <link rel="stylesheet" href="../static/home/css/style.css">
+	<link rel="stylesheet" href="../static/home/css/search-style.css">
+    <link rel="stylesheet" href="../static/home/css/camera.css">
+    <link rel="stylesheet" href="../static/home/css/jquery.fancybox.css">
+
+
+    <link href="static/assets/selectpage/selectpage.css" rel="stylesheet">
+
+
+
+    <style>
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0px;
+            padding: 0px;
+            font-size: 12px;
+            line-height: 1.8;
+            font-weight: 400;
+            color: #000000;
+            background: #ffffff;
+            border-color: #dfdfdf;
+            transition: transform ease-in .4s;
+            overflow-x: hidden;
+        }
+        * + .btn {
+             margin-top: 0px;
+        }
+        ul.sp_element_box li.input_box {
+            height: 60px;
+            min-height:60px;
+        }
+
+        ul.sp_element_box li.input_box input {
+            height: 46px !important;
+            line-height: 46px !important;
+            min-height: 46px !important;
+        }
+
+        .sp_container {
+            width: 1000px !important;
+        }
+    </style>
+ 
+    <script src='../static/home/js/device.min.js'></script>
+</head>
+
+<body>
+<div class="page">
+    <!--========================================================
+                              HEADER
+    =========================================================-->
+    <header>
+
+        <div class="camera_container">
+            <div id="camera" class="camera_wrap">
+                <div data-thumb="../static/home/images/slide01_thumb.jpg" data-src="../static/home/images/slide01.jpg">
+                    <div class="camera_caption fadeIn">
+                    </div>
+                </div>
+                <div data-thumb="../static/home/images/slide02_thumb.jpg" data-src="../static/home/images/slide02.jpg">
+                    <div class="camera_caption fadeIn">
+                    </div>
+                </div>
+                <div data-thumb="../static/home/images/slide03_thumb.jpg" data-src="../static/home/images/slide03.jpg">
+                    <div class="camera_caption fadeIn">
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand wow fadeIn">
+                <h3 class="brand_name">
+                    <a href="../../../test/java">IView Rentals</a>
+                </h1>
+				
+				<div id="cover">
+				    <form method="get" action="rentme">
+					    <div class="tb">
+						    <div class="td">
+                                <input type="text"
+                                       id="searchInput" name="searchInput" class="form-control form-control-custom bg-custom-white"
+                                       placeholder="Street, Suburb or Postcode">
+                                <input type="hidden" name="hidType" id="hidType"> </div>
+                            <input type="hidden" name="area" id="area"> </div>
+
+						    <div class="td" id="s-cover" style="float: right;">
+						        <button type="submit" style="top: 25px;right: 20px;position: absolute;">
+                                    <div id="s-circle"></div>
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>		
+            </div>
+			
+        </div>
+
+    </header>
+    <!--========================================================
+                              CONTENT
+    =========================================================-->
+    <main>
+        <section class="well">
+            <div class="container">
+                <h2><em>IView Rentals</em>Canberra</h2>
+                <div class="row">
+                    <div class="grid_6">
+                        <div class="img img__border"><div class="lazy-img" style="padding-bottom: 63.0282%;"><img data-src="../static/home/images/page-1_img01.jpg" alt=""></div></div>
+						<div style= "text-align:center;margin-left: auto; margin-right: auto;">
+                            <p class="center indents-1">
+						                            <h3>Rental Viewing Service</h3>
+						                            We go to rental inspections and opens inspections when you can't.
+						                            We professionally represent you at the open inspections and register your details to the agent so you can then submit an application.</br>
+													Starting from $59.00</br>
+													- Pictures of property</br>
+													- Basic Inspection report of property</br>
+													Make your 1st impression to the agent the best one.</br>
+													Don't miss out on your dream rental let the professionals do it for you.</br>
+													<b>IViewRentals4U </br></b>
+													<b>The Professional Rental Viewing Service</b>
+						    </p>
+					    </div>
+                        </div>
+                    <div class="grid_6">
+                        <div class="img img__border"><div class="lazy-img" style="padding-bottom: 63.0282%;"><img data-src="../static/home/images/page-1_img02.jpg" alt=""></div></div>
+                        <div style= "text-align:center;margin-left: auto; margin-right: auto;">
+						    <p class="center indents-1">
+						                           <h3>Rental Search Service</h3>
+						                            Are you looking for a rental and finding it a mind field to be across all the search sites and online rental groups to try and find your next rental in Canberra’s tough rental market? </br>
+						                            Let the experts help you in your rental search.</br>
+													We know life is busy and searching for a rental is time consuming and can be beyond stressful.</br>
+													We provide a rental search service where we do the searching for you. We work with all the local agents to find on and off market rentals that meet your needs. We are across all the online sites to be able to find the latest listings.</br>
+													From $475</br>
+													Book A Free Consult Today
+							</p>
+						</div>
+						</div>
+                </div>
+                <div class="decoration"><a href="https://iviewrentals.com.au/" class="btn">Read more</a></div>
+            </div>
+        </section>
+  
+        <section class="well well__offset-2">
+            <div class="container center">
+                <p class="indents-2", style= "font-size:20px;">
+				Book A Rental Inspection Today $59</br>
+				We Go To Rental Inpsections When You Can't</br>
+				Due to high demand when making a booking for a rental inspection service if the time you need is not there please call 0490712232 or email contactus@iviewrentals4u.com.au and we will book it in manually for you.</br>
+				</br>
+				IView Rentals Canberra</br>
+				Australian Capital Territory 2609, Australia
+				<address class="address-1">
+                    <dl><dt>Call Us Now</dt> <dd>Let Us Do The Hard Work For You</dd></dl>
+                    <p><em>04-9071-2232</em></p>
+                </address>
+            </div>
+        </section>
+		
+    </main>
+
+    <!--========================================================
+                              FOOTER
+    =========================================================-->
+    <footer>
+        <div class="copyright">© <span id="copyright-year"></span>- iViewrentals4u - All Rights Reserved.
+           <a href="#">Privacy Policy</a>
+        </div> 
+    </footer>
+</div>
+
+<!-- jQuery -->
+<!--<script src="static/assets/js/jquery.min.js"></script>-->
+<script src="../static/home/js/jquery.js"></script>
+<script src="../static/home/js/jquery-migrate-1.2.1.js"></script>
+
+<!-- Popper -->
+<script src="static/assets/js/popper.min.js"></script>
+<!-- Bootstrap -->
+<script src="static/assets/js/bootstrap.min.js"></script>0
+<!-- Range Slider -->
+<script src="static/assets/js/jquery-ui.js"></script>
+
+<script src="../static/home/js/script.js"></script>
+
+<script src="static/assets/selectpage/selectpage.min.js"></script>
+
+
+<script>
+
+    var _currentPage=1;//当前页数
+    // $(window).on('load',function(){
+    //     //======================================
+    //     //====== preloader ========
+    //     //======================================
+    //     var preLoder = $(".preloader");
+    //     preLoder.fadeOut(1000);
+    // });
+
+    jQuery(document).ready(function($){
+
+
+        $('#searchInput').selectPage({
+            showField : 'name',
+            keyField : 'id',
+            searchField : "name",
+            data : '/searchallbyname',
+            focusDropList:false,
+            //关闭向下的三角尖按钮
+            dropButton : false,
+            //设置每页显示记录数
+            pageSize : 10,
+            //关闭分页的状态下，列表显示的项目个数，其它的项目以滚动条滚动方式展现（默认10个）
+            listSize : 15,
+            //启用多选模式
+            multiple : true,
+            //限制最多选中三个项目
+            maxSelectLimit : 1,
+            pagination : false,
+            selectToCloseList:true,
+            //格式化显示项目，提供源数据进行使用
+            formatItem : function(data){
+                return data.name + '-' + data.type;
+            },
+            //data：选中行的原始数据对象
+            eSelect : function(data){
+                //  $('#callbackLog').append(data.desc + '(' + data.name + ')<br/>');
+                // alert($('#searchInput').selectPageText());
+                $('#hidType').val(data.type);
+                $('#area').val($('#searchInput').selectPageText());
+               /* searchHref($("#basic_searchbox").getParamList(),1,data.id,data.name,data.type);
+                initDomainData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
+                    $('#hidType').val());
+
+                initZangoData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
+                    $('#hidType').val());
+
+                initRealestateData($("#basic_searchbox").getParamList(),1,$('#searchInput').val(),$('#searchInput').selectPageText(),
+                    $('#hidType').val());*/
+            },
+            // params : function(){return {'name':'aa','sex':1};},
+            //ajax请求后服务端返回的数据格式处理
+            //返回的数据里必须包含list（Array）和totalRow（number|string）两个节点
+            eAjaxSuccess : function(rs){
+                var result;
+                if(rs.code==0) {
+                    result = rs.data.gridResult;
+
+                }
+                else result = undefined;
+                return result;
+            }
+        });
+
+    });
+
+
+
+
+
+</script>
+</body>
+</html>

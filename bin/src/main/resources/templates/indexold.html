@@ -1,0 +1,1065 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <!-- fontawesome icon  -->
+    <link rel="stylesheet" href="static/css/fontawesome.min.css">
+    <!-- animate.css -->
+    <link rel="stylesheet" href="static/css/animate.css">
+    <!-- Owl Carousel -->
+  <!--  <link rel="stylesheet" href="static/css/owl.carousel.min.css">-->
+    <!-- flaticon -->
+    <link rel="stylesheet" href="static/fonts/flaticon.css">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="static/css/magnific-popup.css">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <!-- responsive -->
+    <link rel="stylesheet" href="static/css/responsive.css">
+
+    <link rel="stylesheet" href="static/css/filterMore.min.css">
+
+    <style>
+       /* body { padding-top: 70px; padding-left: 20px;padding-right: 20px;padding-bottom: 20px; }
+        .t-red{  color: red;  }
+        .w150{  width: 150px;  }
+        .w200{  width: 200px;  }*/
+       .mask {
+           position: absolute;
+           top: 0px;
+           filter: alpha(opacity=60);
+           background-color: #777;
+           z-index: 1002;
+           left: 0px;
+           opacity: 0.5;
+           -moz-opacity: 0.5;
+       }
+
+       .mask-msg {
+           position: absolute;
+           width: auto;
+           padding: 10px 20px;
+           border: 2px solid #ccc;
+           color: white;
+           cursor: wait;
+           display: none;
+           border-Radius: 5px;
+           background: black;
+           opacity: 0.6;
+           overflow: auto;
+           top: 25%;
+       }
+        h1{
+            background: #2B6695;
+            border-radius: 6px 6px 6px 6px;
+            box-shadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+            color: #FFFFFF;
+            font-size: 17px;
+            font-weight: bold;
+            line-height: 25px;
+            margin: 15px 0 !important;
+            padding: 5px 0 5px 20px;
+            text-shadow: 2px 2px 3px #222222;
+        }
+
+       #loading-mask{
+          /* position:absolute;*/
+           filter: alpha(opacity=60);
+           background-color: #777;
+           left:0;
+           top:0;
+         /*  width:100%;*/
+           height:100%;
+           z-index:20000;
+
+       }
+       #loading{
+           position:absolute;
+           left:45%;
+           top:50%;
+           padding:2px;
+           z-index:20001;
+           height:auto;
+       }
+       #loading .loading-indicator{
+           background:white;
+           color:#444;
+           font:bold 20px tahoma,arial,helvetica;
+           padding:10px;
+           margin:0;
+           height:auto;
+       }
+       #loading-msg {
+           font: normal 18px arial,tahoma,sans-serif;
+       }
+       /* .pContent{font-size: 16px;text-indent: 2em;}*/
+
+       .custom-button {
+           text-align: center; }
+       .custom-button button {
+           color: #fff;
+           font-weight: 600;
+           text-transform: uppercase;
+           background-color: #29aae3;
+           -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+           border-radius: 5px;
+           -webkit-transition: 0.4s;
+           -moz-transition: 0.4s;
+           -o-transition: 0.4s;
+           transition: 0.4s;
+           height: 38px;
+           border: 1px solid #29aae3;
+           outline: none;
+           position: relative;
+           width: 210px;
+           font-size: 15px;
+           cursor: pointer; }
+       .custom-button button:hover {
+           background: #fff;
+           color: #29aae3;
+           border: 1px solid #29aae3; }
+
+    </style>
+</head>
+
+<body>
+
+    
+    <!-- preloader begin-->
+    <div class="preloader">
+        <div class="loader">Loading...</div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- header begin -->
+    <header class="header-area">
+        <!-- header top begin -->
+      <div class="header-top">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-xl-7 col-lg-12">
+                        <div class="support-bar">
+                            <ul>
+                                <li>
+                                    <p><span><i class="fas fa-phone"></i></span>xxxxxx</p>
+                                </li>
+                                <li>
+                                    <p><span><i class="far fa-envelope"></i></span>example@example.com</p>
+                                </li>
+                                <li>
+                                    <p><span><i class="fas fa-question"></i></span>xxxxxxxx</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-12">
+                        <!--<div class="connect-bar">
+                            <div class="social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                            <div class="connect">
+                                <a href="#">Login</a>
+                                <a href="#">Register</a>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header top end -->
+
+        <!-- header bottom begin -->
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row d-flex" style="margin: 10px;">
+                   <!-- <div class="col-xl-2 col-lg-2 col-6 d-flex align-items-center">
+                        <div class="logo">
+                            <a href="index.html"><img src="static/img/logo.png" alt=""></a>
+                        </div>
+                    </div>-->
+                    <div class="col-xl-12 col-lg-12 col-12">
+                            <!--     <h1 class="col-title" id="basic">基本例子</h1>-->
+                            <div class="col-xl-10 col-lg-10" style="float: right">
+                                <div class="input-group"  >
+                                    <input id="searchInput" name="keywords"
+                                           autocomplete="off" type="text" class="form-control" value=""   placeholder="street or postcode">
+                                    <div class="submit-button custom-button" style="margin-left: 5px;display: block">
+                                        <button id="searchBtn"  style="width: 100px ">search</button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <!-- header bottom end -->
+    </header>
+    <!-- header end -->
+
+
+    <!-- banner begin -->
+    <div class="banner-area">
+
+        <!-- selection board begin -->
+        <div class="selection-board">
+            <!--<div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="select-board">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="suitch">
+                                        <select>
+                                            <option>Any Location</option>
+                                            <option>Any Location</option>
+                                            <option>Any Location</option>
+                                        </select>
+                                        <div class="icon">
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="suitch">
+                                        <select>
+                                            <option>Any Status</option>
+                                            <option>Any Status</option>
+                                            <option>Any Status</option>
+                                        </select>
+                                        <div class="icon">
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="suitch">
+                                        <select>
+                                            <option>Any Type</option>
+                                            <option>Any Type</option>
+                                            <option>Any Type</option>
+                                        </select>
+                                        <div class="icon">
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="suitch">
+                                        <select>
+                                            <option>Min. Bedrooms</option>
+                                            <option>Min. Bedrooms</option>
+                                            <option>Min. Bedrooms</option>
+                                        </select>
+                                        <div class="icon">
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="suitch">
+                                        <select>
+                                            <option>Min Size</option>
+                                            <option>Any Location</option>
+                                            <option>Any Location</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="suitch">
+                                        <select>
+                                            <option>Max Size</option>
+                                            <option>Any Location</option>
+                                            <option>Any Location</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="suitch">
+                                        <select>
+                                            <option>Baths</option>
+                                            <option>Baths</option>
+                                            <option>Baths</option>
+                                        </select>
+                                        <div class="icon">
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="suitch">
+                                        <select>
+                                            <option>Stories</option>
+                                            <option>Stories</option>
+                                            <option>Stories</option>
+                                        </select>
+                                        <div class="icon">
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="price-range-slider">
+                                        <div id="result">$0 - $269,000</div>
+
+                                        <div id="my-slider" data-min="0" data-step="1" data-min-value="0" data-max-value="269000" data-max="269000" class="slider">
+                                            <div class="slider-touch-left">
+                                                <span></span>
+                                            </div>
+                                            <div class="slider-touch-right">
+                                                <span></span>
+                                            </div>
+                                            <div class="slider-line">
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="price-range-slider-2">
+                                        <div id="result-2">0 SqFt - 2000 SqFt</div>
+
+                                        <div id="my-slider-2" data-min="0" data-step="1" data-min-value="0" data-max-value="2000" data-max="2000" class="slider">
+                                            <div class="slider-touch-left">
+                                                <span></span>
+                                            </div>
+                                            <div class="slider-touch-right">
+                                                <span></span>
+                                            </div>
+                                            <div class="slider-line">
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-6 col-lg-6">
+                                    <div class="search-button">
+                                        <button type="submit">search properties</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="container">
+               <!-- <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-xl-12 col-lg-12" >
+                   &lt;!&ndash;     <h1 class="col-title" id="basic">基本例子</h1>&ndash;&gt;
+                        <div class="col-xl-8 col-lg-8" style="float: right">
+                            <div class="input-group"  >
+                                <input id="searchInput" name="keywords" type="text" class="form-control" value=""  placeholder="关键词">
+                                <div class="submit-button custom-button" style="margin-left: 5px">
+                                    <button id="searchBtn"  style="width: 155px ">search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="searchbox" id="basic_searchbox" style="  font-size: 14px;"></div>
+                      <!--  <div id="basic_searchbox_param">查询参数:[]</div>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- selection board end -->
+    </div>
+    <!-- banner end -->
+
+
+    <!-- 导航区 -->
+
+
+    <!-- feature properties begin -->
+    <div class="feature-properties">
+        <div id="container" class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="home"
+                       aria-selected="true">
+                        <h6>www.allhomes.com.au</h6>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="profile"
+                       aria-selected="false">
+                        <h6>www.domain.com.au</h6>
+                    </a>
+                </li>
+
+
+            </ul>
+            <div class="tab-content border border-top-0" id="myTabContent" >
+                <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab" style="height: 100%;min-height: 608px">
+                   <!-- <ul class="list-group list-group-flush">
+                        <li class="list-group-item">系统管理内容</li>
+                    </ul>-->
+                    <section class="section-padding bg-light-white">
+                        <div class="container">
+                            <div class="row">
+                                <!--<div class="col-lg-4 col-md-6">
+                                    <div class="property-grid-box mb-xl-20">
+                                        <div class="property-grid-wrapper">
+                                            <div class="property-img animate-img">
+                                                <a href="#">
+                                                    <img src="assets/images/homepage-1/recent-350x235.jpg" class="img-fluid full-width" alt="#">
+                                                </a>
+                                                <div class="property-type">
+                                                    <a href="#" class="property-tag-1 bg-theme text-custom-white">Sale</a>
+                                                    <a href="#" class="property-tag-2 bg-custom-blue text-custom-white">Featured</a>
+                                                </div>
+                                                <div class="property-address bg-custom-blue">
+                                                    <a href="#"><i class="flaticon-pin"></i>9364 School St. Lynchburg, NY</a>
+                                                </div>
+                                                <div class="property-save-btn transform-center">
+                                                    <ul class="custom">
+                                                        <li class="custom-tooltip" data-tip="Photos">
+                                                            <a href="#"><i class="fas fa-camera"></i></a>
+                                                        </li>
+                                                        <li class="custom-tooltip" data-tip="Bookmark">
+                                                            <a href="#"><i class="fas fa-star"></i></a>
+                                                        </li>
+                                                        <li class="custom-tooltip" data-tip="Compare">
+                                                            <a href="#"><i class="fas fa-arrows-alt-h"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="property-grid-caption padding-20">
+                                                <h5><a href="#" class="text-theme">Eagle Apartments</a></h5>
+                                                <div class="price mb-xl-20 fs-16 fw-700 text-custom-blue">$ 275,000</div>
+                                                <ul class="custom property-feature">
+                                                    <li> <i class="flaticon-bed-1"></i>
+                                                        <span>2 Bedrooms</span>
+                                                    </li>
+                                                    <li> <i class="flaticon-bath-1"></i>
+                                                        <span>1 Bath</span>
+                                                    </li>
+                                                    <li> <i class="flaticon-selection-1"></i>
+                                                        <span>530 sq ft</span>
+                                                    </li>
+                                                    <li> <i class="flaticon-car-inside-a-garage"></i>
+                                                        <span>1 Garage</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="property-grid-footer">
+                                                <a href="#" class="text-theme fs-14 fw-600">Read More <span class="flaticon-right-arrow ml-1"></span></a>
+                                                <div class="ratings">
+                                                    <span class="fs-16 text-custom-yellow"><i class="fas fa-star"></i></span>
+                                                    <span class="fs-16 text-custom-yellow"><i class="fas fa-star"></i></span>
+                                                    <span class="fs-16 text-custom-yellow"><i class="fas fa-star"></i></span>
+                                                    <span class="fs-16 text-light-white"><i class="fas fa-star"></i></span>
+                                                    <span class="fs-16 text-light-white"><i class="fas fa-star"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <nav class="section-padding-top">
+                                        <ul class="custom pagination justify-content-center">
+                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div id='loading-mask' style="display: none"></div>
+                    <div id="loading" style="display: none">
+                        <div class="loading-indicator">
+                            <img src="static/img/loading_32.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/>
+                            <br/><span id="loading-msg">Loading ...</span>
+                        </div>
+                    </div>
+                    <div class="row" id="objDiv" >
+
+                    </div>
+                    <ul id='pagebar' style="cursor:pointer; float: right;" class="paginationtool"></ul>
+                </div>
+                <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="profile-tab" style="height: 100%;min-height: 638px">
+                  <!--  <div  id="objTab2Div" >
+
+                    </div>-->
+                    <section class="section-padding bg-light-white">
+
+                    <div class="container">
+                        <div class="row" id="objTab2Div" >
+
+                        </div>
+                    </div>
+                    </section>
+                    <ul id='pagebartab2' style="cursor:pointer; float: right;" class="paginationtool"></ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- feature properties end -->
+
+
+
+    <!-- footer begin -->
+<!--    <footer class="footer-area">
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="logo">
+                            <img src="static/img/footer-logo.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="copyright">
+                            <p>Copyright &copy; 2021.Company name All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>-->
+    <!-- footer end -->
+
+
+    <!-- jquery -->
+    <script src="static/js/jquery.js"></script>
+	<!-- bootstrap -->
+    <script src="static/js/bootstrap.min.js"></script>
+    <!-- owl carousel -->
+<!--    <script src="static/js/owl.carousel.js"></script>-->
+    <!-- magnific popup -->
+<!--    <script src="static/js/jquery.magnific-popup.js"></script>-->
+    <!-- rangeslider -->
+<!--    <script src="static/js/rangeslider.js"></script>-->
+    <!-- way poin js-->
+<!--    <script src="static/js/waypoints.min.js"></script>-->
+    <!-- wow js-->
+<!--    <script src="static/js/wow.min.js"></script>-->
+    <!-- counterup js-->
+<!--    <script src="static/js/jquery.counterup.min.js"></script>-->
+    <!-- main -->
+    <script src="static/js/bootstrap-paginator.js"></script>
+    <script src="static/js/common.js"></script>
+    <script src="static/js/filterMore.min.js"></script>
+
+    <script>
+
+       var _currentPage=1;//当前页数
+        $(window).on('load',function(){
+            //======================================
+            //====== preloader ========
+            //======================================
+            var preLoder = $(".preloader");
+            preLoder.fadeOut(1000);
+        });
+
+        jQuery(document).ready(function($){
+
+              initBasic();
+
+            $("#searchBtn").click(function(){
+                searchHref($("#basic_searchbox").getParamList(),1);
+            });
+
+
+            // //设置iframe高度
+            // setHeight();
+
+            initDomainData($("#basic_searchbox").getParamList(),1);
+        });
+
+        function initPage(currentPage,numberOfPages,totalPages){
+
+            var element = $('#pagebar');//获得数据装配的位置
+            //初始化所需数据
+            var options = {
+                bootstrapMajorVersion:3,//版本号。3代表的是第三版本
+                currentPage: currentPage, //当前页数
+                numberOfPages: numberOfPages, //显示页码数标个数
+                totalPages:totalPages, //总共的数据所需要的总页数
+                itemTexts: function (type, page, current) {
+                    //图标的更改显示可以在这里修改。
+                    switch (type) {
+                        case "first":
+                            return "首页";
+                        case "prev":
+                            return "上一页";
+                        case "next":
+                            return "下一页";
+                        case "last":
+                            return "末页";
+                        case "page":
+                            return  page;
+                    }
+                },
+                tooltipTitles: function (type, page, current) {
+                    //如果想要去掉页码数字上面的预览功能，则在此操作。例如：可以直接return。
+                    switch (type) {
+                        case "first":
+                            return "跳转到首页";
+                        case "prev":
+                            return "跳转到上一页";
+                        case "next":
+                            return "跳转到下一页";
+                        case "last":
+                            return "跳转到最后一页";
+                        case "page":
+                            return (page === current) ? "当前页 " + page : "跳转到 " + page;
+                    }
+                },
+                // pageUrl: function(type, page, current){
+                //     if (page==current) {
+                //         return "javascript:void(0)";
+                //     } else {
+                //         return "/getList?pageIndex="+page;
+                //     }
+                // },
+                onPageClicked: function (e, originalEvent, type, page) {
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                 //   document.location = changeURLArg(document.location.href,"pageNo",page);
+                    // 页数
+                    //currentPage=page;
+                    searchHref($("#basic_searchbox").getParamList(),page);
+                }
+            };
+
+            element.bootstrapPaginator(options);	//进行初始化
+        }
+
+        function searchHref(paramList,currentPage){
+            var ps= {};
+            if(paramList[0].ValueList.length==0){
+            } else {
+
+                for(var i=0;i<paramList.length;i++){
+                    for(var j = 0;j<paramList[i].ValueList.length;j++){
+                       // ps.push(paramList[i].id+":"+paramList[i].ValueList[j]);
+                        ps[paramList[i].id] = paramList[i].ValueList[j];
+                    }
+                }
+              //  var url = "/search?tid=plan&keywords="+encodeURIComponent($("#searchInput").val().trim())+"&op="+encodeURIComponent(ps.toString()) ;
+               // debugger;
+               // var obj ={"meta":{"backend":"lambda-listing-search","environment":"live","version":"9890b48fa1b294a5263b8c22e7c67e4f36712baa"},"searchResults":[{"listing":{"id":177654549,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/page-act-2614?tid=177654549","title":"N/A","priceLabel":"By Negotiation","numPhotos":0,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1575613461152,"relistedDate":1575613461152,"availableFrom":1614171600000},"address":{"suppression":"NAMEANDNUMBER","street":"(no street name provided)","division":"Page","state":"ACT","postcode":"2614","coordinates":{"lat":-35.2361407,"lon":149.0452413}},"property":{"types":["HOUSE"],"beds":0,"baths":0,"cars":2,"size":769,"features":["ALLOCATED_CAR_SPACE","DINING_ROOM","ENCLOSED_BACKYARD","HEATING_CENTRAL","PARTIALLY_FURNISHED","SELF_CONTAINED_FLAT"]},"agency":{"id":421307,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":173455572,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/chifley-act-2606?tid=173455572","title":"ROOMS AVAILABLE IN GREAT LOCATION","firstImage":"https://images.allhomes.com.au/property/photo/85f14360974a6ffcd346deff5d801c26_m.jpg","priceLabel":"$160 per week","numPhotos":3,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1487312513797,"relistedDate":1487312513797},"address":{"suppression":"NAMEANDNUMBER","street":"(no street name provided)","division":"Chifley","state":"ACT","postcode":"2606","coordinates":{"lat":-35.3568281,"lon":149.075456}},"property":{"types":["HOUSE"],"beds":4,"baths":2,"cars":0,"size":764,"features":["AIR_CONDITIONING","AIR_CONDITIONING_OTHER","CEILING_FANS","DINING_ROOM","ENCLOSED_BACKYARD","FAMILY_ROOM","PETS_ALLOWED","STUDY"]},"agency":{"id":65555,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":178515164,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/9-ogilby-crescent-page-act-2614","title":"Great location fully furnished share house","firstImage":"https://images.allhomes.com.au/property/photo/c7fdcc66b7bbd862e9ad12fcda3bb971_m.jpg","priceLabel":"$185 - $300 per week","numPhotos":22,"has3dTour":false,"hasVideo":false,"badges":{"fullyFurnished":true},"events":[],"publicVisibleDate":1595506581071,"relistedDate":1595506581071},"address":{"street":"9 Ogilby Crescent","division":"Page","state":"ACT","postcode":"2614","coordinates":{"lat":-35.23906509,"lon":149.05570679}},"property":{"types":["HOUSE"],"beds":7,"baths":3,"cars":2,"features":["FULLY_FURNISHED","OUTDOOR_ENTERTAINING_AREA","SEPARATE_TOILET","STUDY"]},"agency":{"id":526597,"type":"Agent","name":"Linc Property Group","url":"https://www.allhomes.com.au/agency/linc-property-group-526597/","logo":"https://images.allhomes.com.au/agent/logo/56154323969f1904255cf8da0554eb93_agency_t.jpg","agents":[{"name":"Brian Wang","image":"https://images.allhomes.com.au/agent/staff/9ce54c0d79cb2cee3180a39989b861d9_110x110.jpg"},{"name":"Charlie Chen","image":"https://images.allhomes.com.au/agent/staff/71ef6a100d03250becdc5d4e9b6a42ca_110x110.jpg"}]}},{"listing":{"id":176942739,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/telita-street-bruce-act-2617?tid=176942739","title":"Student accommodation in a perfect location","firstImage":"https://images.allhomes.com.au/property/photo/72d905c4e94fc101301b2ff6d8f1bc42_m.jpg","priceLabel":"$194-$219 per week","numPhotos":7,"has3dTour":false,"hasVideo":false,"badges":{"fullyFurnished":true},"events":[],"publicVisibleDate":1562035966762,"relistedDate":1562035966762},"address":{"suppression":"NUMBER","street":"Telita Street","division":"Bruce","state":"ACT","postcode":"2617","coordinates":{"lat":-35.2393477,"lon":149.0820385}},"property":{"types":["APARTMENT"],"beds":7,"baths":1,"cars":0,"features":["DINING_ROOM","ELECTRIC_HEATING","FULLY_FURNISHED","SEPARATE_TOILET"]},"agency":{"id":857365,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":173579643,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/526-northbourne-avenue-downer-act-2602","title":"En suite individual rooms are available for flexible leasing","firstImage":"https://images.allhomes.com.au/property/photo/7787910e3ebb4db29cb44add8d2253ef_m.jpg","priceLabel":"$200-$300 per week","numPhotos":2,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1489801516838,"relistedDate":1489801516838,"availableFrom":1489842000000},"address":{"street":"526 Northbourne Avenue","division":"Downer","state":"ACT","postcode":"2602","coordinates":{"lat":-35.2443311711149,"lon":149.134990567672}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":1,"size":725,"features":["PARTIALLY_FURNISHED","SHORT_TERM_LEASE"]},"agency":{"id":70925,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":168881532,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/palmerston-act-2913?tid=168881532","title":"A house FOR SHARE in Palmerston ACT","firstImage":"https://images.allhomes.com.au/property/photo/092ccadf1058007aebaeccb51dc99f5a_m.jpg","priceLabel":"$200 per week","numPhotos":7,"has3dTour":false,"hasVideo":false,"badges":{"fullyFurnished":true},"events":[],"publicVisibleDate":1390548062135,"relistedDate":1390548062135,"availableFrom":1617109200000},"address":{"suppression":"NAMEANDNUMBER","street":"(no street name provided)","division":"Palmerston","state":"ACT","postcode":"2913","coordinates":{"lat":-35.1957728689045,"lon":149.121603551473}},"property":{"types":["HOUSE"],"beds":7,"baths":3,"cars":1,"size":10681.4,"features":["FULLY_FURNISHED","SEPARATE_TOILET"]},"agency":{"id":31315,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":178087418,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/9-cowper-street-ainslie-act-2602","title":"All Saints College","firstImage":"https://images.allhomes.com.au/property/photo/14a8713c846e6cd269509cda36fbc656_m.jpg","priceLabel":"$238 per week","numPhotos":4,"has3dTour":false,"hasVideo":false,"badges":{"fullyFurnished":true},"events":[],"publicVisibleDate":1584570504855,"relistedDate":1584570504855},"address":{"street":"9 Cowper Street","division":"Ainslie","state":"ACT","postcode":"2602","coordinates":{"lat":-35.2647335,"lon":149.1391579}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":0,"eer":6,"size":5791,"features":["AIR_CONDITIONING","AIR_CONDITIONING_OTHER","FULLY_FURNISHED","SELF_CONTAINED_FLAT"]},"agency":{"id":514242,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":168645210,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/20-railway-street-oaks-estate-act-2620","title":"CONTAINER LlIVING","priceLabel":"$250 per week","numPhotos":0,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1373342411037,"relistedDate":1373342411037,"availableFrom":1373378400000},"address":{"street":"20 Railway Street","division":"Oaks Estate","state":"ACT","postcode":"2620","coordinates":{"lat":-35.3416671294859,"lon":149.225374681434}},"property":{"types":["COMMERCIAL_STUDIO"],"beds":1,"baths":0,"cars":0,"features":["ELECTRIC_HEATING","NEW_CONSTRUCTION","PARTIALLY_FURNISHED","SELF_CONTAINED_FLAT"]},"agency":{"id":308865,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":179310387,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/32-archibald-street-lyneham-act-2602","title":"Affordable Living for a single or couple","firstImage":"https://images.allhomes.com.au/property/photo/e99aca44716c4d51ac2b18f83c7d045e_m.jpg","priceLabel":"$270 - $300 per week","numPhotos":8,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1615524808901,"relistedDate":1615524808901,"availableFrom":1615726800000},"address":{"street":"32 Archibald Street","division":"Lyneham","state":"ACT","postcode":"2602","coordinates":{"lat":-35.243987041623,"lon":149.123512863488}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":0,"features":[]},"agency":{"id":849623,"type":"Agent","name":"HomeGround Real Estate Canberra","url":"https://www.allhomes.com.au/agency/homeground-real-estate-canberra-849623/","logo":"https://images.allhomes.com.au/agent/logo/7ce4cd737d6893579df6d368227761a3_agency_t.jpg","agents":[{"name":"Maria Edwards","image":"https://images.allhomes.com.au/agent/staff/e1ee5f4144d48a7ef3fdb19a0d713f74_110x110.jpg"}]}},{"listing":{"id":179268732,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-2-43-gardiner-street-downer-act-2602","title":"One Bedroom Studio In convenient location.","firstImage":"https://images.allhomes.com.au/property/photo/cdb32bbb655d628d00f6d4be71dea303_m.jpg","priceLabel":"$275 per week","numPhotos":15,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1614640894216,"relistedDate":1614640894216,"availableFrom":1616072400000},"address":{"street":"2/43 Gardiner Street","division":"Downer","state":"ACT","postcode":"2602","coordinates":{"lat":-35.24479875,"lon":149.14671613}},"property":{"types":["COMMERCIAL_STUDIO"],"beds":1,"baths":1,"cars":1,"eer":0,"size":0,"features":[]},"agency":{"id":135415,"type":"Agent","name":"Ray White Queanbeyan/Jerrabomberra","url":"https://www.allhomes.com.au/agency/ray-white-queanbeyan-jerrabomberra-135415/","logo":"https://images.allhomes.com.au/agent/logo/1854507c695523bd4a5c356060781fda_agency_t.jpg","agents":[{"name":"Kate Morrison"}]}},{"listing":{"id":178996120,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/ainslie-act-2602?tid=178996120","title":"Garden Flat In The Inner North Suburb Of Ainslie","firstImage":"https://images.allhomes.com.au/property/photo/b581e3d9fcb35b5eac52c77c30763098_m.jpg","priceLabel":"$280 per week","numPhotos":10,"has3dTour":false,"hasVideo":false,"badges":{"underApplication":true},"events":[],"publicVisibleDate":1606991919034,"relistedDate":1606991919034,"availableFrom":1614344400000},"address":{"suppression":"NAMEANDNUMBER","street":"(no street name provided)","division":"Ainslie","state":"ACT","postcode":"2602","coordinates":{"lat":-35.26426054,"lon":149.14374964}},"property":{"types":["HOUSE"],"beds":1,"baths":1,"cars":1,"features":["ALLOCATED_CAR_SPACE"]},"agency":{"id":537039,"type":"Agent","name":"Kourie Group","url":"https://www.allhomes.com.au/agency/kourie-group-537039/","logo":"https://images.allhomes.com.au/agent/logo/91c6f8bf117420ee0e4ecaff1bc34842_agency_t.jpg","agents":[{"name":"Jack Kourie"}]}},{"listing":{"id":179319403,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/5-phillip-avenue-watson-act-2602","title":"One bedroom garden flat","firstImage":"https://images.allhomes.com.au/property/photo/50ae83f527357971c33b6d0305b2aa2c_m.jpg","priceLabel":"$280 per week","numPhotos":9,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1615950275957,"relistedDate":1615950275957,"availableFrom":1616245200000},"address":{"street":"5 Phillip Avenue","division":"Watson","state":"ACT","postcode":"2602","coordinates":{"lat":-35.236581827467,"lon":149.144788629843}},"property":{"types":["HOUSE"],"beds":1,"baths":0,"cars":1,"features":["ALLOCATED_CAR_SPACE"]},"agency":{"id":537039,"type":"Agent","name":"Kourie Group","url":"https://www.allhomes.com.au/agency/kourie-group-537039/","logo":"https://images.allhomes.com.au/agent/logo/91c6f8bf117420ee0e4ecaff1bc34842_agency_t.jpg","agents":[{"name":"Jack Kourie"}]}},{"listing":{"id":179313290,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/2-9b-huon-street-lyons-act-2606?tid=179313290","title":"Charming one bedroom garden unit.","firstImage":"https://images.allhomes.com.au/property/photo/385c76b7b2d3db740707d2a46d10dd86_m.jpg","priceLabel":"$280 per week","numPhotos":10,"has3dTour":false,"hasVideo":false,"badges":{},"events":[{"id":115034117,"startTime":"2021-03-31T12:30:00","endTime":"2021-03-31T12:45:00","type":"EXHIBITION"}],"publicVisibleDate":1615605626704,"relistedDate":1615605626704,"availableFrom":1617195600000},"address":{"street":"2/9B Huon Street","division":"Lyons","state":"ACT","postcode":"2606","coordinates":{"lat":-35.3363482,"lon":149.0710623}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":1,"size":0,"features":["AIR_CONDITIONING","AIR_CONDITIONING_OTHER","ALLOCATED_CAR_SPACE"]},"agency":{"id":856353,"type":"Agent","name":"Urban Property","url":"https://www.allhomes.com.au/agency/urban-property-856353/","logo":"https://images.allhomes.com.au/agent/logo/58d61849ef56cc3b5f69355c4ca66439_agency_t.jpg","agents":[{"name":"Nicholas Nagel","image":"https://images.allhomes.com.au/agent/staff/0046bc4b0e3c74e0aa589fe026abaf31_110x110.jpg"}]}},{"listing":{"id":175274007,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/bugden-avenue-fadden-act-2904?tid=175274007","title":"Self Contained 1 BedroomUnite","firstImage":"https://images.allhomes.com.au/property/photo/0fd0a1849de2ab185c41754335ea44af_m.jpg","priceLabel":"$290-$310 per week","numPhotos":15,"has3dTour":false,"hasVideo":false,"badges":{"fullyFurnished":true},"events":[],"publicVisibleDate":1525786321297,"relistedDate":1525786321297,"availableFrom":1525701600000},"address":{"suppression":"NUMBER","street":"Bugden Avenue","division":"Fadden","state":"ACT","postcode":"2904","coordinates":{"lat":-35.4013354204239,"lon":149.114447610932}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":1,"eer":1,"size":1090,"features":["ALLOCATED_CAR_SPACE","ELECTRIC_HEATING","FULLY_FURNISHED"]},"agency":{"id":680846,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":179353877,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/10b-nullagine-street-fisher-act-2611","title":"Cheerful, north facing newly renovated apartment","firstImage":"https://images.allhomes.com.au/property/photo/38e69c0747e10b7daa23eb55b630c977_m.jpg","priceLabel":"$300-$330 per week","numPhotos":8,"has3dTour":false,"hasVideo":false,"badges":{"new":true},"events":[{"id":115033060,"startTime":"2021-03-31T17:15:00","endTime":"2021-03-31T17:45:00","type":"EXHIBITION"}],"publicVisibleDate":1616922633220,"relistedDate":1616922633220},"address":{"street":"10B Nullagine Street","division":"Fisher","state":"ACT","postcode":"2611","coordinates":{"lat":-35.3643488,"lon":149.05527}},"property":{"types":["TOWNHOUSE"],"beds":1,"baths":1,"cars":1,"size":698,"features":["HEATING_REVERSE_CYCLE","SELF_CONTAINED_FLAT","WASH_CLOSET"]},"agency":{"id":26995,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":179319701,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-2b-30-glenorchy-street-lyons-act-2606","title":"BUDGET 1 BEDROOM APARTMENT","firstImage":"https://images.allhomes.com.au/property/photo/683323a7ba52dd4d5391a3325a4ef2c2_m.jpg","priceLabel":"$310 per week","numPhotos":5,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1615958511925,"relistedDate":1615958511925},"address":{"street":"2B/30 Glenorchy Street","division":"Lyons","state":"ACT","postcode":"2606","coordinates":{"lat":-35.33908998,"lon":149.07839408}},"property":{"types":["APARTMENT"],"beds":1,"baths":0,"cars":0,"size":7958,"features":["PARTIALLY_FURNISHED"]},"agency":{"id":407437,"type":"Agent","name":"Alpha Commercial Property","url":"https://www.allhomes.com.au/agency/alpha-commercial-property-407437/","logo":"https://images.allhomes.com.au/agent/logo/8c530f727cca224c217e3d7b87311d5b_agency_t.gif","agents":[{"name":"Chris Drakakis","image":"https://images.allhomes.com.au/agent/staff/1cc6911535ee3c9648c4180855a6d0a5_110x110.jpg"}]}},{"listing":{"id":179249859,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-5-17-devonport-street-lyons-act-2606","title":"Private Studio Apartment","firstImage":"https://images.allhomes.com.au/property/photo/f7aa6f7108b1b22a503f17220815e2cc_m.jpg","priceLabel":"$310 per week","numPhotos":6,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1614171600000,"relistedDate":1614171600000,"availableFrom":1618754400000},"address":{"street":"5/17 Devonport Street","division":"Lyons","state":"ACT","postcode":"2606","coordinates":{"lat":-35.3388928,"lon":149.07568938}},"property":{"types":["COMMERCIAL_STUDIO"],"baths":1,"cars":1,"features":["ALLOCATED_CAR_SPACE","CEILING_FANS","HEATING_REVERSE_CYCLE"]},"agency":{"id":184445,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":171264278,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/burdett-crescent-theodore-act-2905?tid=171264278","title":"comfy furnitured flat","firstImage":"https://images.allhomes.com.au/property/photo/b0d3d4f875743bdd991c1141d56632e6_m.jpg","priceLabel":"$315 per week","numPhotos":9,"has3dTour":false,"hasVideo":false,"badges":{"fullyFurnished":true},"events":[],"publicVisibleDate":1446300175412,"relistedDate":1446300175412},"address":{"suppression":"NUMBER","street":"Burdett Crescent","division":"Theodore","state":"ACT","postcode":"2905","coordinates":{"lat":-35.4489320114902,"lon":149.123216683532}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":0,"size":1085,"features":["CEILING_FANS","DINING_ROOM","ELECTRIC_HEATING","ENCLOSED_BACKYARD","FULLY_FURNISHED","SELF_CONTAINED_FLAT","SWIMMING_POOL"]},"agency":{"id":426677,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":179263660,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/53a-shackleton-circuit-mawson-act-2607","title":"SMART ONE BEDROOM GRANNY FLAT","priceLabel":"$320 per week","numPhotos":0,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1614454215386,"relistedDate":1614454215386,"availableFrom":1616072400000},"address":{"street":"53A Shackleton Circuit","division":"Mawson","state":"ACT","postcode":"2607","coordinates":{"lat":-35.3648598,"lon":149.1041534}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":1,"size":0,"features":["ALLOCATED_CAR_SPACE"]},"agency":{"id":919654,"type":"Agent","name":"Luton Properties Dickson Property Management","url":"https://www.allhomes.com.au/agency/luton-properties-dickson-property-management-919654/","logo":"https://images.allhomes.com.au/agent/logo/2ca87a516d09da84e3a662c648644369_agency_t.jpg","agents":[{"name":"Helen Packard"},{"name":"Ethan Kaine"}]}},{"listing":{"id":177045167,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/4-nulsen-circuit-flynn-act-2615","title":"Available May 2021 - Peaceful and secure furnished Flynn studio - internet included","firstImage":"https://images.allhomes.com.au/property/photo/91b45311321c293dbe1844847bc27697_m.jpg","priceLabel":"$325 per week","numPhotos":12,"has3dTour":false,"hasVideo":false,"badges":{"fullyFurnished":true},"events":[],"publicVisibleDate":1564214923285,"relistedDate":1564214923285,"availableFrom":1621605600000},"address":{"street":"4 Nulsen Circuit","division":"Flynn","state":"ACT","postcode":"2615","coordinates":{"lat":-35.2075071,"lon":149.0410728}},"property":{"types":["COMMERCIAL_STUDIO"],"beds":1,"baths":1,"cars":1,"size":785,"features":["AIR_CONDITIONING","AIR_CONDITIONING_OTHER","ALLOCATED_CAR_SPACE","DINING_ROOM","ELECTRIC_HEATING","ENCLOSED_BACKYARD","FAMILY_ROOM","FULLY_FURNISHED","HEATING_REVERSE_CYCLE","SELF_CONTAINED_FLAT","SEPARATE_TOILET","SWIMMING_POOL"]},"agency":{"id":444527,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":179351336,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/edmondson-street-campbell-act-2612?tid=179351336","title":"Campbell -NO BOND","firstImage":"https://images.allhomes.com.au/property/photo/892f880183dd4db7b417295561b9c10f_m.jpg","priceLabel":"$325 per week","numPhotos":7,"has3dTour":false,"hasVideo":false,"badges":{"new":true,"fullyFurnished":true},"events":[],"publicVisibleDate":1616555918710,"relistedDate":1616555918710,"availableFrom":1619791200000},"address":{"suppression":"NUMBER","street":"Edmondson Street","division":"Campbell","state":"ACT","postcode":"2612","coordinates":{"lat":-35.2857088,"lon":149.1522751}},"property":{"types":["COMMERCIAL_STUDIO"],"baths":0,"cars":0,"size":16822,"features":["CEILING_FANS","ELECTRIC_HEATING","FULLY_FURNISHED"]},"agency":{"id":147165,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":179344158,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-7-141-carruthers-street-curtin-act-2605","title":"Cosy one bedroom unit with plenty of storage, close to shops and pub;ic transport","firstImage":"https://images.allhomes.com.au/property/photo/414bbb830710d9530b4f8181efd40493_m.jpg","priceLabel":"$330 per week","numPhotos":7,"has3dTour":false,"hasVideo":false,"badges":{"new":true},"events":[],"publicVisibleDate":1616471282105,"relistedDate":1616471282105,"availableFrom":1618840800000},"address":{"street":"7/141 Carruthers Street","division":"Curtin","state":"ACT","postcode":"2605","coordinates":{"lat":-35.3238509,"lon":149.08070979}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":1,"size":6419,"features":[]},"agency":{"id":72,"type":"Agent","name":"Wright Dunn Real Estate","url":"https://www.allhomes.com.au/agency/wright-dunn-real-estate-72/","logo":"https://images.allhomes.com.au/agent/logo/14b31757ace784047a406496ab721596_agency_t.jpg","agents":[{"name":"Kelly Wilke","image":"https://images.allhomes.com.au/agent/staff/2259200d31e0ba03f73b4544da735b39_110x110.jpg"},{"name":"Rentals"}]}},{"listing":{"id":179350196,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-3-30-river-street-oaks-estate-act-2620","title":"PARTIALLY FURNISHED","firstImage":"https://images.allhomes.com.au/property/photo/59d7490ab16d0799668f5bc2c51a0a4c_m.jpg","priceLabel":"$330 per week","numPhotos":11,"has3dTour":false,"hasVideo":false,"badges":{"new":true,"fullyFurnished":true},"events":[],"publicVisibleDate":1616551300700,"relistedDate":1616551300700,"availableFrom":1616504400000},"address":{"street":"3/30-34 River Street","division":"Oaks Estate","state":"ACT","postcode":"2620","coordinates":{"lat":-35.33913824,"lon":149.2284476}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":1,"eer":0,"size":0,"features":["FULLY_FURNISHED"]},"agency":{"id":965,"type":"Agent","name":"Ian McNamee & Partners Queanbeyan/Jerrabomberra/Canberra","url":"https://www.allhomes.com.au/agency/ian-mcnamee-partners-queanbeyan-jerrabomberra-canberra-965/","logo":"https://images.allhomes.com.au/agent/logo/842a8c73b100396bf9457f579af49a74_agency_t.gif","agents":[]}},{"listing":{"id":168888312,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-2-102a-carruthers-street-curtin-act-2605","title":"Great self contained flat in Curtin","firstImage":"https://images.allhomes.com.au/property/photo/8f0621fa2f79d2c55827eb90cee575dc_m.jpg","priceLabel":"$330 per week","numPhotos":3,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1391080663477,"relistedDate":1391080663477},"address":{"street":"2/102 Carruthers Street","division":"Curtin","state":"ACT","postcode":"2605","coordinates":{"lat":-35.3250222172526,"lon":149.083192035418}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":1,"size":810.1,"features":["ALLOCATED_CAR_SPACE","PARTIALLY_FURNISHED","SELF_CONTAINED_FLAT","SEPARATE_TOILET"]},"agency":{"id":34425,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":169176341,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/101-hennessy-street-belconnen-act-2617","title":"Clean, Affordable Fully Furnished Studio","firstImage":"https://images.allhomes.com.au/property/photo/4515f909ef7c05550d5441c23a3a2de9_m.jpg","priceLabel":"$340 - $350 per week","numPhotos":7,"has3dTour":false,"hasVideo":false,"badges":{"fullyFurnished":true},"events":[],"publicVisibleDate":1405997524718,"relistedDate":1405997524718,"availableFrom":1617195600000},"address":{"street":"101 Hennessy Street","division":"Belconnen","state":"ACT","postcode":"2617","coordinates":{"lat":-35.2462143,"lon":149.071207}},"property":{"types":["COMMERCIAL_STUDIO"],"beds":1,"baths":2,"cars":0,"eer":6,"size":2704.1,"features":["BODY_CORPORATE","BROADBAND","CEILING_FANS","FULLY_FURNISHED","GYM","HEATING_ELECTRIC_CENTRAL","NETWORK_CABLING","SAUNA","SEPARATE_TOILET","SHORT_TERM_LEASE","SHOWER","SLAB_CONSTRUCTION","STUDY","WALK_IN_ROBE","WASH_CLOSET"]},"agency":{"id":191156,"type":"Agent","name":"UniGardens","url":"https://www.allhomes.com.au/agency/unigardens-191156/","logo":"https://images.allhomes.com.au/agent/logo/c27bdf4c73b29aacdd02424e3828cd14_agency_t.png","agents":[{"name":"James Kana"}]}},{"listing":{"id":179301950,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-201a-241-northbourne-avenue-lyneham-act-2602","title":"Studio apartment in a great location","firstImage":"https://images.allhomes.com.au/property/photo/36b36f91ecfecf4100eb8ed2b9531193_m.jpg","priceLabel":"$340 per week","numPhotos":9,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1615358601497,"relistedDate":1615358601497,"availableFrom":1617195600000},"address":{"street":"201A/241 Northbourne Avenue","division":"Lyneham","state":"ACT","postcode":"2602","coordinates":{"lat":-35.25889696,"lon":149.13200196}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":0,"size":0,"features":[]},"agency":{"id":5406,"type":"Agent","name":"Independent Property Management","url":"https://www.allhomes.com.au/agency/independent-property-management-5406/","logo":"https://images.allhomes.com.au/agent/logo/cd5264cb73239e7d1e37246a1182638a_agency_t.png","agents":[{"name":"Georgia Hall","image":"https://images.allhomes.com.au/agent/staff/c611b08e16ca667d18601be23983a57d_110x110.jpg"}]}},{"listing":{"id":179320433,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-606a-241-northbourne-avenue-lyneham-act-2602","title":"Modern 1 bedroom apartment","firstImage":"https://images.allhomes.com.au/property/photo/ef4bfc311fd5853c8bde93d61c702dbd_m.jpg","priceLabel":"$340 per week","numPhotos":7,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1615861927784,"relistedDate":1615861927784,"availableFrom":1617195600000},"address":{"street":"606A/241 Northbourne Avenue","division":"Lyneham","state":"ACT","postcode":"2602","coordinates":{"lat":-35.25889696,"lon":149.13200196}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":0,"size":0,"features":[]},"agency":{"id":5406,"type":"Agent","name":"Independent Property Management","url":"https://www.allhomes.com.au/agency/independent-property-management-5406/","logo":"https://images.allhomes.com.au/agent/logo/cd5264cb73239e7d1e37246a1182638a_agency_t.png","agents":[{"name":"Georgia Hall","image":"https://images.allhomes.com.au/agent/staff/c611b08e16ca667d18601be23983a57d_110x110.jpg"}]}},{"listing":{"id":179344415,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-11-8-walsh-place-curtin-act-2605","title":"Partially furnished apartment in central Canberra location!","firstImage":"https://images.allhomes.com.au/property/photo/2e63fb237a50eac7d08db6216241753f_m.jpg","priceLabel":"$340 per week","numPhotos":4,"has3dTour":false,"hasVideo":false,"badges":{"new":true},"events":[{"id":115018473,"startTime":"2021-04-01T12:10:00","endTime":"2021-04-01T12:25:00","type":"EXHIBITION"}],"publicVisibleDate":1616646081322,"relistedDate":1616646081322,"availableFrom":1617631200000},"address":{"street":"11/8 Walsh Place","division":"Curtin","state":"ACT","postcode":"2605","coordinates":{"lat":-35.32529065,"lon":149.08504769}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":0,"features":["BODY_CORPORATE","OFF_STREET_PARKING","PARTIALLY_FURNISHED"]},"agency":{"id":60,"type":"Agent","name":"Homefinders Real Estate","url":"https://www.allhomes.com.au/agency/homefinders-real-estate-60/","logo":"https://images.allhomes.com.au/agent/logo/110e890288bbfdbb8e5c8dec405f49a9_agency_t.gif","agents":[{"name":"Sarah Castrission"}]}},{"listing":{"id":179216081,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-2-141-mapleton-avenue-harrison-act-2914","title":"NRAS - affordable housing. Eligibility conditions do apply","firstImage":"https://images.allhomes.com.au/property/photo/d155d5f3e26d5ef7461eba7508e96562_m.jpg","priceLabel":"$346 per week","numPhotos":5,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1613351488064,"relistedDate":1613351488064,"availableFrom":1615208400000},"address":{"street":"2/141 Mapleton Avenue","division":"Harrison","state":"ACT","postcode":"2914","coordinates":{"lat":-35.19428906,"lon":149.15223222}},"property":{"types":["APARTMENT"],"beds":2,"baths":2,"cars":1,"size":0,"features":[]},"agency":{"id":5406,"type":"Agent","name":"Independent Property Management","url":"https://www.allhomes.com.au/agency/independent-property-management-5406/","logo":"https://images.allhomes.com.au/agent/logo/cd5264cb73239e7d1e37246a1182638a_agency_t.png","agents":[{"name":"Corley Percival","image":"https://images.allhomes.com.au/agent/staff/7840b21f0fa33cb5381f86793cde6011_110x110.jpg"}]}},{"listing":{"id":179253589,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/braddon-act-2612?tid=179253589","title":"BRADDON 1 BEDROOM FULLY FURNISHED","firstImage":"https://images.allhomes.com.au/property/photo/6aee7760a7213df876eba824d20edaed_m.jpg","priceLabel":"$350 per week","numPhotos":9,"has3dTour":false,"hasVideo":false,"badges":{"fullyFurnished":true},"events":[],"publicVisibleDate":1615704416304,"relistedDate":1615704416304},"address":{"suppression":"NAMEANDNUMBER","street":"(no street name provided)","division":"Braddon","state":"ACT","postcode":"2612","coordinates":{"lat":-35.2656672,"lon":149.1330817}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":0,"eer":1,"size":876,"features":["ELECTRIC_HEATING","ENCLOSED_BACKYARD","FULLY_FURNISHED","SELF_CONTAINED_FLAT"]},"agency":{"id":83875,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":179339894,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-8-51-hampton-circuit-yarralumla-act-2600","title":"Convenient One Bedroom Apartment","firstImage":"https://images.allhomes.com.au/property/photo/e48e58aade9fe9a4a0261e96ca64198b_m.jpg","priceLabel":"$350 per week","numPhotos":7,"has3dTour":false,"hasVideo":false,"badges":{"new":true},"events":[],"publicVisibleDate":1616379724913,"relistedDate":1616379724913,"availableFrom":1617109200000},"address":{"street":"8/51 Hampton Circuit","division":"Yarralumla","state":"ACT","postcode":"2600","coordinates":{"lat":-35.31107158,"lon":149.10908288}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":1,"size":0,"features":[]},"agency":{"id":12,"type":"Agent","name":"Blackshaw Manuka","url":"https://www.allhomes.com.au/agency/blackshaw-manuka-12/","logo":"https://images.allhomes.com.au/agent/logo/65b5b76845237cf0ecf042f480f570cb_agency_t.jpg","agents":[{"name":"Lily Swan","image":"https://images.allhomes.com.au/agent/staff/15fc661b93acb055195cfd84a52d186b_110x110.jpg"},{"name":"Courtney Baker","image":"https://images.allhomes.com.au/agent/staff/4a5982879ca57885ed098d84a347ec61_110x110.jpg"}]}},{"listing":{"id":179354942,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/36a-mawson-drive-mawson-act-2607","title":"LOW MAINTENANCE LIVING IN A GREAT LOCATION","firstImage":"https://images.allhomes.com.au/property/photo/e5bd1027bb02d1d84908767bfc9166f4_m.jpg","priceLabel":"$350 wk","numPhotos":8,"has3dTour":false,"hasVideo":false,"badges":{"new":true},"events":[{"id":115021551,"startTime":"2021-04-01T15:50:00","endTime":"2021-04-01T16:05:00","type":"EXHIBITION"}],"publicVisibleDate":1616639526337,"relistedDate":1616639526337,"availableFrom":1619618400000},"address":{"street":"36A Mawson Drive","division":"Mawson","state":"ACT","postcode":"2607","coordinates":{"lat":-35.3619733084279,"lon":149.101536724695}},"property":{"types":["HOUSE"],"beds":1,"baths":1,"cars":0,"size":0,"features":[]},"agency":{"id":98,"type":"Agent","name":"LJ Hooker Manuka","url":"https://www.allhomes.com.au/agency/lj-hooker-manuka-98/","logo":"https://images.allhomes.com.au/agent/logo/22ebde2a4d2bb7dc86ac50127bdd8bc8_agency_t.jpg","agents":[{"name":"Leasing Consultant","image":"https://images.allhomes.com.au/agent/staff/8dc0ed2fad86ff94f0e066b451dd36f7_110x110.jpg"}]}},{"listing":{"id":179281939,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-6-3-keith-street-scullin-act-2614","title":"Newly renovated 1 bedroom apartment","firstImage":"https://images.allhomes.com.au/property/photo/cc1ac6f4baf87f02ee88be3ef74b024f_m.jpg","priceLabel":"$350 per week","numPhotos":9,"has3dTour":false,"hasVideo":false,"badges":{"priceReduced":true},"events":[{"id":115050356,"startTime":"2021-03-30T12:00:00","endTime":"2021-03-30T12:15:00","type":"EXHIBITION"}],"publicVisibleDate":1614832871863,"relistedDate":1614832871863,"availableFrom":1614776400000},"address":{"street":"6/3 Keith Street","division":"Scullin","state":"ACT","postcode":"2614","coordinates":{"lat":-35.23418654,"lon":149.04214207}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":1,"size":0,"features":[]},"agency":{"id":5406,"type":"Agent","name":"Independent Property Management","url":"https://www.allhomes.com.au/agency/independent-property-management-5406/","logo":"https://images.allhomes.com.au/agent/logo/cd5264cb73239e7d1e37246a1182638a_agency_t.png","agents":[{"name":"Caroline Phengrasmy","image":"https://images.allhomes.com.au/agent/staff/6ed5068f73291ffe9b969b1dea058601_110x110.jpg"}]}},{"listing":{"id":179298641,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/35a-ainsworth-street-mawson-act-2607","title":"Spacious 1 bedroom apartment","firstImage":"https://images.allhomes.com.au/property/photo/2a506199b1799988834542fe1f598d31_m.jpg","priceLabel":"$350 per week","numPhotos":10,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1615331488977,"relistedDate":1615331488977,"availableFrom":1616072400000},"address":{"street":"35A Ainsworth Street","division":"Mawson","state":"ACT","postcode":"2607","coordinates":{"lat":-35.3595237,"lon":149.0969335}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":0,"size":0,"features":[]},"agency":{"id":5406,"type":"Agent","name":"Independent Property Management","url":"https://www.allhomes.com.au/agency/independent-property-management-5406/","logo":"https://images.allhomes.com.au/agent/logo/cd5264cb73239e7d1e37246a1182638a_agency_t.png","agents":[{"name":"Mela Tonga","image":"https://images.allhomes.com.au/agent/staff/dae0724db355a826c7e68a58d033fea8_110x110.jpg"}]}},{"listing":{"id":173814883,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/belconnen-act-2617?tid=173814883","title":"HEART OF BELCONNEN","firstImage":"https://images.allhomes.com.au/property/photo/c5277704a2c0f8534f82c0ce56f86552_m.jpg","priceLabel":"$360 per week","numPhotos":19,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1494581419056,"relistedDate":1494581419056},"address":{"suppression":"NAMEANDNUMBER","street":"(no street name provided)","division":"Belconnen","state":"ACT","postcode":"2617","coordinates":{"lat":-35.2374908,"lon":149.0694467}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":1,"eer":5,"size":6354,"features":["AIR_CONDITIONING","AIR_CONDITIONING_OTHER","DINING_ROOM","ELECTRIC_HEATING","HEATING_REVERSE_CYCLE","SWIMMING_POOL","TENNIS_COURT"]},"agency":{"id":112955,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":179320449,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/13-forbes-street-turner-act-2612","title":"Studio/Flat in Turner","firstImage":"https://images.allhomes.com.au/property/photo/718d45234f8bf9c4472200bbe3b9fb03_m.jpg","priceLabel":"$360 per week","numPhotos":6,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1616057898425,"relistedDate":1616057898425,"availableFrom":1615986000000},"address":{"street":"13 Forbes Street","division":"Turner","state":"ACT","postcode":"2612","coordinates":{"lat":-35.2672235,"lon":149.1294591}},"property":{"types":["COMMERCIAL_STUDIO"],"beds":1,"baths":1,"cars":1,"size":1045,"features":["PARTIALLY_FURNISHED","SELF_CONTAINED_FLAT"]},"agency":{"id":352806,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":179314417,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-12-137-blamey-crescent-campbell-act-2612","title":"Renovated apartment with a lovely view","firstImage":"https://images.allhomes.com.au/property/photo/3fcee7f276be4899b087d3ae17796c53_m.jpg","priceLabel":"$360 per week","numPhotos":5,"has3dTour":false,"hasVideo":false,"badges":{"underApplication":true},"events":[],"publicVisibleDate":1615775420563,"relistedDate":1615775420563},"address":{"street":"12/137 Blamey Crescent","division":"Campbell","state":"ACT","postcode":"2612","coordinates":{"lat":-35.29085272,"lon":149.15298307}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":0,"features":[]},"agency":{"id":60,"type":"Agent","name":"Homefinders Real Estate","url":"https://www.allhomes.com.au/agency/homefinders-real-estate-60/","logo":"https://images.allhomes.com.au/agent/logo/110e890288bbfdbb8e5c8dec405f49a9_agency_t.gif","agents":[{"name":"Sarah Castrission"}]}},{"listing":{"id":179280036,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/15b-selection-street-lawson-act-2617","title":"Excellent Location","firstImage":"https://images.allhomes.com.au/property/photo/eb4378207ff2459967447e0ebd00c65e_m.jpg","priceLabel":"$360 per week","numPhotos":5,"has3dTour":false,"hasVideo":false,"badges":{"underApplication":true},"events":[],"publicVisibleDate":1614819649211,"relistedDate":1614819649211,"availableFrom":1617717600000},"address":{"street":"15B Selection Street","division":"Lawson","state":"ACT","postcode":"2617","coordinates":{"lat":-35.2295634,"lon":149.0860117}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":0,"size":0,"features":["AIR_CONDITIONING","AIR_CONDITIONING_OTHER"]},"agency":{"id":1624,"type":"Agent","name":"Blackshaw Gungahlin","url":"https://www.allhomes.com.au/agency/blackshaw-gungahlin-1624/","logo":"https://images.allhomes.com.au/agent/logo/65b5b76845237cf0ecf042f480f570cb_agency_t.jpg","agents":[{"name":"Property Management"}]}},{"listing":{"id":179331946,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-139-1-braybrooke-street-bruce-act-2617","title":"Proximity in Bruce","firstImage":"https://images.allhomes.com.au/property/photo/adadb1d0b8bc42f5cac9ba40e2a5ee5a_m.jpg","priceLabel":"$360 per week","numPhotos":11,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1616045523043,"relistedDate":1616045523043,"availableFrom":1617717600000},"address":{"street":"139/1 Braybrooke Street","division":"Bruce","state":"ACT","postcode":"2617","coordinates":{"lat":-35.24625709,"lon":149.09802191}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":1,"size":0,"features":["AIR_CONDITIONING_REVERSE_CYCLE","DISHWASHER"]},"agency":{"id":51,"type":"Agent","name":"Badenoch Real Estate Rentals","url":"https://www.allhomes.com.au/agency/badenoch-real-estate-rentals-51/","logo":"https://images.allhomes.com.au/agent/logo/aead56809818ed7c5bc78cf31efe948a_agency_t.jpg","agents":[{"name":"Jayne Spice","image":"https://images.allhomes.com.au/agent/staff/63b79078e301a371fc12c98e3051ddf8_110x110.jpg"}]}},{"listing":{"id":168895852,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-67-10-hinder-street-gungahlin-act-2912","title":"1 Bedroom plus Study apartment in Gungahlin Square","firstImage":"https://images.allhomes.com.au/property/photo/b6b3ec92b73c6271f4a189b1dd72a29b_m.jpg","priceLabel":"$360 per week","numPhotos":1,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1391641500000,"relistedDate":1391641500000,"availableFrom":1411826400000},"address":{"street":"10 Hinder Street","division":"Gungahlin","state":"ACT","postcode":"2912","coordinates":{"lat":-35.185996410902,"lon":149.137117804723}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":2,"size":17188,"features":["AIR_CONDITIONING","AIR_CONDITIONING_OTHER","ALLOCATED_CAR_SPACE","HEATING_REVERSE_CYCLE","STUDY"]},"agency":{"id":102315,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":177431569,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/o-connor-act-2602?tid=177431569","title":"Studio flat not available until Dec 2021","priceLabel":"$365 per week","numPhotos":0,"has3dTour":false,"hasVideo":false,"badges":{"fullyFurnished":true},"events":[],"publicVisibleDate":1571637104523,"relistedDate":1571637104523,"availableFrom":1638277200000},"address":{"suppression":"NAMEANDNUMBER","street":"(no street name provided)","division":"O'Connor","state":"ACT","postcode":"2602","coordinates":{"lat":-35.2511716,"lon":149.1153511}},"property":{"types":["COMMERCIAL_STUDIO"],"beds":1,"baths":1,"cars":1,"size":830,"features":["ALLOCATED_CAR_SPACE","ELECTRIC_HEATING","ENCLOSED_BACKYARD","FULLY_FURNISHED","SELF_CONTAINED_FLAT","SEPARATE_TOILET","SHORT_TERM_LEASE"]},"agency":{"id":706173,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":178390322,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-19-30-springvale-drive-hawker-act-2614","title":"Bright Two Bedroom Unit Ideally Located","firstImage":"https://images.allhomes.com.au/property/photo/d1c5ca7359d14b1a696f8665c03182f0_m.jpg","priceLabel":"$370 per week","numPhotos":6,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1591938057764,"relistedDate":1591938057764,"availableFrom":1619704800000},"address":{"street":"19/30 Springvale Drive","division":"Hawker","state":"ACT","postcode":"2614","coordinates":{"lat":-35.2463709,"lon":149.043508}},"property":{"types":["UNIT"],"beds":2,"baths":1,"cars":1,"size":0,"features":[]},"agency":{"id":93,"type":"Agent","name":"LJ Hooker Belconnen","url":"https://www.allhomes.com.au/agency/lj-hooker-belconnen-93/","logo":"https://images.allhomes.com.au/agent/logo/22ebde2a4d2bb7dc86ac50127bdd8bc8_agency_t.jpg","agents":[{"name":"Leasing Team","image":"https://images.allhomes.com.au/agent/staff/560cd65b9b886d2f1e6ded75872f2e3b_110x110.jpg"}]}},{"listing":{"id":171325946,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/gungahlin-act-2912?tid=171325946","title":"House for share","priceLabel":"$370 per week","numPhotos":0,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1447282386886,"relistedDate":1447282386886,"availableFrom":1622469600000},"address":{"suppression":"NAMEANDNUMBER","street":"(no street name provided)","division":"Gungahlin","state":"ACT","postcode":"2912","coordinates":{"lat":-35.1829932448182,"lon":149.134723788985}},"property":{"types":["HOUSE"],"baths":2,"cars":0,"size":357.3,"features":[]},"agency":{"id":31315,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":178923813,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-50-311-flemington-road-franklin-act-2913","title":"Conveniently located 1 bedroom apartment","firstImage":"https://images.allhomes.com.au/property/photo/6d17136906bad89fc9373e881229fc47_m.jpg","priceLabel":"$370 per week","numPhotos":11,"has3dTour":false,"hasVideo":true,"badges":{},"events":[],"publicVisibleDate":1605490921690,"relistedDate":1605490921690,"availableFrom":1607259600000},"address":{"street":"50/311 Flemington Road","division":"Franklin","state":"ACT","postcode":"2913","coordinates":{"lat":-35.1881044,"lon":149.1477491}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":1,"size":0,"features":[]},"agency":{"id":5406,"type":"Agent","name":"Independent Property Management","url":"https://www.allhomes.com.au/agency/independent-property-management-5406/","logo":"https://images.allhomes.com.au/agent/logo/cd5264cb73239e7d1e37246a1182638a_agency_t.png","agents":[{"name":"Caroline Phengrasmy","image":"https://images.allhomes.com.au/agent/staff/6ed5068f73291ffe9b969b1dea058601_110x110.jpg"}]}},{"listing":{"id":174675334,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/franklin-act-2913?tid=174675334","title":"Gorgeous North Facing Top Floor 1 Bedroom Apartment - Minutes from Gungahlin Market Place","firstImage":"https://images.allhomes.com.au/property/photo/42a3c882106db8ff991c9d6daa723495_m.jpg","priceLabel":"$370 per week","numPhotos":10,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1512340916801,"relistedDate":1512340916801,"availableFrom":1546520400000},"address":{"suppression":"NAMEANDNUMBER","street":"(no street name provided)","division":"Franklin","state":"ACT","postcode":"2913","coordinates":{"lat":-35.1994473015195,"lon":149.143299362077}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":1,"size":9026,"features":["AIR_CONDITIONING","AIR_CONDITIONING_OTHER","ALLOCATED_CAR_SPACE","HEATING_REVERSE_CYCLE"]},"agency":{"id":159086,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":177641919,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/waramanga-act-2611?tid=177641919","title":"Quiet leafy one bedroom unit. First to see will rent it!","priceLabel":"$372 per week","numPhotos":0,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1575414468623,"relistedDate":1575414468623},"address":{"suppression":"NAMEANDNUMBER","street":"(no street name provided)","division":"Waramanga","state":"ACT","postcode":"2611","coordinates":{"lat":-35.3471999,"lon":149.0580441}},"property":{"types":["UNIT"],"beds":1,"baths":0,"cars":1,"features":[]},"agency":{"id":578579,"type":"PrivateLister","name":"Private Lister"}},{"listing":{"id":179268651,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-8-21-battye-street-bruce-act-2617","title":"Open Plan Modern Apartment!","firstImage":"https://images.allhomes.com.au/property/photo/8a9fc55f52f4c47959f9c143f2c942e4_m.jpg","priceLabel":"$375 per week","numPhotos":8,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1614630013758,"relistedDate":1614630013758,"availableFrom":1612098000000},"address":{"street":"8/21 Battye St","division":"Bruce","state":"ACT","postcode":"2617","coordinates":{"lat":-35.24646289,"lon":149.09707114}},"property":{"types":["HOUSE"],"beds":1,"baths":1,"cars":1,"size":0,"features":[]},"agency":{"id":633372,"type":"Agent","name":"Bolton & Co Gungahlin","url":"https://www.allhomes.com.au/agency/bolton-co-gungahlin-633372/","logo":"https://images.allhomes.com.au/agent/logo/6d834fd9d47d281411030cb7cd4bac42_agency_t.jpg","agents":[{"name":"Jacqui Turner"}]}},{"listing":{"id":179324825,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/12b-gill-street-lyneham-act-2602","title":"Breath Easy with this Gill Street Beauty","firstImage":"https://images.allhomes.com.au/property/photo/6f80c80e32bf1a878610de7aa661c0ba_m.jpg","priceLabel":"$380.00 per week","numPhotos":6,"has3dTour":false,"hasVideo":false,"badges":{"underApplication":true},"events":[],"publicVisibleDate":1615944728747,"relistedDate":1615944728747,"availableFrom":1614862800000},"address":{"street":"12b Gill Street","division":"Lyneham","state":"ACT","postcode":"2602","coordinates":{"lat":-35.2469345,"lon":149.125322}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":0,"eer":0,"size":0,"features":[]},"agency":{"id":649081,"type":"Agent","name":"Ashby Partners Real Estate Pty Ltd","url":"https://www.allhomes.com.au/agency/ashby-partners-real-estate-pty-ltd-649081/","logo":"https://images.allhomes.com.au/agent/logo/4fe945081ca93ef674a52de815c6e45b_agency_t.jpg","agents":[{"name":"Braedan Kidd","image":"https://images.allhomes.com.au/agent/staff/fd5eb1f681566030db63767c4633580d_110x110.jpg"},{"name":"Jake Arranz","image":"https://images.allhomes.com.au/agent/staff/971cb340f4c7ffd06d20756a44bef4dd_110x110.jpg"}]}},{"listing":{"id":179315693,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-54-17-medley-street-chifley-act-2606","title":"Walking distance to Woden Plaza","firstImage":"https://images.allhomes.com.au/property/photo/295eb334f11104eac2edb4165a3c21ff_m.jpg","priceLabel":"$380 per week","numPhotos":5,"has3dTour":false,"hasVideo":false,"badges":{},"events":[],"publicVisibleDate":1615780324727,"relistedDate":1615780324727,"availableFrom":1615726800000},"address":{"street":"54/17 Medley Street","division":"Chifley","state":"ACT","postcode":"2606","coordinates":{"lat":-35.35470504,"lon":149.08510629}},"property":{"types":["UNIT"],"beds":1,"baths":1,"cars":1,"eer":0,"size":0,"features":["AIR_CONDITIONING","AIR_CONDITIONING_OTHER"]},"agency":{"id":135415,"type":"Agent","name":"Ray White Queanbeyan/Jerrabomberra","url":"https://www.allhomes.com.au/agency/ray-white-queanbeyan-jerrabomberra-135415/","logo":"https://images.allhomes.com.au/agent/logo/1854507c695523bd4a5c356060781fda_agency_t.jpg","agents":[{"name":"Ray White Queanbeyan"}]}},{"listing":{"id":179363431,"type":"RENTAL_RESIDENTIAL","url":"https://www.allhomes.com.au/unit-12-1-gungahlin-place-gungahlin-act-2912","title":"1 bedroom plus study 'Aviva' apartment","firstImage":"https://images.allhomes.com.au/property/photo/5ae6172c3095a3f79004d1651e75f281_m.jpg","priceLabel":"$380 per week","numPhotos":3,"has3dTour":false,"hasVideo":false,"badges":{"new":true},"events":[],"publicVisibleDate":1616976198641,"relistedDate":1616976198641,"availableFrom":1618149600000},"address":{"street":"12/1 Gungahlin Place","division":"Gungahlin","state":"ACT","postcode":"2912","coordinates":{"lat":-35.1807474907969,"lon":149.136299875512}},"property":{"types":["APARTMENT"],"beds":1,"baths":1,"cars":1,"size":0,"features":[]},"agency":{"id":5406,"type":"Agent","name":"Independent Property Management","url":"https://www.allhomes.com.au/agency/independent-property-management-5406/","logo":"https://images.allhomes.com.au/agent/logo/cd5264cb73239e7d1e37246a1182638a_agency_t.png","agents":[{"name":"Corley Percival","image":"https://images.allhomes.com.au/agent/staff/7840b21f0fa33cb5381f86793cde6011_110x110.jpg"}]}}],"bounds":{"from":{"lat":-35.15484154690057,"lon":149.00687852874398},"to":{"lat":-35.47206259332597,"lon":149.2304010875523}},"totalHits":914,"numPages":19,"query":{"page":1,"pageSize":50,"sort":{"criteria":"PRICE","order":"ASC"},"filters":{"localities":[{"type":"REGION","id":391}]},"results":{"type":"LIST"}},"suppressedResults":14}
+                ps["keywords"]= encodeURIComponent($("#searchInput").val().trim());
+                ps["currentPage"]= currentPage;
+                var objHtml=[];
+
+                $.ajax({
+                    type: 'POST',
+
+                    // contentType : "application/json",
+                     data: ps,
+                   // data: {
+                    //     "keywords": encodeURIComponent($("#searchInput").val().trim()),
+                    //     "region": region,
+                    //     "street":street
+                    // },
+                    url: '/getList',
+                    beforeSend:function(XMLHttpRequest){
+                        //alert('远程调用开始...');
+                        //$("#loading").html("<img src='/jqueryStu/images/loading.gif' />");
+                      //  var h = document.body.scrollHeight;
+                      //  var w = document.body.scrollWidth;
+                      //  var h = $("#tab1").height();
+                      //  var w = $("#tab1").width();
+                        //$("<div class=\"mask\"></div>").css({ display: "block", width: w, height: h }).appendTo("#tab1");
+                        /*$("<div class=\"mask-msg\"></div>").html("正在加载数据，请稍候......").appendTo("#tab1").css({
+                            display: "block",
+                            left:  $("#tab1").offset().left+100,//($(document.body).outerWidth(true) - 190) / 2
+                            top: $("#tab1").offset().top+100
+                        });*/
+                        var o = document.getElementById("tab1");
+                        var w = o.clientWidth||o.offsetWidth;
+                        var h = o.clientHeight||o.offsetHeight;
+                        $("#loading-mask").css({ display: "block", width: w, height: h})
+                        $("#loading").css({ display: "block"})
+                       /* $("body").height($(window).height()).css({
+                            "overflow-y": "hidden"
+                        });*/
+                    },
+                    success: function (result) {
+
+                        var obj = $.parseJSON(result.data);
+
+                        // 返回成功的处理
+                        if (result.code == 0) {
+
+                            // 总的页码数
+                            var  numPages =obj.numPages;
+                            // 总记录数
+                            var totalHits =obj.totalHits;
+
+                            // 分页组件初始化
+                            if (currentPage ==1) {
+                                initPage(obj.query.page,5,numPages);
+                            }
+
+
+                        //     layer.msg(result.msg);
+                        //     reLoad();
+                        // } else {
+                        //     layer.msg(result.msg);
+                            $("#objDiv").empty();
+
+                            for(var i=0;i<obj.searchResults.length;i++) {
+
+                                var listing= obj.searchResults[i].listing;
+                                var address= obj.searchResults[i].address;
+                                var property= obj.searchResults[i].property;
+                                var agency= obj.searchResults[i].agency;
+
+                                objHtml.push('<div class="col-xl-4 col-lg-4 col-md-6">');
+                                objHtml.push('<div class="single-property">');
+                                objHtml.push('<div class="part-img">');
+                                if (listing.numPhotos >0) {
+                                    objHtml.push('<img src='+listing.firstImage+' alt="">');
+                                } else {
+                                    objHtml.push('<img src="" alt="">');
+                                }
+
+                                objHtml.push('<div class="content-on-img">');
+                                objHtml.push('<div class="cat-list">');
+                                objHtml.push('<a href="#">'+property.types[0]+'</a>');
+                                /*   objHtml.push('<a href="#">Modern villa</a>');*/
+                                objHtml.push('</div>');
+                                //objHtml.push('<div class="price-n-time">');
+                                // objHtml.push('    <h3>'+listing.priceLabel+'</h3>');
+                                // objHtml.push('</div>');
+                                objHtml.push('</div>');
+                                objHtml.push('</div>');
+                                objHtml.push('<div class="part-details">');
+                                objHtml.push('<div class="price-n-time" style="padding-left: 20px; font-size: 20px;color:#29aae3;font-weight: 900;">');
+                                objHtml.push('    <span>'+listing.priceLabel+'</span>');
+                                objHtml.push('</div>');
+                                objHtml.push('    <div class="title-nd-place" style="padding-top: 0px">');
+                                objHtml.push('    <h4><a href="'+listing.url+'">'+listing.title+'</a></h4>');
+                                objHtml.push(' <p>'+ address.street + ' ' + address.division + '  '+ address.state + ' '+ address.postcode+'</p>');
+                                objHtml.push(' </div>');
+                                objHtml.push('<div class="rent-info">');
+                                objHtml.push('   <ul>');
+                                objHtml.push('   <li><span><i class="flaticon-bed"></i></span>'+property.beds+'</li>');
+                                objHtml.push('<li><span><i class="flaticon-bathtub"></i></span>'+property.baths+'</li>');
+                                objHtml.push('<li><span class="icon"><i class="fas fa-car"></i></span>'+property.cars+'</li>');
+                                objHtml.push(' </ul>');
+                                objHtml.push(' </div>');
+                                objHtml.push('</div>');
+                                objHtml.push('</div>');
+                                objHtml.push('</div>');
+
+                            }
+
+                        $("#objDiv").html(objHtml.join(''));
+
+                        }
+                    },
+                    complete:function(XMLHttpRequest,textStatus){
+                        // alert('远程调用成功，状态文本值：'+textStatus);
+                        //$("#loading").empty();
+                        $("#loading-mask").remove();
+                        $("#loading").remove();
+                        // $("body").height($(window).height()).css({
+                        //     "overflow-y": "auto"
+                        // });
+                    },
+                    error:function(XMLHttpRequest,textStatus,errorThrown){
+                        alert('error...状态文本值：'+textStatus+" 异常信息："+errorThrown);
+                        //$("#loading").empty();
+                        $("#loading-mask").remove();
+                        $("#loading").remove();
+                        // $("body").height($(window).height()).css({
+                        //     "overflow-y": "auto"
+                        // });
+                    }
+                });
+
+                // $("#myiframe").attr("src",url);
+            }
+        }
+
+        //基本例子
+        function  initBasic() {
+
+            // var obj= {"address":[],"street":[{"priority":1,"value":314410,"name":"Canberra Avenue, Capital Hill, ACT, 2600","type":"STREET"},{"priority":1,"value":314473,"name":"Canberra Avenue, Forrest, ACT, 2603","type":"STREET"},{"priority":1,"value":314557,"name":"Canberra Avenue, Fyshwick, ACT, 2609","type":"STREET"},{"priority":1,"value":2059,"name":"Canberra Avenue, Griffith, ACT, 2603","type":"STREET"},{"priority":1,"value":769385,"name":"Canberra Avenue, Jerrabomberra, ACT","type":"STREET"},{"priority":1,"value":4790,"name":"Canberra Avenue, Symonston, ACT, 2609","type":"STREET"},{"priority":2,"value":233013,"name":"Canberra Avenue, Berwick, VIC, 3806","type":"STREET"},{"priority":2,"value":83758,"name":"Canberra Avenue, Casula, NSW, 2170","type":"STREET"},{"priority":2,"value":148244,"name":"Canberra Avenue, Cooloola Cove, QLD, 4580","type":"STREET"},{"priority":2,"value":320159,"name":"Canberra Avenue, Crestwood, NSW, 2620","type":"STREET"},{"priority":2,"value":265930,"name":"Canberra Avenue, Dandenong, VIC, 3175","type":"STREET"},{"priority":2,"value":644962,"name":"Canberra Avenue, Greenwich, NSW, 2065","type":"STREET"},{"priority":2,"value":513453,"name":"Canberra Avenue, Hoppers Crossing, VIC, 3029","type":"STREET"},{"priority":2,"value":526338,"name":"Canberra Avenue, Mildura, VIC, 3500","type":"STREET"},{"priority":2,"value":364409,"name":"Canberra Avenue, Queanbeyan, NSW, 2620","type":"STREET"},{"priority":2,"value":364548,"name":"Canberra Avenue, Queanbeyan West, NSW, 2620","type":"STREET"},{"priority":2,"value":365843,"name":"Canberra Avenue, Richmond, NSW, 2753","type":"STREET"},{"priority":2,"value":369644,"name":"Canberra Avenue, South Durras, NSW, 2536","type":"STREET"},{"priority":2,"value":59305,"name":"Canberra Avenue, St Leonards, NSW, 2065","type":"STREET"},{"priority":2,"value":377590,"name":"Canberra Avenue, Turramurra, NSW, 2074","type":"STREET"}],"division":[{"priority":1,"value":18010,"name":"Canberra, ACT, 2601","type":"DIVISION"},{"priority":1,"value":26187,"name":"Canberra Airport, ACT, 2609","type":"DIVISION"}],"district":[],"region":[{"priority":1,"value":391,"name":"Canberra, ACT","type":"REGION"},{"priority":1,"value":391,"name":"Canberra - Greater Region, ACT","type":"REGION"}],"state":[],"postcode":[]}
+            //  var street =[];
+            // for(var i=1;i<obj.street.length;i++) {
+            //     street.push({"value": obj.street[i].value, "text": obj.street[i].name})
+            // }
+            var options = {
+                //查询事件
+                "search": function (paramList) {
+                  //  $("#basic_searchbox_param").html('查询参数:'+JSON.stringify(paramList));
+                },
+
+                //默认展开条件数
+                "expandRow": 2,
+                //查询条件
+                "searchBoxs": [
+                    {
+                        "id": "region",
+                        "title": "region",
+                        //"isMultiple":false,
+                        "isShowAll": false,//是否显示全部
+                        "data": [
+                            { "value": "391", "text": "Canberra, ACT" }
+                        ],
+                        "defaults": ['391']
+                    },
+                    {
+                        "id": "domain",
+                        "title": "domain",
+                        //"isMultiple":false,
+                        "isShowAll": false,//是否显示全部
+                        "data": [
+                            { "value": "allhomes", "text": "www.allhomes.com.au" },
+                            { "value": "domain", "text": "www.domain.com.au" }
+                        ],
+                        "defaults": ['391']
+                    },
+                    {
+                        "id": "propertyTypes",
+                        "title": "Types",
+                        "isShowAll": false,//是否显示全部
+                        "data": [
+                            {"value": "__ALL__", "text": "ALL"},
+                            {"value": "HOUSE", "text": "House"},
+                            {"value": "TOWNHOUSE", "text": "TOWNHOUSE"},
+                            {"value": "UNIT", "text": "Unit/Apartment"},
+                            {"value": "Rural", "text": "Rural"},
+                            {"Duplex": "Studio", "text": "Duplex"},
+                            {"value": "Studio", "text": "Studio"},
+                            {"value": "Other", "text": "Other"}
+                        ]
+                    }
+                ]
+            };
+            $("#basic_searchbox").fiterMore(options);
+        }
+
+
+        // 加载www.domain.com.au数据
+       function initDomainData(paramList,currentPage,id,name,type){
+           var ps= {};
+           for(var i=0;i<paramList.length;i++){
+               for(var j = 0;j<paramList[i].ValueList.length;j++){
+                   // ps.push(paramList[i].id+":"+paramList[i].ValueList[j]);
+                   ps[paramList[i].id] = paramList[i].ValueList[j];
+               }
+           }
+           ps["keywords"]= encodeURIComponent($("#searchInput").val().trim());
+           ps["currentPage"]= currentPage;
+           ps["region"]= "canberra-act";
+           var objHtml=[];
+
+           $.ajax({
+               type: 'POST',
+               // contentType : "application/json",
+               data: ps,
+
+               url: '/getDomainList',
+               beforeSend:function(XMLHttpRequest){
+
+                   var o = document.getElementById("tab2");
+                   var w = o.clientWidth||o.offsetWidth;
+                   var h = o.clientHeight||o.offsetHeight;
+                   $("#loading-mask").css({ display: "block", width: w, height: h})
+                   $("#loading").css({ display: "block"})
+               },
+               success: function (result) {
+
+                   var obj = $.parseJSON(result.data);
+
+                   // 返回成功的处理
+                   if (result.code == 0) {
+
+                       // 总的页码数
+                       var  numPages =obj.props.totalPages;
+                       // 总记录数
+                       var totalListings =obj.props.totalListings;
+
+                       // 分页组件初始化
+                       if (currentPage ==1) {
+                           initPage(obj.props.currentPage,5,numPages);
+                       }
+                       //     layer.msg(result.msg);
+                       //     reLoad();
+                       // } else {
+                       //     layer.msg(result.msg);
+                       $("#objTab2Div").empty();
+
+                       for(var i in obj.props.listingsMap){
+
+
+                     //  for(var i=0;i<obj.props.listingsMap.length;i++) {
+
+                           var listing= obj.props.listingsMap[i].listingModel;
+                           var address= obj.props.listingsMap[i].listingModel.address;
+                           var property= obj.props.listingsMap[i].listingModel.features;
+                           // var agency= obj.props.listingsMap[i].branding;
+
+                           objHtml.push('<div class="col-lg-4 col-md-6">');
+                           objHtml.push('<div class="property-grid-box mb-xl-20">');
+                           objHtml.push('<div class="property-grid-wrapper">');
+                           objHtml.push('<div class="property-img animate-img">');
+                           objHtml.push('<a href="'+obj.props.baseUrl+listing.url+'">');
+                           if (listing.lowResImage.length >0) {
+                              // objHtml.push('<img src="assets/images/homepage-1/recent-350x235.jpg" class="img-fluid full-width" alt="#">');
+                               objHtml.push('<img src="'+listing.lowResImage+'" class="img-fluid full-width" alt="#"/></a>');
+                           } else {
+                               objHtml.push('<img src="" class="img-fluid full-width" />');
+                           }
+
+                           objHtml.push('</a>');
+                           objHtml.push('<div class="property-type">');
+                           objHtml.push('<a href="#" class="property-tag-1 bg-theme text-custom-white">Sale</a>');
+                           objHtml.push('<a href="#" class="property-tag-2 bg-custom-blue text-custom-white">Featured</a>');
+                           objHtml.push('</div>');
+                           objHtml.push('<div class="property-address bg-custom-blue">');
+                           objHtml.push('<a href="#"><i class="flaticon-pin"></i>'+ address.street + ' ' + address.suburb + '  '+ address.state + ' '+ address.postcode+'</a>');
+                           objHtml.push('</div>');
+                        /*   objHtml.push('<div class="property-save-btn transform-center">');
+                           objHtml.push('<ul class="custom">');
+                           objHtml.push('<li class="custom-tooltip" data-tip="Photos">');
+                           objHtml.push('<a href="#"><i class="fas fa-camera"></i></a>');
+                           objHtml.push('</li>');
+                           objHtml.push('<li class="custom-tooltip" data-tip="Bookmark">');
+                           objHtml.push('<a href="#"><i class="fas fa-star"></i></a>');
+                           objHtml.push('</li>');
+                           objHtml.push('<li class="custom-tooltip" data-tip="Compare">');
+                           objHtml.push('<a href="#"><i class="fas fa-arrows-alt-h"></i></a>');
+                           objHtml.push('</li>');
+                           objHtml.push('</ul>');
+                           objHtml.push('</div>');*/
+                           objHtml.push('</div>');
+                           objHtml.push('<div class="property-grid-caption padding-20">');
+                           objHtml.push('<h5><a href="#" class="text-theme">'+property.propertyTypeFormatted+'</a></h5>');
+                           objHtml.push('<div class="price mb-xl-20 fs-16 fw-700 text-custom-blue">'+listing.price+'</div>');
+                           objHtml.push('<ul class="custom property-feature">');
+                           objHtml.push('<li> <i class="flaticon-bed-1"></i>');
+                           objHtml.push('<span>'+property.beds+'</span>');
+                           objHtml.push('</li>');
+                           objHtml.push('<li> <i class="flaticon-bath-1"></i>');
+                           objHtml.push('<span>'+property.baths+'</span>');
+                           objHtml.push('</li>');
+                           objHtml.push('<li> <i class="flaticon-selection-1"></i>');
+                           objHtml.push('<span>530 sq ft</span>');
+                           objHtml.push('</li>');
+                           objHtml.push('<li> <i class="flaticon-car-inside-a-garage"></i>');
+                           objHtml.push('<span>1 Garage</span>');
+                           objHtml.push('</li>');
+                           objHtml.push('</ul>');
+                           objHtml.push('</div>');
+                           objHtml.push('<div class="property-grid-footer">');
+                           objHtml.push('<a href="#" class="text-theme fs-14 fw-600">Read More <span class="flaticon-right-arrow ml-1"></span></a>');
+                           objHtml.push('<div class="ratings">');
+                           objHtml.push('<span class="fs-16 text-custom-yellow"><i class="fas fa-star"></i></span>');
+                           objHtml.push('<span class="fs-16 text-custom-yellow"><i class="fas fa-star"></i></span>');
+                           objHtml.push('<span class="fs-16 text-custom-yellow"><i class="fas fa-star"></i></span>');
+                           objHtml.push('<span class="fs-16 text-light-white"><i class="fas fa-star"></i></span>');
+                           objHtml.push('<span class="fs-16 text-light-white"><i class="fas fa-star"></i></span>');
+                           objHtml.push('</div>');
+                           objHtml.push('</div>');
+                           objHtml.push('</div>');
+                           objHtml.push('</div>');
+                           objHtml.push('</div>');
+
+
+                          //  objHtml.push('<div class="col-xl-4 col-lg-4 col-md-6">');
+                          //  objHtml.push('<div class="single-property" style="margin-top: 5px;">');
+                          //  objHtml.push('<div class="part-img">');
+                          //
+                          //  if (listing.lowResImage.length >0) {
+                          //      objHtml.push('<a style="display: block;z-index: 999; width: 100%; position: absolute;" href="'+obj.props.baseUrl+listing.url+'"><img src="'+listing.lowResImage+'"/></a>');
+                          //  } else {
+                          //      objHtml.push('<img src=""/>');
+                          //  }
+                          //
+                          //
+                          // // objHtml=[];
+                          //  objHtml.push('<div class="content-on-img">');
+                          //  objHtml.push('<div class="cat-list">');
+                          //  objHtml.push('<a href="'+obj.props.baseUrl+listing.url+'">'+property.propertyTypeFormatted+'</a>');
+                          //  /*   objHtml.push('<a href="#">Modern villa</a>');*/
+                          //  objHtml.push('</div>');
+                          //  //objHtml.push('<div class="price-n-time">');
+                          //  // objHtml.push('    <h3>'+listing.priceLabel+'</h3>');
+                          //  // objHtml.push('</div>');
+                          //  objHtml.push('</div>');
+                          //  objHtml.push('</div>');
+                          //
+                          //  //objHtml.push('<a href="'+obj.props.baseUrl+listing.url+'">'+objHtml.join('')+'</a>')
+                          //
+                          //  objHtml.push('<div class="part-details" style="height: 90px;">');
+                          //  objHtml.push('<div class="price-n-time" style="padding-left: 20px; font-size: 20px;color:#29aae3;font-weight: 900;">');
+                          //  objHtml.push('    <span>'+listing.price+'</span>');
+                          //  objHtml.push('</div>');
+                          //  objHtml.push('    <div class="title-nd-place" style="padding-top: 0px">');
+                          // // objHtml.push('    <h4><a href="'+obj.props.baseUrl+listing.url+'">'+listing.promoType+'</a></h4>');
+                          //  objHtml.push(' <p>'+ address.street + ' ' + address.suburb + '  '+ address.state + ' '+ address.postcode+'</p>');
+                          //  objHtml.push(' </div>');
+                          //  objHtml.push('<div class="rent-info">');
+                          //  objHtml.push('   <ul>');
+                          //  objHtml.push('   <li><span><i class="flaticon-bed"></i></span>'+property.beds+'</li>');
+                          //  objHtml.push('<li><span><i class="flaticon-bathtub"></i></span>'+property.baths+'</li>');
+                          //  objHtml.push('<li><span class="icon"><i class="fas fa-car"></i></span>'+property.parking+'</li>');
+                          //  objHtml.push(' </ul>');
+                          //  objHtml.push(' </div>');
+                          //  objHtml.push('</div>');
+                          //  objHtml.push('</div>');
+                          //  objHtml.push('</div>');
+                           //ahtml.push('<a href="'+obj.props.baseUrl+listing.url+'">'+objHtml.join('')+'</a>')
+
+                       }
+
+
+                       $("#objTab2Div").html(objHtml.join(''));
+
+                   }
+               },
+               complete:function(XMLHttpRequest,textStatus){
+                   $("#loading-mask").remove();
+                   $("#loading").remove();
+               },
+               error:function(XMLHttpRequest,textStatus,errorThrown){
+                   alert('error...状态文本值：'+textStatus+" 异常信息："+errorThrown);
+                   $("#loading-mask").remove();
+                   $("#loading").remove();
+               }
+           });
+       }
+
+
+
+    </script>
+
+</body>
+
+</html>
