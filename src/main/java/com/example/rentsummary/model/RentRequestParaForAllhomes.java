@@ -1,3 +1,8 @@
+/**
+ * define RentRequestParaForAllhomes class which are all filtering parameters
+ *
+ * @author rentme
+ */
 package com.example.rentsummary.model;
 
 import java.util.List;

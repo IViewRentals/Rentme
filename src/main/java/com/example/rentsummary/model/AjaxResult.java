@@ -1,3 +1,9 @@
+/**
+ * define AjaxResult class for the interaction between frontend and backend
+ *
+ * @author rentme
+ */
+
 package com.example.rentsummary.model;
 
 import com.example.rentsummary.utils.StringUtils;

@@ -1,3 +1,8 @@
+/**
+ * define AllHomesEntity class to query information from AllHomes
+ *
+ * @author rentme
+ */
 package com.example.rentsummary.model;
 
 import java.util.List;

@@ -1,3 +1,8 @@
+/**
+ * define RealestateRequest class to query information from Realestate
+ *
+ * @author rentme
+ */
 package com.example.rentsummary.model;
 
 public class RealestateRequest {

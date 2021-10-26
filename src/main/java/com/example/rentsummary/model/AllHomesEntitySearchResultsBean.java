@@ -1,3 +1,8 @@
+/**
+ * define AllHomesEntitySearchResultsBean class for filtering
+ *
+ * @author rentme
+ */
 package com.example.rentsummary.model;
 
 import java.util.List;

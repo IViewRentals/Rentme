@@ -1,3 +1,8 @@
+/**
+ * define AllHomesEntitySearchResultsBean class for handle data about address
+ *
+ * @author rentme
+ */
 package com.example.rentsummary.model;
 
 public class District {

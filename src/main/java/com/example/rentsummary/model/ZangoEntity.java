@@ -1,3 +1,8 @@
+/**
+ * define ZangoEntity class to query information from Zango
+ *
+ * @author rentme
+ */
 package com.example.rentsummary.model;
 
 import java.util.List;

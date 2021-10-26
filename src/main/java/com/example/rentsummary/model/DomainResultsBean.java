@@ -1,3 +1,8 @@
+/**
+ * define DomainResultsBean class for handle the result got from domain
+ *
+ * @author rentme
+ */
 package com.example.rentsummary.model;
 
 import java.util.List;

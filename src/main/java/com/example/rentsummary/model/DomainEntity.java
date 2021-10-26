@@ -1,3 +1,8 @@
+/**
+ * define DomainEntity class to query information from AllHomes
+ *
+ * @author rentme
+ */
 package com.example.rentsummary.model;
 
 import com.alibaba.fastjson.annotation.JSONField;

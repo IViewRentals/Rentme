@@ -1,3 +1,8 @@
+/**
+ * define RealestateRequest class for filtering
+ *
+ * @author rentme
+ */
 package com.example.rentsummary.model;
 
 public class RealestateRequestFilter {
