@@ -1,0 +1,371 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Login&Register</title>
+    <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Make the image fully responsive */
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f6f5f7;
+            display: flex;
+
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 120vh;
+            margin: 20px 0 50px;
+        }
+
+        h1 {
+            font-family: "MV Boli";
+            font-weight: bold;
+            margin: 0;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: .5px;
+            margin: 20px 0 30px;
+        }
+
+        span {
+            font-size: 12px;
+        }
+
+        a {
+            color: #333;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 15px 0;
+        }
+
+        .dowebok {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22);
+            position: relative;
+            width: 668px;
+            max-width: 100%;
+            min-height: 780px;
+        }
+
+        .form-container form {
+            display: flex;
+            background: #fff;
+            flex-direction: column;
+            padding: 0 50px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .form-container input {
+            background: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 60%;
+            outline: none;
+        }
+
+        select {
+            background: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 30%;
+            outline: none;
+
+        }
+
+        button {
+            border-radius: 20px;
+            border: 1px solid lightseagreen;
+            background: lightseagreen;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(.95);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button.ghost {
+            background: transparent;
+            border-color: #fff;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all .6s ease-in-out;
+        }
+
+        .sign-in-container {
+            left: 0;
+            width: 100%;
+            z-index: 2;
+        }
+
+        /* Move signin to right */
+        .dowebok.right-panel-active .sign-in-container {
+            transform: translateY(100%);
+        }
+
+        /* Move overlay to left */
+        .dowebok.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        /* Bring signup over signin */
+        .dowebok.right-panel-active .sign-up-container {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+        }
+
+        /* Move overlay back to right */
+        .dowebok.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        /* Bring back the text to center */
+        .dowebok.right-panel-active .overlay-left {
+            transform: translateY(0);
+        }
+
+        /* Same effect for right */
+        .dowebok.right-panel-active .overlay-right {
+            transform: translateY(20%);
+        }
+
+        .login-input {
+            width: 80%;
+        }
+
+        .b-red {
+            color: red;
+            margin: 0 3px;
+        }
+        .bs-popover-auto[x-placement^=right]>.arrow::before, .bs-popover-right>.arrow::before {
+            border-right-color: rgba(255,0,0,.5);
+        }
+
+        .popover {
+            padding: 6px;
+            background-color: #fff;
+            border: 1px solid rgba(255,0,0,.5);
+            color: red;
+        }
+    </style>
+</head>
+
+<script type="text/javascript" th:inline="javascript">
+    $(function () {
+        $.ajax({
+            type: "get",
+            url: "/getState",
+            dataType: "json",
+            success: function (res) {
+                $.each(res.stateList, function (index, obj) {
+                    $("#state").append("<option value='" + obj.id + "'>" + obj.state + "</option>")
+                })
+                $.ajax({
+                    type: "get",
+                    url: "/getCityById",
+                    data: {"id": res.stateList[0].id},
+                    dataType: "json",
+                    async: false,
+                    success: function (res) {
+                        $.each(res.cityList, function (index, obj) {
+                            $("#city").append("<option value='" + obj.id + "'>" + obj.city + "</option>")
+                        })
+                    }
+                })
+            }
+        })
+
+        changeState()
+    })
+
+    // 监听option改变的事件
+    function changeState() {
+        $("#state").change(function () {
+            const value = $(this).val();
+            if (value !== 0) {
+                $.ajax({
+                    type: "get",
+                    url: "/getCityById",
+                    data: {"id": value},
+                    dataType: "json",
+                    success: function (res) {
+                        $("#city").html("<option value='0'></option>");
+                        $.each(res.cityList, function (index, obj) {
+                            $("#city").append("<option value='" + obj.id + "'>" + obj.city + "</option>")
+                        })
+                    }
+                })
+            }
+        })
+    }
+
+    // Register Method
+    function register() {
+        const username = $("#lUsername").val();
+        const password = $("#lPassword").val();
+        const state = $("#state").val();
+        const city = $("#city").val();
+        const phone = $("#lPhone").val();
+        const email = $("#lEmail").val();
+
+
+        if (!isNull(username) && !isNull(password) && !isNull(state) && !isNull(city) && !isNull(phone) && !isNull(email)) {
+            $.ajax({
+                type: "post",
+                url: "/register",
+                data: {"account": username, "password": password, "cityId": city, "phone": phone, "email": email},
+                dataType: "json",
+                success: function (res) {
+                    if (res.flag === 1) {
+                        // 注册成功
+                        alert(res.msg);
+                        window.location.href = "/toLogin";
+                    } else {
+                        // 注册失败
+                        alert(res.msg);
+                    }
+                }
+            })
+        } else {
+            if (isNull(username)) {
+                $("#lUsername").popover('show')
+            }
+            if (isNull(password)) {
+                $("#lPassword").popover('show')
+            }
+            if (isNull(state) || isNull(city)) {
+                $("#city").popover('show')
+            }
+            if (isNull(phone)) {
+                $("#lPhone").popover('show')
+            }
+            if (isNull(email)) {
+                $("#lEmail").popover('show')
+            }
+
+            setTimeout(function () {
+                $('[data-toggle="popover"]').each(function () {
+                    $(this).popover('hide');
+                })
+            }, 2000);
+        }
+    }
+
+
+    function isNull(obj) {
+        if (obj === null || obj === "" || obj === '0') {
+            return true;
+        }
+        return false;
+    }
+</script>
+<body>
+<div class="dowebok" id="dowebok">
+    <div class="form-container sign-in-container">
+        <form action="#" class="layui-form">
+            <h1 style="margin:30px 0">Rent me</h1>
+
+            <div id="demo" class="carousel slide" data-ride="carousel">
+                <!-- 指示符 -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+
+                <!-- 轮播图片 -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg">
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-input">
+                Account number<b class="b-red">*</b>
+                <input type="text" id="lUsername"  lay-verify="username" placeholder="Username"
+                       data-container="body" data-toggle="popover" data-placement="right" data-trigger="manual"
+                       data-content="This bar could not be empty!">
+            </div>
+            <div class="login-input layui-form-item"><i style="margin-left: 58px"></i>Password<b
+                    class="b-red">*</b><input
+                    type="password" id="lPassword" placeholder="Password"  data-trigger="manual"
+                    data-container="body" data-toggle="popover" data-placement="right"
+                    data-content="This bar could not be empty!">
+            </div>
+            <div class="login-input" style="margin-left: -5px;">
+                Place of residence<b class="b-red" style="margin:0px">*</b>
+                <span >
+                    <select id="state">
+                        <option value="0"></option>
+                    </select>
+                    <select id="city"  data-trigger="manual"
+                            data-container="body" data-toggle="popover" data-placement="right"
+                            data-content="This bar could not be empty!">
+                        <option value="0"></option>
+                    </select>
+                </span>
+            </div>
+            <div class="login-input"><i style="margin-left: 16px"></i>Phone number<b class="b-red">*</b><input
+                    type="text" id="lPhone" placeholder="Phone number"
+                    data-container="body" data-toggle="popover" data-placement="right" data-trigger="manual"
+                    data-content="This bar could not be empty!"></div>
+            <div class="login-input"><i style="margin-left: 21px"></i>Email Address<b class="b-red">*</b><input
+                    type="text" id="lEmail" placeholder="Email Address"  data-trigger="manual"
+                    data-container="body" data-toggle="popover" data-placement="right"
+                    data-content="This bar could not be empty!"></div>
+
+            <button onclick="register()">Register</button>
+            <div style="margin: 30px 0 0 0 ">If you already acquired an account, please proceed to the <a
+                    href="/toLogin" style="color: blue">login</a> page.
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+
