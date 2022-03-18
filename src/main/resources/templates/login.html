@@ -188,3 +188,105 @@
     </style>
 </head>
 
+<script type="text/javascript" th:inline="javascript">
+
+    // Login Method
+    function login() {
+        const username = $("#lUsername").val();
+        const password = $("#lPassword").val();
+        if (!isNull(username) || !isNull(password)) {
+            $.ajax({
+                type: "get",
+                url: "/login",
+                async: false,
+                data: {"account": username, "password": password},
+                dataType: "json",
+                success: function (res) {
+                    if (res.flag === 0) {
+                        alert(res.msg)
+                    } else {
+                        console.log(res)
+                        sessionStorage.setItem("USER_NAME", res.username);
+                        window.location.href="/rentme"
+                    }
+                }
+            })
+        } else {
+            if (isNull(username)) {
+                $("#lUsername").popover('show')
+            }
+            if (isNull(password)) {
+                $("#lPassword").popover('show')
+            }
+
+            setTimeout(function () {
+                $('[data-toggle="popover"]').each(function () {
+                    $(this).popover('hide');
+                })
+            }, 2000);
+        }
+    }
+    function isNull(obj) {
+        if (obj === null || obj === "" || obj === '0') {
+            return true;
+        }
+        return false;
+    }
+</script>
+<body>
+<div id="msg"></div>
+
+<div class="dowebok" id="dowebok">
+    <div class="form-container sign-in-container">
+        <div class="login-form">
+            <h1 style="margin:30px 0">Rent me</h1>
+            <div class="login-input">Username：<input type="text" id="lUsername" placeholder="Username"
+                                                     data-container="body" data-toggle="popover" data-placement="right"
+                                                     data-trigger="manual"
+                                                     data-content="This bar could not be empty!"></div>
+            <div class="login-input">&nbsp;Password：<input type="password" id="lPassword" placeholder="Password"
+                                                           data-container="body" data-toggle="popover"
+                                                           data-placement="right" data-trigger="manual"
+                                                           data-content="This bar could not be empty!"></div>
+            <button onclick="login()">LOG IN</button>
+            <div class="login-tip"><a href="/toRegister"><i>Account registration</i></a><a href="#"
+                                                                                           style="margin-left: 30px"><i>Forgot
+                password?</i></a></div>
+
+            <div id="demo" class="carousel slide" data-ride="carousel">
+                <!-- 指示符 -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+
+                <!-- 轮播图片 -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var signUpButton = document.getElementById('signUp')
+    var signInButton = document.getElementById('signIn')
+    var container = document.getElementById('dowebok')
+
+
+</script>
+
+</body>
+</html>
+
