@@ -3,6 +3,7 @@ package com.example.rentsummary.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.rentsummary.model.*;
 import com.example.rentsummary.server.RentContextGet;
+import com.example.rentsummary.server.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,6 +41,9 @@ public class RentController extends BaseController {
 
     @Autowired
     JavaMailSender javaMailSender;
+
+    @GetMapping(value = "/toLogin")
+    public String toLogin() { return "login.html"; }
 
     @GetMapping(value = "getrent")
     public String getRent(Model model,String keywords) {
@@ -242,6 +247,7 @@ public class RentController extends BaseController {
         return "rentsummary";
     }
 
+
     @GetMapping(value = "/allhomes")
     public String allhomes(){
         return "allhomes";
@@ -258,4 +264,5 @@ public class RentController extends BaseController {
     public String zango(){
         return "zango";
     }
+
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.rentsummary.dao.UserDAO">
+
+    <!-- 用户登录 -->
+    <select id="login" parameterType="UserEntity" resultType="UserEntity">
+        select * from users
+        <where>
+            1=1
+            <if test="account!=null and account!=''">
+                and account=#{account}
+            </if>
+            <if test="password!=null and password!=''">
+                and password=#{password}
+            </if>
+        </where>
+    </select>
+
+    <!-- 用户注册 -->
+    <insert id="register" parameterType="UserEntity">
+        insert into users(account, password, phone, email, city_id)
+        values (#{account}, #{password}, #{phone}, #{email}, #{cityId})
+    </insert>
+
+    <!-- 获取所有的州 -->
+    <select id="getState" resultType="StateEntity">
+        select * from state
+    </select>
+
+    <!-- 根据州查询城市 -->
+    <select id="getCityById" parameterType="Integer" resultType="CityEntity">
+        select * from city where state_id=#{id}
+    </select>
+
+
+</mapper>
