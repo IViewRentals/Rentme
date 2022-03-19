@@ -977,3 +977,63 @@ footer .tm {
 .map_locations {
   display: none;
 }
+
+/*Colors*/
+.bg-custom-black {
+  background-color: #292a2c;
+}
+
+.text-custom-white {
+  color: #ffffff;
+}
+
+.topbar {
+  padding-bottom: 10px;
+}
+
+.col-md-8 {
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+}
+.col-md-4 {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+/*topbar*/
+.topbar{
+  padding-bottom: 10px;
+}
+.topbar .right-side,
+.topbar .left-side{
+  padding: 10px 0 0;
+}
+.topbar .left-side ul{
+  display: flex;
+  align-self: flex-start;
+}
+.topbar .left-side li{
+  margin-right: 20px;
+}
+.topbar .left-side li a{
+  color: #fff;
+}
+.topbar .left-side li a i{
+  margin-right: 5px;
+  color: #fff;
+}
+.topbar .right-side ul{
+  display: flex;
+  align-self: flex-end;
+  justify-content: flex-end;
+}
+.topbar .right-side li{
+  margin-left: 20px;
+}

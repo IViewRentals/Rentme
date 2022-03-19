@@ -48,12 +48,12 @@
              margin-top: 0px;
         }
         ul.sp_element_box li.input_box {
-            height: 60px;
+            height: 80px;
             min-height:60px;
         }
 
         ul.sp_element_box li.input_box input {
-            height: 46px !important;
+            height: 70px !important;
             line-height: 46px !important;
             min-height: 46px !important;
         }
@@ -68,6 +68,9 @@
 
 <body>
 <div class="page">
+    <!-- topbar -->
+    <div th:insert="~{rentme :: nevigationbar}"></div>
+
     <!--========================================================
                               HEADER
     =========================================================-->
@@ -92,7 +95,7 @@
             <div class="brand wow fadeIn">
                 <h3 class="brand_name">
                     <a href="../../../test/java">IView Rentals</a>
-                </h1>
+                </h3>
 				
 				<div id="cover">
 				    <form method="get" action="rentme">
@@ -100,7 +103,7 @@
 						    <div class="td">
                                 <input type="text"
                                        id="searchInput" name="searchInput" class="form-control form-control-custom bg-custom-white"
-                                       placeholder="Street, Suburb or Postcode">
+                                       placeholder="Street, Suburb or Postcode" style="height: 300px;">
                                 <input type="hidden" name="hidType" id="hidType"> </div>
                             <input type="hidden" name="area" id="area"> </div>
 
