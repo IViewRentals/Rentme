@@ -9,10 +9,10 @@ import java.util.List;
 public interface UserDAO {
 
 
-    // user login
+    // 用户登录
     UserEntity login(UserEntity userEntity);
 
-    // user reigister
+    // 用户注册
     int register(UserEntity userEntity);
 
     List<StateEntity> getState();
