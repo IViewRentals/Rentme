@@ -20,7 +20,10 @@
   font-size: 200px;
   line-height: 220px;
   font-weight: 400;
-  color: #ffffff;
+  text-shadow: 5px 5px 10px #0b2e13;
+  color: #f8f8f8;
+  background-color: #49495469;
+  border-radius: 0.3em;
 }
 @media (max-width: 1700px) {
   .camera_container .brand {
@@ -51,6 +54,7 @@
   min-height: 60px;
   position: relative;
   width: 100%;
+  opacity: 0.8;
 }
 .camera_src {
   display: none;
