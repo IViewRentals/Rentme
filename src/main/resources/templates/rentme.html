@@ -161,6 +161,17 @@
             text-underline-position: under;
         }
 
+        .text-search-result{
+            margin-top: 15px;
+            font-family: Arial;
+            font-size: 200%;
+        }
+
+        .text-search-clear{
+            margin-top: 30px;
+            font-size: 150%;
+            color: #1ab7ea;
+        }
 
         .range-slider {
             margin-top: 15px;
@@ -320,6 +331,8 @@
 
 <!-- navigation -->
 <header class="menu-style">
+
+
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -327,29 +340,33 @@
                     <h1 class="text-custom-white search-title">FIND YOUR DREAM HOME</h1>
                     <div class="search-form mb-xl-20">
                         <div class="row">
-                            <div class="col-lg-5 col-sm-4">
+                            <div class="col-lg-1 col-sm-1">
                                 <div class="form-group">
+                                    <a href="http://127.0.0.1:8888/" class="text-custom-white"><img src="../static/search/images.png" float="right"></a>
 
-                                    <input type="text"
-                                           id="searchInput" name="searchInput"
-                                           class="form-control form-control-custom bg-custom-white"
-                                           placeholder="Street, Suburb or Postcode">
-                                    <input type="hidden" id="hidType">
                                 </div>
                             </div>
                             <div class="col-lg-5 col-sm-4">
                                 <div class="form-group">
+
+                                    <input type="text"
+                                           id="searchInput"   name="searchInput" class="form-control form-control-custom bg-custom-white"
+                                           placeholder="Street, Suburb or Postcode" style="font-size: 12px">
+                                    <input type="hidden" id="hidType">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-3">
+                                <div class="form-group">
                                     <div class="location-box">
                                         <input type="text"
-                                               id="keywords" name="keywords"
-                                               class="form-control form-control-custom bg-custom-white"
+                                               id="keywords" name="keywords" class="form-control form-control-custom bg-custom-white"
                                                placeholder="eg. waterfront, views, street name">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-sm-4">
                                 <div class="form-group">
-                                    <button id="searchBtn" class="btn-first btn-submit full-width">Search</button>
+                                    <button  id="searchBtn"  class="btn-first btn-submit full-width" style="border-radius: 4px">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -378,7 +395,7 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12">
                     <div class="range-slider">
-                        <label>Price</label>
+                        <label>Price&emsp;</label>
                         <div data-min="0" data-max="150"
                              data-min-name="min_price"
                              data-max-name="max_price" data-unit="AUD" class="range-slider-ui ui-slider"
@@ -386,6 +403,22 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-8 col-lg-8" style="font-weight: bold">
+<!--加个搜索结果汇总，从下方的函数中直接取数-->
+                    <div class="text-search-result" style="color: #0b0b0b;float: left;margin-right: 5px">Having found</div><div class="text-search-result" id="houseNum" style="color: #0ea800;float: left"></div><div class="text-search-result" style="color: #0b0b0b;float: left;margin-left: 5px">houses for you!</div>
+
+                </div>
+<!--一个直接刷新页面的清除筛选-->
+                <div class="col-xl-4 col-lg-4">
+                    <div class="text-search-clear">
+                        <a href="homepage.html" style="color: #1ab7ea"> <u>Clear filter criteria</u></a>
+                    </div>
+                </div>
+
+                <div class="col-xl-12 col-lg-12" style="height: 3px;background-color: #9f9f9f;margin-bottom: 5px"></div>
+<!--加条分割线-->
             </div>
 
         </div>
@@ -696,7 +729,7 @@
                     if (totalHits == 0) {
                         $("#page404").css({display: "block"})
                     }
-
+                    document.getElementById("houseNum").innerHTML = document.getElementById("houseNum").innerHTML+totalHits;
                     // 分页组件初始化
                     if (currentPage == 1 && numPages > 0) {
 
