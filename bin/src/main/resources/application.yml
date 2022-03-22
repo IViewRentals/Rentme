@@ -1,11 +1,19 @@
 server:
-  #the port number
-  port: 8888
+  # Port number
+  port: 8905
 
+  # DataSource Config
 spring:
+  datasource:
+    # 此处使用 druid 数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rentme?allowMultiQueries=true&useUnicode=true&characterEncoding=UTC+11
+    username: rentme
+    password: p6LDLcMEZD8e3npM
   thymeleaf:
-    mode: LEGACYHTML5 #html formal
-    cache: false  #Turn off the cache during development, otherwise you will not be able to see the real-time page
+    mode: LEGACYHTML5 # Allow less rigorous HTML format
+    cache: false  # Set false when developing, otherwise it is impossible to see real-time pages
   mvc:
     view:
       prefix: html/
@@ -17,18 +25,23 @@ spring:
   mail:
     # Configure SMTP server address
     host: smtp.qq.com
-    # sender email
+    # Sender email address
     username: 342372686@qq.com
-    # Configure the password, note that it is not the real password, but the authorization code just applied for
+    # Configure password (Note: Here is the applied authorization code rather than the real password)
     password: uxepsqpooddscabe
-    # port number 465 or 587
+    # Port number is 465 or 587
     port: 587
-    # Default mail encoding is UTF-8
+    # Default email encoding is UTF-8
     default-encoding: UTF-8
-
+    # Configure SSL encryption factory
     properties:
       mail:
         smtp:
           socketFactoryClass: javax.net.ssl.SSLSocketFactory
-        #Indicates that DEBUG mode is turned on, so that the log of the mail sending process will be printed on the console, which is convenient for troubleshooting
+        # Open the DEBUG mode so that it is convenient to troubleshoot issues as the log of the email sending process will be printed on the console
         debug: true
+
+mybatis:
+  type-aliases-package: com.example.rentsummary.model
+  type-handlers-package: com.example.rentsummary.dao
+  mapper-locations: classpath*:mapper/**/*.xml
