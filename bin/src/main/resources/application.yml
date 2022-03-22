@@ -1,11 +1,11 @@
 server:
-  #端口号
+  #the port number
   port: 8888
 
 spring:
   thymeleaf:
-    mode: LEGACYHTML5 #允许不太严格的HTML格式
-    cache: false  #开发时关闭缓存,不然没法看到实时页面
+    mode: LEGACYHTML5 #html formal
+    cache: false  #Turn off the cache during development, otherwise you will not be able to see the real-time page
   mvc:
     view:
       prefix: html/
@@ -15,20 +15,20 @@ spring:
     resources:
       static-locations: classpath:templates/,classpath:static/
   mail:
-    # 配置 SMTP 服务器地址
+    # Configure SMTP server address
     host: smtp.qq.com
-    # 发送者邮箱
+    # sender email
     username: 342372686@qq.com
-    # 配置密码，注意不是真正的密码，而是刚刚申请到的授权码
+    # Configure the password, note that it is not the real password, but the authorization code just applied for
     password: uxepsqpooddscabe
-    # 端口号465或587
+    # port number 465 or 587
     port: 587
-    # 默认的邮件编码为UTF-8
+    # Default mail encoding is UTF-8
     default-encoding: UTF-8
-    # 配置SSL 加密工厂
+
     properties:
       mail:
         smtp:
           socketFactoryClass: javax.net.ssl.SSLSocketFactory
-        #表示开启 DEBUG 模式，这样，邮件发送过程的日志会在控制台打印出来，方便排查错误
+        #Indicates that DEBUG mode is turned on, so that the log of the mail sending process will be printed on the console, which is convenient for troubleshooting
         debug: true
