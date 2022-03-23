@@ -216,7 +216,7 @@
         changeState()
     })
 
-    // 监听option改变的事件
+    // option change
     function changeState() {
         $("#state").change(function () {
             const value = $(this).val();
@@ -255,11 +255,11 @@
                 dataType: "json",
                 success: function (res) {
                     if (res.flag === 1) {
-                        // 注册成功
+                        // success
                         alert(res.msg);
                         window.location.href = "/toLogin";
                     } else {
-                        // 注册失败
+                        // register fail
                         alert(res.msg);
                     }
                 }
@@ -304,14 +304,14 @@
             <h1 style="margin:30px 0">Rent me</h1>
 
             <div id="demo" class="carousel slide" data-ride="carousel">
-                <!-- 指示符 -->
+                <!-- point -->
                 <ul class="carousel-indicators">
                     <li data-target="#demo" data-slide-to="0" class="active"></li>
                     <li data-target="#demo" data-slide-to="1"></li>
                     <li data-target="#demo" data-slide-to="2"></li>
                 </ul>
 
-                <!-- 轮播图片 -->
+                <!-- advertisement -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
