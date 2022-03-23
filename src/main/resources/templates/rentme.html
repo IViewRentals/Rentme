@@ -160,13 +160,13 @@
             text-decoration: underline;
             text-underline-position: under;
         }
-
+        /*显示搜索到多少房子的结果格式类型*/
         .text-search-result{
             margin-top: 15px;
             font-family: Arial;
             font-size: 200%;
         }
-
+        /*清除筛选条件的格式类型*/
         .text-search-clear{
             margin-top: 30px;
             font-size: 150%;
@@ -340,13 +340,14 @@
                     <h1 class="text-custom-white search-title">FIND YOUR DREAM HOME</h1>
                     <div class="search-form mb-xl-20">
                         <div class="row">
+<!--col是屏幕适配参数，分配各部分所占整个屏幕部分比例，总数为12，lg是大屏幕，sm是小屏幕-->
                             <div class="col-lg-1 col-sm-1">
                                 <div class="form-group">
                                     <a href="http://127.0.0.1:8888/" class="text-custom-white"><img src="../static/search/images.png" float="right"></a>
 
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-sm-4">
+                            <div class="col-lg-5 col-sm-5">
                                 <div class="form-group">
 
                                     <input type="text"
@@ -355,7 +356,7 @@
                                     <input type="hidden" id="hidType">
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-3">
+                            <div class="col-lg-4 col-sm-4">
                                 <div class="form-group">
                                     <div class="location-box">
                                         <input type="text"
@@ -364,7 +365,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-sm-4">
+                            <div class="col-lg-2 col-sm-2">
                                 <div class="form-group">
                                     <button  id="searchBtn"  class="btn-first btn-submit full-width" style="border-radius: 4px">Search</button>
                                 </div>
@@ -410,15 +411,15 @@
                     <div class="text-search-result" style="color: #0b0b0b;float: left;margin-right: 5px">Having found</div><div class="text-search-result" id="houseNum" style="color: #0ea800;float: left"></div><div class="text-search-result" style="color: #0b0b0b;float: left;margin-left: 5px">houses for you!</div>
 
                 </div>
-<!--直接刷新页面的清除筛选条件-->
+<!--直接刷新页面的清除筛选条件，应用JS的页面重载功能-->
                 <div class="col-xl-4 col-lg-4">
                     <div class="text-search-clear">
                         <button type="button"  onclick="javascript:location.reload()" style="color: #1ab7ea"><u>Clear filter criteria</u></button>
                     </div>
                 </div>
-
+<!--在搜索选项下加一条分割线来分割搜索条件和结果部分-->
                 <div class="col-xl-12 col-lg-12" style="height: 3px;background-color: #9f9f9f;margin-bottom: 5px"></div>
-<!--加条分割线-->
+
             </div>
 
         </div>
@@ -477,7 +478,7 @@
 <!-- feature properties end -->
 
 <!-- Start Footer -->
-
+<!--网页最底端的知识产权部分内容-->
 <div class="copyright">
     <div class="container">
         <div class="row">
