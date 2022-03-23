@@ -124,7 +124,7 @@ INSERT INTO `city` VALUES (88, 'Darwin', 7);
 INSERT INTO `city` VALUES (89, 'Alice Springs', 7);
 INSERT INTO `city` VALUES (90, 'Katherine', 7);
 INSERT INTO `city` VALUES (91, 'Palmerston', 7);
-
+INSERT INTO `city` VALUES (92, 'Canberra', 8);
 -- ----------------------------
 -- Table structure for state
 -- ----------------------------
@@ -145,6 +145,7 @@ INSERT INTO `state` VALUES (4, 'Western Australia');
 INSERT INTO `state` VALUES (5, 'South Australia（SA）');
 INSERT INTO `state` VALUES (6, 'Tasmania');
 INSERT INTO `state` VALUES (7, 'Northern Territory');
+INSERT INTO `state` VALUES (8, 'ACT');
 
 -- ----------------------------
 -- Table structure for users

@@ -1,6 +1,6 @@
 server:
   # Port number
-  port: 8888
+  port: 8905
 
   # DataSource Config
 spring:
@@ -8,9 +8,9 @@ spring:
     # 此处使用 druid 数据源
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/rentme?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: root
+    url: jdbc:mysql://47.114.170.77:3306/rentme?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: rentme
+    password: p6LDLcMEZD8e3npM
   thymeleaf:
     mode: LEGACYHTML5 # Allow less rigorous HTML format
     cache: false  # Set false when developing, otherwise it is impossible to see real-time pages

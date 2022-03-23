@@ -1,11 +1,19 @@
 server:
-  #端口号
-  port: 8888
+  # Port number
+  port: 8905
 
+  # DataSource Config
 spring:
+  datasource:
+    # 此处使用 druid 数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rentme?allowMultiQueries=true&useUnicode=true&characterEncoding=UTC+11
+    username: rentme
+    password: p6LDLcMEZD8e3npM
   thymeleaf:
-    mode: LEGACYHTML5 #允许不太严格的HTML格式
-    cache: false  #开发时关闭缓存,不然没法看到实时页面
+    mode: LEGACYHTML5 # Allow less rigorous HTML format
+    cache: false  # Set false when developing, otherwise it is impossible to see real-time pages
   mvc:
     view:
       prefix: html/
@@ -15,20 +23,25 @@ spring:
     resources:
       static-locations: classpath:templates/,classpath:static/
   mail:
-    # 配置 SMTP 服务器地址
+    # Configure SMTP server address
     host: smtp.qq.com
-    # 发送者邮箱
+    # Sender email address
     username: 342372686@qq.com
-    # 配置密码，注意不是真正的密码，而是刚刚申请到的授权码
+    # Configure password (Note: Here is the applied authorization code rather than the real password)
     password: uxepsqpooddscabe
-    # 端口号465或587
+    # Port number is 465 or 587
     port: 587
-    # 默认的邮件编码为UTF-8
+    # Default email encoding is UTF-8
     default-encoding: UTF-8
-    # 配置SSL 加密工厂
+    # Configure SSL encryption factory
     properties:
       mail:
         smtp:
           socketFactoryClass: javax.net.ssl.SSLSocketFactory
-        #表示开启 DEBUG 模式，这样，邮件发送过程的日志会在控制台打印出来，方便排查错误
+        # Open the DEBUG mode so that it is convenient to troubleshoot issues as the log of the email sending process will be printed on the console
         debug: true
+
+mybatis:
+  type-aliases-package: com.example.rentsummary.model
+  type-handlers-package: com.example.rentsummary.dao
+  mapper-locations: classpath*:mapper/**/*.xml
