@@ -516,3 +516,55 @@ table {
     margin-left: 0;
   }
 }
+
+.grid_6_button{
+  margin-bottom: 0 !important;
+  font-size: 16px;
+  text-align: center;
+  font-family: 'Open Sans', arial, sans-serif;
+  text-transform: none;
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+}
+.grid_6_button_1 {
+  background-color: rgb(203, 65, 84);
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  text-align: center;
+  display: inline-flex;
+  text-transform: uppercase;
+  margin-right: 32px;
+  margin-left: 32px;
+  padding-right: 32px;
+  padding-left: 32px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  max-width: 100%;
+  letter-spacing: 0.214em;
+  min-height: 56px;
+  font-weight: 700;
+}
+
+.grid_6_button_2 {
+  background-color: rgb(203, 65, 84);
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  text-align: center;
+  display: inline-flex;
+  text-transform: uppercase;
+  margin-left: 100px;
+  padding-right: 150px;
+  padding-left: 150px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  max-width: 100%;
+  letter-spacing: 0.214em;
+  min-height: 56px;
+  font-weight: 700;
+}
+
+.grid_6_button a:hover{
+  background-color: rgb(203 65 82 / 72%);
+  color: rgb(255, 255, 255);
+}
