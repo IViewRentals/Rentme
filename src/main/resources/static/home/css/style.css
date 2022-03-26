@@ -568,25 +568,9 @@ header .nav {
   line-height: 64px;
   color: #ffffff;
 }
-.instruct
-{
-
-
-  margin: 140px 0px 10px 0px;
-  padding: 0px 20px 0px;
-  display: inline-block;
-  overflow: hidden;
-  font-family:"Museo-Sans-300", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 40px;
-  text-shadow: 2px 4px 4px #000000;
-  background-color: #49495469;
-
-  color: #f8f8f8;
-  border-radius: 0.3em;
-  }
-  /*=======================================================
-                       CONTENT  Layout
-  =========================================================*/
+/*=======================================================
+                     CONTENT  Layout
+=========================================================*/
 * + p {
   margin-top: 46px;
 }
