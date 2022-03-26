@@ -190,7 +190,6 @@
 
 <script type="text/javascript" th:inline="javascript">
     $(function () {
-        // $("#area").hide()
         $.ajax({
             type: "get",
             url: "/getState",
@@ -212,30 +211,13 @@
             if (value !== 0) {
                 $.ajax({
                     type: "get",
-                    url: "/getAreaById",
+                    url: "/getCityById",
                     data: {"id": value},
                     dataType: "json",
                     success: function (res) {
-                        $("#area").html("<option value='0'></option>");
-                        $.each(res.areaList, function (index, obj) {
-                            $("#area").append("<option value='" + obj.id + "'>" + obj.area + "</option>")
-                        })
-                    }
-                })
-            }
-        })
-        $("#city").change(function () {
-            const value = $(this).val();
-            if (value !== 0) {
-                $.ajax({
-                    type: "get",
-                    url: "/getAreaById",
-                    data: {"id": value},
-                    dataType: "json",
-                    success: function (res) {
-                        $("#area").html("<option value='0'></option>");
-                        $.each(res.areaList, function (index, obj) {
-                            $("#area").append("<option value='" + obj.id + "'>" + obj.area + "</option>")
+                        $("#city").html("<option value='0'></option>");
+                        $.each(res.cityList, function (index, obj) {
+                            $("#city").append("<option value='" + obj.id + "'>" + obj.city + "</option>")
                         })
                     }
                 })
@@ -350,16 +332,6 @@
                         <option value="0"></option>
                     </select>
                     <select id="city"  data-trigger="manual"
-                            data-container="body" data-toggle="popover" data-placement="right"
-                            data-content="This bar could not be empty!">
-                        <option value="0"></option>
-                    </select>
-                    <select id="area"  data-trigger="manual"
-                            data-container="body" data-toggle="popover" data-placement="right"
-                            data-content="This bar could not be empty!">
-                        <option value="0"></option>
-                    </select>
-                    <select id="area"  data-trigger="manual"
                             data-container="body" data-toggle="popover" data-placement="right"
                             data-content="This bar could not be empty!">
                         <option value="0"></option>
