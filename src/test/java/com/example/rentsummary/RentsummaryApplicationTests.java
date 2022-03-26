@@ -8,6 +8,7 @@ class RentsummaryApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }

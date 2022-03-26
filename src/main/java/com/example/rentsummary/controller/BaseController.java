@@ -211,7 +211,7 @@ public class BaseController {
         } else {
             // propertyTypes: ["HOUSE", "TOWNHOUSE"]
             if(null!= propertyTypes && propertyTypes.length >0) {
-               String propertyTypeTmp= StringUtils.join(propertyTypes, ",");
+                String propertyTypeTmp= StringUtils.join(propertyTypes, ",");
                 if (!propertyTypeTmp.contains("Apartment")) {
                     para.append("/apartment/?page="+currentPage);
                 } else if (!propertyTypeTmp.contains("House")) {
@@ -282,9 +282,9 @@ public class BaseController {
 
         if (null != request.getParameter("Bedrooms") && StringUtils.isNotEmpty(request.getParameter("Bedrooms"))) {
             // Set bed number
-             para.append("&bedrooms__gte=" + Integer.parseInt(request.getParameter("Bedrooms")));
+            para.append("&bedrooms__gte=" + Integer.parseInt(request.getParameter("Bedrooms")));
             if (!"5".equals(request.getParameter("Bedrooms"))) {
-              para.append("&bedrooms__lte=" + Integer.parseInt(request.getParameter("Bedrooms")));
+                para.append("&bedrooms__lte=" + Integer.parseInt(request.getParameter("Bedrooms")));
             }
         }
 
@@ -292,7 +292,7 @@ public class BaseController {
             // Set bathroom
             para.append("&bathrooms__gte=" + Integer.parseInt(request.getParameter("Bathrooms")));
             if (!"5".equals(request.getParameter("Bathrooms"))) {
-               para.append("&bathrooms__lte=" + Integer.parseInt(request.getParameter("Bathrooms")));
+                para.append("&bathrooms__lte=" + Integer.parseInt(request.getParameter("Bathrooms")));
             }
         }
 
@@ -363,7 +363,7 @@ public class BaseController {
                 query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":25,\\\"filters\\\":{ "+ querytmp +"\\\"propertyTypes\\\":[\\\"townhouse\\\"],\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
             }
         } else {
-           query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":50,\\\"filters\\\":{ "+ querytmp +"\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
+            query="{\"operationName\":\"searchByQuery\",\"variables\":{\"query\":\"{\\\"channel\\\":\\\"rent\\\",\\\"page\\\":"+currentPage+",\\\"pageSize\\\":50,\\\"filters\\\":{ "+ querytmp +"\\\"surroundingSuburbs\\\":false,\\\"excludeNoSalePrice\\\":false,\\\"ex-under-contract\\\":false,\\\"furnished\\\":false,\\\"petsAllowed\\\":false,\\\"hasScheduledAuction\\\":false},\\\"localities\\\":[{\\\"searchLocation\\\":\\\""+region.split("-")[0]+"\\\"}]}\",\"testListings\":false,\"nullifyOptionals\":false,\"recentHides\":[]},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"f8a7353b213f7dbce77ad95aa4cae9558511cd0617d3f10f5c26b534a480b570\"}}}";
         }
         return query;
     }

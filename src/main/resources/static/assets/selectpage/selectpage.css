@@ -240,7 +240,7 @@ ul.sp_results > li.sp_selected {
  * 多选模式相关样式
  */
 div.sp_container_combo{
-    border: 1px solid #CCCCCC;
+    border: 1px solid #cccccc00;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -268,6 +268,7 @@ div.sp_container_combo.sp_container_open{
 }
 input.sp_combo_input{
     border: 0 !important;
+    outline:none;
     box-shadow: none;
     background-color: transparent;
     max-width: 100%;
@@ -295,7 +296,7 @@ ul.sp_element_box{
     list-style: none;
     height: auto;
     min-height: 50px;
-    font-size: 14px;
+    font-size: 20px;
 }
 ul.sp_element_box > li{
     list-style: none;
@@ -315,18 +316,18 @@ ul.sp_element_box li.full_width input{
 }
 ul.sp_element_box li.selected_tag {
     border: 1px solid #AAAAAA;
-    border-radius: 3px;
-    background-color: #EFEFEF;
+    border-radius: 5px;
+    background-color: #f8f8f899;
     cursor: pointer;
     max-width: 100%;
     box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-    height: 30px;
-    line-height: 30px;
+    height: 50px;
+    line-height: 50px;
     -webkit-transition: all .5s cubic-bezier(.175,.885,.32,1);
     transition: all .5s cubic-bezier(.175,.885,.32,1);
 }
 ul.sp_element_box li.selected_tag:hover {
-    background-color: white;
+    background-color: #eeeeeec7;
     border: 1px solid #D0D0D0;
     box-shadow: 0 2px 7px rgba(0,0,0,.1);
 }

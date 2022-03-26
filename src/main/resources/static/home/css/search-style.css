@@ -15,8 +15,9 @@
 
 input, button
 {
-    color: #fff;
+    color: #666666;
     font-family: Nunito;
+    font-weight: bolder;
     padding: 0;
     margin: 0;
     border: 0;
@@ -29,12 +30,12 @@ input, button
     top: 50%;
     left: 0;
     right: 0;
-    width: 1200px;
+    width: 1248px;
     padding: 35px;
     margin: 50px auto 0 auto;
-    background-color: transparent;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px #ff7c7c, 0 0 0 20px #ffffffeb;
+    background-color: #eeeeee7d;
+    border-radius: 15px;
+    box-shadow: 0 5px 5px #eeeeeec7, 0 0 2px 7px #eeeeee94;
     transform: scale(0.6);
 }
 
@@ -53,7 +54,17 @@ input[type="text"]
 
 input[type="text"]::placeholder
 {
-    color: #e16868;
+    color: #6f6f69;
+    text-shadow: 3px 3px 5px #555855;
+    font-size:60px;
+    font-weight: bold;
+    font-family: "Museo-Sans-300", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    filter: blur(2px);
+}
+
+input[type="text"]:focus::placeholder
+{
+    opacity: 0;
 }
 
 #s-cover
@@ -76,8 +87,8 @@ button
     position: relative;
     top: -8px;
     left: 0;
-    width: 43px;
-    height: 43px;
+    width: 71px;
+    height: 71px;
     margin-top: 0;
     border-width: 15px;
     border: 15px solid #fff;

@@ -1,0 +1,293 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Login&Register</title>
+    <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Make the image fully responsive */
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f6f5f7;
+            display: flex;
+
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 95vh;
+            margin: -20px 0 50px;
+        }
+
+        h1 {
+            font-family: "MV Boli";
+            font-weight: bold;
+            margin: 0;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: .5px;
+            margin: 20px 0 30px;
+        }
+
+        span {
+            font-size: 12px;
+        }
+
+        a {
+            color: #333;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 15px 0;
+        }
+
+        .dowebok {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22);
+            position: relative;
+            overflow: hidden;
+            width: 668px;
+            max-width: 100%;
+            min-height: 580px;
+        }
+
+        .form-container .login-form {
+            height: calc(100% - 58px);
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 0 50px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .social-container a {
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 5px;
+            height: 40px;
+            width: 40px;
+        }
+
+        .social-container a:hover {
+            background-color: #eee;
+        }
+
+        .form-container input {
+            background: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 60%;
+            outline: none;
+        }
+
+        button {
+            border-radius: 20px;
+            border: 1px solid lightseagreen;
+            background: lightseagreen;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(.95);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button.ghost {
+            background: transparent;
+            border-color: #fff;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all .6s ease-in-out;
+        }
+
+        .sign-in-container {
+            left: 0;
+            width: 100%;
+            z-index: 2;
+        }
+
+        /* Move signin to right */
+        .dowebok.right-panel-active .sign-in-container {
+            transform: translateY(100%);
+        }
+
+        /* Move overlay to left */
+        .dowebok.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        /* Bring signup over signin */
+        .dowebok.right-panel-active .sign-up-container {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+        }
+
+        /* Move overlay back to right */
+        .dowebok.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        /* Bring back the text to center */
+        .dowebok.right-panel-active .overlay-left {
+            transform: translateY(0);
+        }
+
+        /* Same effect for right */
+        .dowebok.right-panel-active .overlay-right {
+            transform: translateY(20%);
+        }
+
+        .login-tip {
+            margin: 20px 0 10px 0;
+        }
+
+        .login-input {
+            width: 80%;
+        }
+
+        #demo {
+
+        }
+    </style>
+</head>
+
+<script type="text/javascript" th:inline="javascript">
+
+    // Login Method
+    function login() {
+        const username = $("#lUsername").val();
+        const password = $("#lPassword").val();
+        if (!isNull(username) || !isNull(password)) {
+            $.ajax({
+                type: "get",
+                url: "/login",
+                async: false,
+                data: {"account": username, "password": password},
+                dataType: "json",
+                success: function (res) {
+                    if (res.flag === 0) {
+                        alert(res.msg)
+                    } else {
+                        console.log(res)
+                        sessionStorage.setItem("USER_NAME", res.username);
+                        sessionStorage.setItem("USER_ID", res.id);
+                        window.location.href="/rentme"
+                    }
+                }
+            })
+        } else {
+            if (isNull(username)) {
+                $("#lUsername").popover('show')
+            }
+            if (isNull(password)) {
+                $("#lPassword").popover('show')
+            }
+
+            setTimeout(function () {
+                $('[data-toggle="popover"]').each(function () {
+                    $(this).popover('hide');
+                })
+            }, 2000);
+        }
+    }
+    function isNull(obj) {
+        if (obj === null || obj === "" || obj === '0') {
+            return true;
+        }
+        return false;
+    }
+</script>
+<body>
+<div id="msg"></div>
+
+<div class="dowebok" id="dowebok">
+    <div class="form-container sign-in-container">
+        <div class="login-form">
+            <h1 style="margin:30px 0">Rent me</h1>
+            <div class="login-input">Username：<input type="text" id="lUsername" placeholder="Username"
+                                                     data-container="body" data-toggle="popover" data-placement="right"
+                                                     data-trigger="manual"
+                                                     data-content="This bar could not be empty!"></div>
+            <div class="login-input">&nbsp;Password：<input type="password" id="lPassword" placeholder="Password"
+                                                           data-container="body" data-toggle="popover"
+                                                           data-placement="right" data-trigger="manual"
+                                                           data-content="This bar could not be empty!"></div>
+            <button onclick="login()">LOG IN</button>
+            <div class="login-tip"><a href="/toRegister"><i>Account registration</i></a><a href="#"
+                                                                                           style="margin-left: 30px"><i>Forgot
+                password?</i></a></div>
+
+            <div id="demo" class="carousel slide" data-ride="carousel">
+                <!-- 指示符 -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+
+                <!-- 轮播图片 -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var signUpButton = document.getElementById('signUp')
+    var signInButton = document.getElementById('signIn')
+    var container = document.getElementById('dowebok')
+
+
+</script>
+
+</body>
+</html>
+
