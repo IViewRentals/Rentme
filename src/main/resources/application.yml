@@ -11,6 +11,9 @@ spring:
     url: jdbc:mysql://47.114.170.77:3306/rentme?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
     username: rentme
     password: p6LDLcMEZD8e3npM
+#    url: jdbc:mysql://localhost:3306/rentme?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+#    username: root
+#    password: root
   thymeleaf:
     mode: LEGACYHTML5 # Allow less rigorous HTML format
     cache: false  # Set false when developing, otherwise it is impossible to see real-time pages

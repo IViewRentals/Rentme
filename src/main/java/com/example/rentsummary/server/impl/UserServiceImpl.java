@@ -35,4 +35,15 @@ public class UserServiceImpl implements UserService {
     public List<CityEntity> getCityById(int id) {
         return dao.getCityById(id);
     }
+
+    @Override
+    public void addUserHistory(UserEntity userEntity) {
+        dao.addUserHistory(userEntity);
+    }
+
+    @Override
+    public UserEntity getUserById(int id) {
+        return dao.getUserById(id);
+    }
+
 }

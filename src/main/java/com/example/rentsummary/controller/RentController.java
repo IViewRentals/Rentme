@@ -41,6 +41,29 @@ public class RentController extends BaseController {
 
     @Autowired
     JavaMailSender javaMailSender;
+    @Autowired
+    private UserService userService;
+
+    @ResponseBody
+    @PostMapping(value = "addUserHistory")
+    public String addUserHistory(UserEntity userEntity) {
+        userService.addUserHistory(userEntity);
+        return "success";
+    }
+
+    @ResponseBody
+    @PostMapping(value = "getUserById")
+    public String getUserById(int id) {
+        UserEntity user = userService.getUserById(id);
+        System.out.println(user.toString());
+        JSONObject result = new JSONObject();
+        if (user!= null) {
+            result.put("result", user);
+        } else {
+            result.put("result", null);
+        }
+        return result.toString();
+    }
 
     @GetMapping(value = "/toLogin")
     public String toLogin() { return "login.html"; }

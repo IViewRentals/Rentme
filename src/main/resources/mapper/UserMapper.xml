@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.rentsummary.dao.UserDAO">
+    
+    <resultMap id="UserMap" type="UserEntity">
+        <id property="id" column="id"/>
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="cityId" column="city_id"/>
+        <result property="baseSearch" column="base_search"/>
+        <result property="hidTypeValue" column="hid_type_val"/>
+        <result property="searchInputPageTxt" column="search_input_text"/>
+        <result property="searchInputValue" column="search_input_val"/>
+    </resultMap>
 
     <!-- 用户登录 -->
     <select id="login" parameterType="UserEntity" resultType="UserEntity">
@@ -31,6 +44,22 @@
     <select id="getCityById" parameterType="Integer" resultType="CityEntity">
         select * from city where state_id=#{id}
     </select>
+
+    <!-- 根据城市查询区域 -->
+    <select id="getAreaById" parameterType="Integer" resultType="AreaEntity">
+        select * from area where city_id=#{id}
+    </select>
+
+    <update id="addUserHistory" parameterType="UserEntity">
+        update users set base_search=#{baseSearch},search_input_val=#{searchInputValue},
+        search_input_text=#{searchInputPageTxt},hid_type_val=#{hidTypeValue} where id=#{id}
+    </update>
+
+    <select id="getUserById" parameterType="Integer" resultMap="UserMap" >
+        select * from users where id=#{id}
+    </select>
+
+
 
 
 </mapper>
