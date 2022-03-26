@@ -18,4 +18,9 @@ public interface UserDAO {
     List<StateEntity> getState();
 
     List<CityEntity> getCityById(int id);
+
+    void addUserHistory(UserEntity userEntity);
+
+    UserEntity getUserById(int id);
+
 }

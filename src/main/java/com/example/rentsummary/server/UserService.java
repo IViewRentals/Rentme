@@ -14,6 +14,10 @@ public interface UserService {
 
     List<StateEntity> getState();
 
-
     List<CityEntity> getCityById(int id);
+
+    void addUserHistory(UserEntity userEntity);
+
+    UserEntity getUserById(int id);
+
 }
