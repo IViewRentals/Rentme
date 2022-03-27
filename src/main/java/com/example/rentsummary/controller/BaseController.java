@@ -1,6 +1,7 @@
 package com.example.rentsummary.controller;
 
-import com.example.rentsummary.model.*;
+import com.example.rentsummary.model.AjaxResult;
+import com.example.rentsummary.model.RentRequestParaForAllhomes;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;

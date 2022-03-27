@@ -1,6 +1,7 @@
 package com.example.rentsummary.server.impl;
 
 import com.example.rentsummary.dao.UserDAO;
+import com.example.rentsummary.model.AreaEntity;
 import com.example.rentsummary.model.CityEntity;
 import com.example.rentsummary.model.StateEntity;
 import com.example.rentsummary.model.UserEntity;
@@ -34,5 +35,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<CityEntity> getCityById(int id) {
         return dao.getCityById(id);
+    }
+
+    @Override
+    public void addUserHistory(UserEntity userEntity) {
+        dao.addUserHistory(userEntity);
+    }
+
+    @Override
+    public UserEntity getUserById(int id) {
+        return dao.getUserById(id);
+    }
+
+    @Override
+    public List<AreaEntity> getAreaById(int id) {
+        return dao.getAreaById(id);
     }
 }

@@ -1,21 +1,17 @@
 package com.example.rentsummary.controller;
 
-import com.alibaba.druid.util.Utils;
 import com.alibaba.fastjson.JSONObject;
+import com.example.rentsummary.model.AreaEntity;
 import com.example.rentsummary.model.CityEntity;
 import com.example.rentsummary.model.StateEntity;
 import com.example.rentsummary.model.UserEntity;
 import com.example.rentsummary.server.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.support.SessionStatus;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -55,6 +51,7 @@ public class UserController {
         }
         UserEntity user = userService.login(userEntity);
         if (user != null) {
+            result.put("id", user.getId());
             result.put("username", user.getAccount()); // login success
             result.put("flag", 1); // login success
             return result.toString();
@@ -84,6 +81,15 @@ public class UserController {
         JSONObject result = new JSONObject();
         List<CityEntity> cityList = userService.getCityById(id);
         result.put("cityList", cityList);
+        return result.toString();
+    }
+
+    @ResponseBody
+    @GetMapping(value = "getAreaById")
+    public String getAreaById(int id) {
+        JSONObject result = new JSONObject();
+        List<AreaEntity> areaList = userService.getAreaById(id);
+        result.put("areaList", areaList);
         return result.toString();
     }
 

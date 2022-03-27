@@ -11,11 +11,28 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 16/03/2022 13:43:24
+ Date: 26/03/2022 21:49:29
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for area
+-- ----------------------------
+DROP TABLE IF EXISTS `area`;
+CREATE TABLE `area`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `area` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `city_id` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `city_state_id`(`city_id`) USING BTREE,
+  CONSTRAINT `area_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `state` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 92 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of area
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for city
@@ -28,7 +45,7 @@ CREATE TABLE `city`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `city_state_id`(`state_id`) USING BTREE,
   CONSTRAINT `city_state_id` FOREIGN KEY (`state_id`) REFERENCES `state` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of city
@@ -124,7 +141,8 @@ INSERT INTO `city` VALUES (88, 'Darwin', 7);
 INSERT INTO `city` VALUES (89, 'Alice Springs', 7);
 INSERT INTO `city` VALUES (90, 'Katherine', 7);
 INSERT INTO `city` VALUES (91, 'Palmerston', 7);
-INSERT INTO `city` VALUES (92, 'Canberra', 8);
+INSERT INTO `city` VALUES (92, 'Canberra\r\n', 8);
+
 -- ----------------------------
 -- Table structure for state
 -- ----------------------------
@@ -133,7 +151,7 @@ CREATE TABLE `state`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `state` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of state
@@ -158,14 +176,18 @@ CREATE TABLE `users`  (
   `phone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `city_id` int NULL DEFAULT NULL,
+  `base_search` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `search_input_val` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `search_input_text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `hid_type_val` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `users_city_id`(`city_id`) USING BTREE,
   CONSTRAINT `users_city_id` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (13, 'admin', '111', '18079838928', '20393489@qq.com', 27);
+INSERT INTO `users` VALUES (13, 'admin', '111', '18079838928', '20393489@qq.com', 27, 'allhomes:Apartment,propertyTypes:UNIT,Bedrooms:,Bathrooms:,Parking:,', '', '', '');
 
 SET FOREIGN_KEY_CHECKS = 1;

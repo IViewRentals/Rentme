@@ -1,7 +1,5 @@
 package com.example.rentsummary.model;
 
-import lombok.Data;
-
 /**
  * user
  */
@@ -32,13 +30,10 @@ public class UserEntity {
      */
     private int cityId;
 
-    public int getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
-    }
+    private String baseSearch;
+    private String hidTypeValue;
+    private String searchInputPageTxt;
+    private String searchInputValue;
 
     public int getId() {
         return id;
@@ -46,6 +41,46 @@ public class UserEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getBaseSearch() {
+        return baseSearch;
+    }
+
+    public void setBaseSearch(String baseSearch) {
+        this.baseSearch = baseSearch;
+    }
+
+    public String getHidTypeValue() {
+        return hidTypeValue;
+    }
+
+    public void setHidTypeValue(String hidTypeValue) {
+        this.hidTypeValue = hidTypeValue;
+    }
+
+    public String getSearchInputPageTxt() {
+        return searchInputPageTxt;
+    }
+
+    public void setSearchInputPageTxt(String searchInputPageTxt) {
+        this.searchInputPageTxt = searchInputPageTxt;
+    }
+
+    public String getSearchInputValue() {
+        return searchInputValue;
+    }
+
+    public void setSearchInputValue(String searchInputValue) {
+        this.searchInputValue = searchInputValue;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
     public String getAccount() {
@@ -89,6 +124,10 @@ public class UserEntity {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", cityId=" + cityId +
+                ", baseSearch='" + baseSearch + '\'' +
+                ", hidTypeValue='" + hidTypeValue + '\'' +
+                ", searchInputPageTxt='" + searchInputPageTxt + '\'' +
+                ", searchInputValue='" + searchInputValue + '\'' +
                 '}';
     }
 }

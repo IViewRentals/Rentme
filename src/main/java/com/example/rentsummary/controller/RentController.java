@@ -5,33 +5,20 @@ import com.example.rentsummary.model.*;
 import com.example.rentsummary.server.RentContextGet;
 import com.example.rentsummary.server.UserService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.HttpClientUtils;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.jsoup.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * The controller to get rent data from each rent website.
@@ -41,6 +28,30 @@ public class RentController extends BaseController {
 
     @Autowired
     JavaMailSender javaMailSender;
+    @Autowired
+    private UserService userService;
+
+    @ResponseBody
+    @PostMapping(value = "addUserHistory")
+    public String addUserHistory(UserEntity userEntity) {
+        System.out.println(userEntity);
+        userService.addUserHistory(userEntity);
+        return "success";
+    }
+
+    @ResponseBody
+    @PostMapping(value = "getUserById")
+    public String getUserById(int id) {
+        UserEntity user = userService.getUserById(id);
+        System.out.println(user.toString());
+        JSONObject result = new JSONObject();
+        if (user!= null) {
+            result.put("result", user);
+        } else {
+            result.put("result", null);
+        }
+        return result.toString();
+    }
 
     @GetMapping(value = "/toLogin")
     public String toLogin() { return "login.html"; }

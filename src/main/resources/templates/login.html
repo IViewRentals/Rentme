@@ -207,6 +207,7 @@
                     } else {
                         console.log(res)
                         sessionStorage.setItem("USER_NAME", res.username);
+                        sessionStorage.setItem("USER_ID", res.id);
                         window.location.href="/rentme"
                     }
                 }

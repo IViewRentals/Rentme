@@ -1,7 +1,5 @@
 package com.example.rentsummary.model;
 
-import java.util.Date;
-
 public class Division {
 
     private int priority;

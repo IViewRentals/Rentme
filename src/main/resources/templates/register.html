@@ -65,7 +65,7 @@
             min-height: 780px;
         }
 
-        .form-container form {
+        .form-container .form {
             display: flex;
             background: #fff;
             flex-direction: column;
@@ -198,26 +198,14 @@
                 $.each(res.stateList, function (index, obj) {
                     $("#state").append("<option value='" + obj.id + "'>" + obj.state + "</option>")
                 })
-                $.ajax({
-                    type: "get",
-                    url: "/getCityById",
-                    data: {"id": res.stateList[0].id},
-                    dataType: "json",
-                    async: false,
-                    success: function (res) {
-                        $.each(res.cityList, function (index, obj) {
-                            $("#city").append("<option value='" + obj.id + "'>" + obj.city + "</option>")
-                        })
-                    }
-                })
             }
         })
 
-        changeState()
+        changeInput()
     })
 
-    // option change
-    function changeState() {
+    // 监听option改变的事件
+    function changeInput() {
         $("#state").change(function () {
             const value = $(this).val();
             if (value !== 0) {
@@ -255,11 +243,11 @@
                 dataType: "json",
                 success: function (res) {
                     if (res.flag === 1) {
-                        // success
+                        // 注册成功
                         alert(res.msg);
                         window.location.href = "/toLogin";
                     } else {
-                        // register fail
+                        // 注册失败
                         alert(res.msg);
                     }
                 }
@@ -300,18 +288,18 @@
 <body>
 <div class="dowebok" id="dowebok">
     <div class="form-container sign-in-container">
-        <form action="#" class="layui-form">
+        <div class="layui-form form">
             <h1 style="margin:30px 0">Rent me</h1>
 
             <div id="demo" class="carousel slide" data-ride="carousel">
-                <!-- point -->
+                <!-- 指示符 -->
                 <ul class="carousel-indicators">
                     <li data-target="#demo" data-slide-to="0" class="active"></li>
                     <li data-target="#demo" data-slide-to="1"></li>
                     <li data-target="#demo" data-slide-to="2"></li>
                 </ul>
 
-                <!-- advertisement -->
+                <!-- 轮播图片 -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
@@ -363,7 +351,7 @@
             <div style="margin: 30px 0 0 0 ">If you already acquired an account, please proceed to the <a
                     href="/toLogin" style="color: blue">login</a> page.
             </div>
-        </form>
+        </div>
     </div>
 </div>
 </body>

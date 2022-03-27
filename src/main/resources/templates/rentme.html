@@ -160,13 +160,13 @@
             text-decoration: underline;
             text-underline-position: under;
         }
-        /*显示搜索到多少房子的结果格式类型*/
+
         .text-search-result{
             margin-top: 15px;
             font-family: Arial;
             font-size: 200%;
         }
-        /*清除筛选条件的格式类型*/
+
         .text-search-clear{
             margin-top: 30px;
             font-size: 150%;
@@ -285,7 +285,7 @@
 </head>
 
 <body class="loader">
-<div id="loginState" style="display: block"></div>
+<div id="loginId" style="display: none;"></div>
 
 <div class="topbar bg-custom-black" th:fragment="nevigationbar">
     <div class="container">
@@ -340,14 +340,13 @@
                     <h1 class="text-custom-white search-title">FIND YOUR DREAM HOME</h1>
                     <div class="search-form mb-xl-20">
                         <div class="row">
-<!--col是屏幕适配参数，分配各部分所占整个屏幕部分比例，总数为12，lg是大屏幕，sm是小屏幕-->
                             <div class="col-lg-1 col-sm-1">
                                 <div class="form-group">
                                     <a href="http://127.0.0.1:8888/" class="text-custom-white"><img src="../static/search/images.png" float="right"></a>
 
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-sm-5">
+                            <div class="col-lg-5 col-sm-4">
                                 <div class="form-group">
 
                                     <input type="text"
@@ -356,7 +355,7 @@
                                     <input type="hidden" id="hidType">
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-4">
+                            <div class="col-lg-4 col-sm-3">
                                 <div class="form-group">
                                     <div class="location-box">
                                         <input type="text"
@@ -365,7 +364,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-sm-2">
+                            <div class="col-lg-2 col-sm-4">
                                 <div class="form-group">
                                     <button  id="searchBtn"  class="btn-first btn-submit full-width" style="border-radius: 4px">Search</button>
                                 </div>
@@ -411,15 +410,15 @@
                     <div class="text-search-result" style="color: #0b0b0b;float: left;margin-right: 5px">Having found</div><div class="text-search-result" id="houseNum" style="color: #0ea800;float: left"></div><div class="text-search-result" style="color: #0b0b0b;float: left;margin-left: 5px">houses for you!</div>
 
                 </div>
-<!--直接刷新页面的清除筛选条件，应用JS的页面重载功能-->
+<!--直接刷新页面的清除筛选条件-->
                 <div class="col-xl-4 col-lg-4">
                     <div class="text-search-clear">
                         <button type="button"  onclick="javascript:location.reload()" style="color: #1ab7ea"><u>Clear filter criteria</u></button>
                     </div>
                 </div>
-<!--在搜索选项下加一条分割线来分割搜索条件和结果部分-->
-                <div class="col-xl-12 col-lg-12" style="height: 3px;background-color: #9f9f9f;margin-bottom: 5px"></div>
 
+                <div class="col-xl-12 col-lg-12" style="height: 3px;background-color: #9f9f9f;margin-bottom: 5px"></div>
+<!--加条分割线-->
             </div>
 
         </div>
@@ -478,7 +477,7 @@
 <!-- feature properties end -->
 
 <!-- Start Footer -->
-<!--网页最底端的知识产权部分内容-->
+
 <div class="copyright">
     <div class="container">
         <div class="row">
@@ -526,17 +525,6 @@
 
 <script src="static/assets/js/rentme.js"></script>
 <script>
-    $(function () {
-        const username = sessionStorage.getItem('USER_NAME');
-        if (username !== null && username !== '') {
-            $("#userLogin").html("<span style='color: #fff;margin-right: 5px;'>Hello，" + username + "</span><a id='loginOut' href='/loginOut' style='color: gray'>Login Out</a>");
-        }
-
-        $("#loginOut").click(function () {
-            sessionStorage.setItem('USER_NAME', '');
-        });
-    })
-
     //获取url中的参数
     function getUrlParam(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -548,8 +536,6 @@
     var _currentPage = 1;//当前页数
 
     jQuery(document).ready(function ($) {
-
-
         $(".range-slider-ui").each(function () {
             var minRangeValue = $(this).attr('data-min');
             var maxRangeValue = $(this).attr('data-max');
@@ -591,6 +577,7 @@
         initBasic();
         var searchInput = getUrlParam("searchInput");
         if (searchInput) {
+            // console.log(searchInput)
             $('#hidType').val(getUrlParam("hidType"));
             var area = getUrlParam("area");
             searchHref($("#basic_searchbox").getParamList(), 1, searchInput, area, $('#hidType').val());
@@ -605,6 +592,30 @@
 
 
         $("#searchBtn").click(function () {
+            let baseSearchBox = $("#basic_searchbox").getParamList();
+            let searchInputValue = $('#searchInput').val();
+            let searchInputPageTxt = $('#searchInput').selectPageText();
+            let hidTypeValue = $('#hidType').val();
+            let searchObj = {
+                id,
+                baseSearch: "",
+                searchInputValue,
+                searchInputPageTxt,
+                hidTypeValue
+            }
+            for (let i = 0; i < baseSearchBox.length; i++) {
+                searchObj.baseSearch += baseSearchBox[i].id + ":" + baseSearchBox[i].ValueList + ",";
+            }
+            $.ajax({
+                type: "post",
+                url: "/addUserHistory",
+                data: searchObj,
+                dataType: "json",
+                success: function (res) {
+                    // console.log(res)
+                }
+            })
+
             //  alert($('#searchInput').selectPageText());
             searchHref($("#basic_searchbox").getParamList(), 1, $('#searchInput').val(), $('#searchInput').selectPageText(),
                 $('#hidType').val());
@@ -644,6 +655,32 @@
             },
             //data：选中行的原始数据对象
             eSelect: function (data) {
+                let baseSearchBox = $("#basic_searchbox").getParamList();
+                let searchInputValue = $('#searchInput').val();
+                let searchInputPageTxt = $('#searchInput').selectPageText();
+                let hidTypeValue = data.type;
+                let searchObj = {
+                    id,
+                    baseSearch: "",
+                    searchInputValue,
+                    searchInputPageTxt,
+                    hidTypeValue
+                }
+                for (let i = 0; i < baseSearchBox.length; i++) {
+                    searchObj.baseSearch += baseSearchBox[i].id + ":" + baseSearchBox[i].ValueList + ",";
+                }
+                console.log(searchObj,data)
+                $.ajax({
+                    type: "post",
+                    url: "/addUserHistory",
+                    data: searchObj,
+                    dataType: "json",
+                    success: function (res) {
+                        // console.log(res)
+                    }
+                })
+
+
                 //  $('#callbackLog').append(data.desc + '(' + data.name + ')<br/>');
                 // alert($('#searchInput').selectPageText());
                 $('#hidType').val(data.type);
@@ -668,6 +705,59 @@
                 return result;
             }
         });
+
+        const username = sessionStorage.getItem('USER_NAME');
+        const id = sessionStorage.getItem("USER_ID");
+
+        if (username !== null && username !== '') {
+            $("#userLogin").html("<span style='color: #fff;margin-right: 5px;'>Hello，" + username + "</span><a id='loginOut' href='/loginOut' style='color: gray'>Login Out</a>");
+            $("#loginId").html(id);
+            $("#loginOut").click(function () {
+                sessionStorage.setItem('USER_NAME', '');
+                sessionStorage.setItem("USER_ID", '');
+            });
+            $.ajax({
+                type: "post",
+                url: "/getUserById",
+                data: {id},
+                dataType: "json",
+                async: false,
+                success: function (obj) {
+                    // console.log(obj.result)
+                    let paramList = [];
+                    let baseSearch = obj.result.baseSearch.split(",");
+                    for (let i = 0; i < baseSearch.length - 1; i++) {
+                        let item = baseSearch[i].split(":");
+                        let row = {};
+                        row.id = item[0];
+                        row.ValueList = [];
+                        row.ValueList.push(item[1]);
+
+                        row.isMultiple = false;
+                        paramList.push(row);
+                    }
+
+                    console.log("obj：",obj.result)
+
+                    searchHref(paramList, 1, obj.result.searchInputValue, obj.result.searchInputPageTxt, obj.result.hidTypeValue);
+
+                    initDomainData(paramList, 1, obj.result.searchInputValue, obj.result.searchInputPageTxt, obj.result.hidTypeValue);
+
+                    initZangoData(paramList, 1, obj.result.searchInputValue, obj.result.searchInputPageTxt, obj.result.hidTypeValue);
+
+                    initRealestateData(paramList, 1, obj.result.searchInputValue, obj.result.searchInputPageTxt, obj.result.hidTypeValue);
+
+
+
+                }
+            })
+
+        } else {
+            alert("please log in");
+            window.location.href = "/toLogin";
+        }
+
+
 
     });
 
@@ -695,6 +785,8 @@
         ps["maxprice"] = $(".current-max").val();
         var objHtml = [];
 
+        // console.log(ps)
+
         $.ajax({
             type: 'POST',
 
@@ -719,6 +811,7 @@
 
                 var obj = $.parseJSON(result.data);
 
+                // console.log("返回的记录数：",obj.totalHits)
                 // 返回成功的处理
                 if (result.code == 0) {
 
@@ -730,7 +823,7 @@
                     if (totalHits == 0) {
                         $("#page404").css({display: "block"})
                     }
-                    document.getElementById("houseNum").innerHTML = document.getElementById("houseNum").innerHTML+totalHits;
+                    document.getElementById("houseNum").innerHTML = totalHits;
                     // 分页组件初始化
                     if (currentPage == 1 && numPages > 0) {
 
