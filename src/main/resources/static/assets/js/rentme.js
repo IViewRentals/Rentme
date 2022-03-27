@@ -103,27 +103,27 @@ function  initBasic() {
            //      ],
            //      "defaults": ['391']
            //  },*/
-            {
-                "id": "allhomes",
-                "title": "allhomes(Types)",
-                "isShowAll": false,//是否显示全部
-                "data": [
-                    {"value": "", "text": "ALL"},
-                    {"value": "House", "text": "House"},
-                    {"value": "Townhouse", "text": "Townhouse"},
-                    {"value": "Apartment", "text": "Apartment"},
-                    // {"value": "Rural", "text": "Rural"},
-                    // {"Duplex": "Studio", "text": "Duplex"},
-                    // {"value": "Studio", "text": "Studio"},
-                    // {"value": "Other", "text": "Other"}
-                ]
-                // House,Unit,Apartment,Townhouse
-            // {"value": "HOUSE", "text": "House"},
-            // "house","unit apartment","townhouse","villa"
-            // Apartment
-            // Townhouse
-            // Land
-            },
+           //  {
+           //      "id": "allhomes",
+           //      "title": "allhomes(Types)",
+           //      "isShowAll": false,//是否显示全部
+           //      "data": [
+           //          {"value": "", "text": "ALL"},
+           //          {"value": "House", "text": "House"},
+           //          {"value": "Townhouse", "text": "Townhouse"},
+           //          {"value": "Apartment", "text": "Apartment"},
+           //          // {"value": "Rural", "text": "Rural"},
+           //          // {"Duplex": "Studio", "text": "Duplex"},
+           //          // {"value": "Studio", "text": "Studio"},
+           //          // {"value": "Other", "text": "Other"}
+           //      ]
+           //      // House,Unit,Apartment,Townhouse
+           //  // {"value": "HOUSE", "text": "House"},
+           //  // "house","unit apartment","townhouse","villa"
+           //  // Apartment
+           //  // Townhouse
+           //  // Land
+           //  },
             {
                 "id": "propertyTypes",
                 "title": "Property Type",
