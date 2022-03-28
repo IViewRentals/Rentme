@@ -406,11 +406,11 @@
             </div>
             <div class="row">
                 <div class="col-xl-8 col-lg-8" style="font-weight: bold">
-<!--加个搜索结果汇总，从下方的函数中直接取数-->
+<!--Add a summary of search results and take the number directly from the function below-->
                     <div class="text-search-result" style="color: #0b0b0b;float: left;margin-right: 5px">Having found</div><div class="text-search-result" id="houseNum" style="color: #0ea800;float: left"></div><div class="text-search-result" style="color: #0b0b0b;float: left;margin-left: 5px">houses for you!</div>
 
                 </div>
-<!--直接刷新页面的清除筛选条件-->
+<!--Refresh the page directly for clear filters-->
                 <div class="col-xl-4 col-lg-4">
                     <div class="text-search-clear">
                         <button type="button"  onclick="javascript:location.reload()" style="color: #1ab7ea"><u>Clear filter criteria</u></button>
@@ -418,7 +418,7 @@
                 </div>
 
                 <div class="col-xl-12 col-lg-12" style="height: 3px;background-color: #9f9f9f;margin-bottom: 5px"></div>
-<!--加条分割线-->
+
             </div>
 
         </div>
@@ -428,7 +428,7 @@
 <!-- banner end -->
 
 
-<!-- 导航区 -->
+<!-- Navigation zone -->
 
 
 <!-- feature properties begin -->
@@ -525,15 +525,15 @@
 
 <script src="static/assets/js/rentme.js"></script>
 <script>
-    //获取url中的参数
+    //Gets the parameters in the url
     function getUrlParam(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //Constructs a regular expression object that contains the target parameters
+        var r = window.location.search.substr(1).match(reg);  //Matches the target parameter
         if (r != null) return unescape(r[2]);
-        return null; //返回参数值
+        return null; //Returns the parameter value
     }
 
-    var _currentPage = 1;//当前页数
+    var _currentPage = 1;//The current number of pages
 
     jQuery(document).ready(function ($) {
         $(".range-slider-ui").each(function () {
@@ -638,23 +638,23 @@
             searchField: "name",
             data: '/searchallbyname',
             focusDropList: false,
-            //关闭向下的三角尖按钮
+            //Close the down triangle tip button
             dropButton: false,
-            //设置每页显示记录数
+            //Sets the number of records to display per page
             pageSize: 10,
-            //关闭分页的状态下，列表显示的项目个数，其它的项目以滚动条滚动方式展现（默认10个）
+            //When paging is turned off, the list displays the number of items, and other items are displayed in scroll bar scrolling (default 10)
             listSize: 15,
-            //启用多选模式
+            //Enable multi-select mode
             multiple: true,
-            //限制最多选中三个项目
+            //Limits the maximum of three items selected
             maxSelectLimit: 1,
             pagination: false,
             selectToCloseList: true,
-            //格式化显示项目，提供源数据进行使用
+            //Formats the display item to provide source data for use
             formatItem: function (data) {
                 return data.name + '-' + data.type;
             },
-            //data：选中行的原始数据对象
+            //data：Select the raw data object for the row
             eSelect: function (data) {
                 //  $('#callbackLog').append(data.desc + '(' + data.name + ')<br/>');
                 // alert($('#searchInput').selectPageText());
@@ -787,20 +787,20 @@
 
                 var obj = $.parseJSON(result.data);
 
-                // console.log("返回的记录数：",obj.totalHits)
-                // 返回成功的处理
+                // console.log("The number of records returned：",obj.totalHits)
+                // Returns successful processing
                 if (result.code == 0) {
 
-                    // 总的页码数
+                    // The total number of pages
                     var numPages = obj.numPages;
-                    // 总记录数
+                    // Total number of records
                     var totalHits = obj.totalHits;
 
                     if (totalHits == 0) {
                         $("#page404").css({display: "block"})
                     }
                     document.getElementById("houseNum").innerHTML = totalHits;
-                    // 分页组件初始化
+                    // Paging component initialization
                     if (currentPage == 1 && numPages > 0) {
 
 
