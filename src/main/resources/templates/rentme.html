@@ -729,6 +729,7 @@
 
                 //  $('#callbackLog').append(data.desc + '(' + data.name + ')<br/>');
                 // alert($('#searchInput').selectPageText());
+                console.log("paramList of the query：",$("#basic_searchbox").getParamList())
                 $('#hidType').val(data.type);
                 searchHref($("#basic_searchbox").getParamList(), 1, data.id, data.name, data.type);
                 initDomainData($("#basic_searchbox").getParamList(), 1, $('#searchInput').val(), $('#searchInput').selectPageText(),
