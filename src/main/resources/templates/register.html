@@ -62,7 +62,7 @@
             position: relative;
             width: 668px;
             max-width: 100%;
-            min-height: 780px;
+            min-height: 800px;
         }
 
         .form-container .form {
@@ -175,14 +175,20 @@
             color: red;
             margin: 0 3px;
         }
-        .bs-popover-auto[x-placement^=right]>.arrow::before, .bs-popover-right>.arrow::before {
-            border-right-color: rgba(255,0,0,.5);
+
+        .bs-popover-auto[x-placement^=right] > .arrow::before, .bs-popover-right > .arrow::before {
+            border-right-color: rgba(255, 0, 0, .5);
+        }
+
+        #verifyCode {
+            width: 30%;
+            margin-left: 91px;
         }
 
         .popover {
             padding: 6px;
             background-color: #fff;
-            border: 1px solid rgba(255,0,0,.5);
+            border: 1px solid rgba(255, 0, 0, .5);
             color: red;
         }
     </style>
@@ -201,6 +207,7 @@
             }
         })
 
+        getCode();
         changeInput()
     })
 
@@ -233,14 +240,19 @@
         const city = $("#city").val();
         const phone = $("#lPhone").val();
         const email = $("#lEmail").val();
+        const verifyCode = $("#verifyCode").val();
 
-
-        if (!isNull(username) && !isNull(password) && !isNull(state) && !isNull(city) && !isNull(phone) && !isNull(email)) {
+        if (!regUserName(username) || !regPwd(password) || !regPhoneNumber(phone) || !regMail(email)) {
+            console.log(“It do not pass the test");
+            return;
+        }
+        if (!isNull(username) && !isNull(password) && !isNull(state) && !isNull(city) && !isNull(phone) && !isNull(email) && !isNull(verifyCode)) {
             $.ajax({
                 type: "post",
                 url: "/register",
-                data: {"account": username, "password": password, "cityId": city, "phone": phone, "email": email},
+                data: {"account": username, "password": password, "cityId": city, "phone": phone, "email": email,verifyCode},
                 dataType: "json",
+                async: false,
                 success: function (res) {
                     if (res.flag === 1) {
                         // register success
@@ -268,21 +280,95 @@
             if (isNull(email)) {
                 $("#lEmail").popover('show')
             }
+            if (isNull(verifyCode)) {
+                $("#verifyCode").popover('show')
+            }
 
             setTimeout(function () {
                 $('[data-toggle="popover"]').each(function () {
                     $(this).popover('hide');
                 })
-            }, 2000);
+            }, 3000);
         }
     }
 
+    function regPwd(password) {
+        password = password.toString();
+        if (password.length < 6) {
+            alert("The password must be more than six characters long!")
+            return false;
+        }
+        const regExp = /^[A-Za-z0-9]+$/
+        const reg = new RegExp(regExp);
+        if (!reg.test(password)) {
+            alert("The password must contain numbers and letters!")
+            return false;
+        }
+
+        if (new RegExp(/^[0-9]+$/).test(password)) {
+            alert("The password must contain numbers and letters!")
+            return false;
+        }
+        if (new RegExp(/^[A-Za-z]+$/).test(password)) {
+            alert("The password must contain numbers and letters!")
+            return false;
+        }
+
+        return true;
+    }
+
+
+    function regPhoneNumber(phoneNum){
+        const regExp = /(^(\d{2,4}[-_－—]?)?\d{3,8}([-_－—]?\d{3,8})?([-_－—]?\d{1,7})?$)|(^0?1[35]\d{9}$)/;
+        const reg = new RegExp(regExp);
+        if (!reg.test(phoneNum)) {
+            alert("The phone number is invalid!")
+            return false;
+        }
+        return true;
+    }
+
+
+    function regMail(mail) {
+        const reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        if(!reg.test(mail)){
+            alert("The email format is invalid!");
+            return false;
+        }
+        return true;
+    }
+
+    function regUserName(username) {
+        const reg = /^[a-zA-z][a-zA-Z0-9_]*$/;
+        if(!reg.test(username)){
+            alert("Account numbers must begin with a letter!");
+            return false;
+        }
+        return true;
+    }
 
     function isNull(obj) {
-        if (obj === null || obj === "" || obj === '0') {
-            return true;
+        return obj === null || obj === "" || obj === '0';
+
+    }
+
+    /**
+     * get vertify code
+     * put the vertufy code into login.htmlpage id = verifyimg 
+     */
+    function getCode() {
+        document.getElementById("verifyImg").src = timestamp("http://127.0.0.1:8905/verifyCode");
+    }
+
+    //add time tip for url
+    function timestamp(url) {
+        let getTimestamp = new Date().getTime();
+        if (url.indexOf("?") > -1) {
+            url = url + "&timestamp=" + getTimestamp
+        } else {
+            url = url + "?timestamp=" + getTimestamp
         }
-        return false;
+        return url;
     }
 </script>
 <body>
@@ -315,38 +401,49 @@
 
             <div class="login-input">
                 Account number<b class="b-red">*</b>
-                <input type="text" id="lUsername"  lay-verify="username" placeholder="Username"
+                <input type="text" id="lUsername" lay-verify="username" placeholder="Username"
                        data-container="body" data-toggle="popover" data-placement="right" data-trigger="manual"
                        data-content="This bar could not be empty!">
             </div>
             <div class="login-input layui-form-item"><i style="margin-left: 58px"></i>Password<b
                     class="b-red">*</b><input
-                    type="password" id="lPassword" placeholder="Password"  data-trigger="manual"
+                    type="password" id="lPassword" placeholder="Password" data-trigger="manual"
                     data-container="body" data-toggle="popover" data-placement="right"
                     data-content="This bar could not be empty!">
             </div>
             <div class="login-input" style="margin-left: -5px;">
                 Place of residence<b class="b-red" style="margin:0px">*</b>
-                <span >
+                <span>
                     <select id="state">
                         <option value="0"></option>
                     </select>
-                    <select id="city"  data-trigger="manual"
+                    <select id="city" data-trigger="manual"
                             data-container="body" data-toggle="popover" data-placement="right"
                             data-content="This bar could not be empty!">
                         <option value="0"></option>
                     </select>
                 </span>
             </div>
-            <div class="login-input"><i style="margin-left: 16px"></i>Phone number<b class="b-red">*</b><input
+            <div class="login-input"><i style="margin-left: 16px"></i>Phone number<b class="b-red">*</b>
+                <input
                     type="text" id="lPhone" placeholder="Phone number"
                     data-container="body" data-toggle="popover" data-placement="right" data-trigger="manual"
-                    data-content="This bar could not be empty!"></div>
-            <div class="login-input"><i style="margin-left: 21px"></i>Email Address<b class="b-red">*</b><input
-                    type="text" id="lEmail" placeholder="Email Address"  data-trigger="manual"
+                    data-content="This bar could not be empty!">
+            </div>
+            <div class="login-input"><i style="margin-left: 21px"></i>Email Address<b class="b-red">*</b>
+                <input
+                    type="text" id="lEmail" placeholder="Email Address" data-trigger="manual"
                     data-container="body" data-toggle="popover" data-placement="right"
-                    data-content="This bar could not be empty!"></div>
-
+                    data-content="This bar could not be empty!">
+            </div>
+            <div class="login-input">
+                <input type="text" id="verifyCode" placeholder="verify code"
+                                            data-container="body" data-toggle="popover"
+                                            data-placement="right" data-trigger="manual"
+                                            data-content="This bar could not be empty!" size="4">
+                <!-- show the vertify code -->
+                <img onclick="getCode()" id="verifyImg" alt="verify code" src=""/>
+            </div>
             <button onclick="register()">Register</button>
             <div style="margin: 30px 0 0 0 ">If you already acquired an account, please proceed to the <a
                     href="/toLogin" style="color: blue">login</a> page.
