@@ -51,4 +51,9 @@ public class UserServiceImpl implements UserService {
     public List<AreaEntity> getAreaById(int id) {
         return dao.getAreaById(id);
     }
+
+    @Override
+    public List<UserEntity> getUserByAccount(String account) {
+        return dao.getUserByAccount(account);
+    }
 }

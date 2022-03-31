@@ -16,7 +16,7 @@ import java.io.OutputStream;
 import java.util.Random;
 
 /**
- * 
+ *
  */
 public class SimpleCharVerifyCodeGenImpl implements VerifyCodeGenService {
 
@@ -85,8 +85,8 @@ public class SimpleCharVerifyCodeGenImpl implements VerifyCodeGenService {
     public VerifyCode generate(int width, int height) {
         VerifyCode verifyCode = null;
         try (
-            //Putting the initialization of the stream here eliminates the need to manually close the stream
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
+                //Putting the initialization of the stream here eliminates the need to manually close the stream
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
             String code = generate(width, height, baos);
             verifyCode = new VerifyCode();
             verifyCode.setCode(code);

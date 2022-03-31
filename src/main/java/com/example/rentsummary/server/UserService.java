@@ -22,4 +22,6 @@ public interface UserService {
     UserEntity getUserById(int id);
 
     List<AreaEntity> getAreaById(int id);
+
+    List<UserEntity> getUserByAccount(String account);
 }
