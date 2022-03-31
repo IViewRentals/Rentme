@@ -63,7 +63,8 @@
             overflow: hidden;
             width: 668px;
             max-width: 100%;
-            min-height: 580px;
+            min-height: 640px;
+            margin-top: 100px;
         }
 
         .form-container .login-form {
@@ -182,8 +183,9 @@
             width: 80%;
         }
 
-        #demo {
-
+        #verifyCode {
+            width: 30%;
+            margin-left: 41px;
         }
     </style>
 </head>
@@ -194,18 +196,18 @@
     function login() {
         const username = $("#lUsername").val();
         const password = $("#lPassword").val();
-        if (!isNull(username) || !isNull(password)) {
+        const verifyCode = $("#verifyCode").val();
+        if (!isNull(username) && !isNull(password) && !isNull(verifyCode)) {
             $.ajax({
                 type: "get",
                 url: "/login",
                 async: false,
-                data: {"account": username, "password": password},
+                data: {"account": username, "password": password, verifyCode},
                 dataType: "json",
                 success: function (res) {
                     if (res.flag === 0) {
                         alert(res.msg)
                     } else {
-                        console.log(res)
                         sessionStorage.setItem("USER_NAME", res.username);
                         sessionStorage.setItem("USER_ID", res.id);
                         window.location.href="/rentme"
@@ -219,20 +221,22 @@
             if (isNull(password)) {
                 $("#lPassword").popover('show')
             }
+            if (isNull(verifyCode)) {
+                $("#verifyCode").popover('show')
+            }
 
             setTimeout(function () {
                 $('[data-toggle="popover"]').each(function () {
                     $(this).popover('hide');
                 })
-            }, 2000);
+            }, 4000);
         }
     }
     function isNull(obj) {
-        if (obj === null || obj === "" || obj === '0') {
-            return true;
-        }
-        return false;
+        return obj === null || obj === "" || obj === '0';
     }
+
+
 </script>
 <body>
 <div id="msg"></div>
@@ -249,10 +253,20 @@
                                                            data-container="body" data-toggle="popover"
                                                            data-placement="right" data-trigger="manual"
                                                            data-content="This bar could not be empty!"></div>
+            <div class="login-input"><input type="text" id="verifyCode" placeholder="verify code"
+                                            data-container="body" data-toggle="popover"
+                                            data-placement="right" data-trigger="manual"
+                                            data-content="This bar could not be empty!" size="4">
+                <!-- 验证码 显示 -->
+                <img onclick="getCode()" id="verifyImg" alt="verify code" src=""/>
+            </div>
             <button onclick="login()">LOG IN</button>
-            <div class="login-tip"><a href="/toRegister"><i>Account registration</i></a><a href="#"
-                                                                                           style="margin-left: 30px"><i>Forgot
-                password?</i></a></div>
+            <div class="login-tip">
+                <a href="/toRegister"><i>Account registration</i></a>
+                <a href="#" style="margin-left: 30px">
+                    <i>Forgot password?</i>
+                </a>
+            </div>
 
             <div id="demo" class="carousel slide" data-ride="carousel">
                 <!-- 指示符 -->
@@ -281,13 +295,28 @@
 </div>
 
 <script>
-    var signUpButton = document.getElementById('signUp')
-    var signInButton = document.getElementById('signIn')
-    var container = document.getElementById('dowebok')
 
-
+    getCode();
+    /**
+     * 获取验证码
+     * 将验证码写到login.html页面的id = verifyimg 的地方
+     */
+    function getCode() {
+        document.getElementById("verifyImg").src = timestamp("http://127.0.0.1:8905/verifyCode");
+    }
+    //为url添加时间戳
+    function timestamp(url) {
+        let getTimestamp = new Date().getTime();
+        if (url.indexOf("?") > -1) {
+            url = url + "&timestamp=" + getTimestamp
+        } else {
+            url = url + "?timestamp=" + getTimestamp
+        }
+        return url;
+    }
 </script>
 
 </body>
 </html>
+
 
