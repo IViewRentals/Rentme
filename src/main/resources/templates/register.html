@@ -243,7 +243,7 @@
         const verifyCode = $("#verifyCode").val();
 
         if (!regUserName(username) || !regPwd(password) || !regPhoneNumber(phone) || !regMail(email)) {
-            console.log(“It do not pass the test");
+            console.log("没有通过正则校验");
             return;
         }
         if (!isNull(username) && !isNull(password) && !isNull(state) && !isNull(city) && !isNull(phone) && !isNull(email) && !isNull(verifyCode)) {
@@ -353,14 +353,14 @@
     }
 
     /**
-     * get vertify code
-     * put the vertufy code into login.htmlpage id = verifyimg 
+     * 获取验证码
+     * 将验证码写到login.html页面的id = verifyimg 的地方
      */
     function getCode() {
         document.getElementById("verifyImg").src = timestamp("http://127.0.0.1:8905/verifyCode");
     }
 
-    //add time tip for url
+    //为url添加时间戳
     function timestamp(url) {
         let getTimestamp = new Date().getTime();
         if (url.indexOf("?") > -1) {
@@ -441,7 +441,7 @@
                                             data-container="body" data-toggle="popover"
                                             data-placement="right" data-trigger="manual"
                                             data-content="This bar could not be empty!" size="4">
-                <!-- show the vertify code -->
+                <!-- 验证码 显示 -->
                 <img onclick="getCode()" id="verifyImg" alt="verify code" src=""/>
             </div>
             <button onclick="register()">Register</button>

@@ -15,7 +15,7 @@
         <result property="searchInputValue" column="search_input_val"/>
     </resultMap>
 
-    <!-- user login -->
+    <!-- 用户登录 -->
     <select id="login" parameterType="UserEntity" resultType="UserEntity">
         select * from users
         <where>
@@ -29,23 +29,23 @@
         </where>
     </select>
 
-    <!-- register -->
+    <!-- 用户注册 -->
     <insert id="register" parameterType="UserEntity">
         insert into users(account, password, phone, email, city_id)
         values (#{account}, #{password}, #{phone}, #{email}, #{cityId})
     </insert>
 
-    <!-- get the state  -->
+    <!-- 获取所有的州 -->
     <select id="getState" resultType="StateEntity">
         select * from state
     </select>
 
-    <!-- get the city -->
+    <!-- 根据州查询城市 -->
     <select id="getCityById" parameterType="Integer" resultType="CityEntity">
         select * from city where state_id=#{id}
     </select>
 
-    <!-- get the square -->
+    <!-- 根据城市查询区域 -->
     <select id="getAreaById" parameterType="Integer" resultType="AreaEntity">
         select * from area where city_id=#{id}
     </select>
@@ -55,12 +55,12 @@
         search_input_text=#{searchInputPageTxt},hid_type_val=#{hidTypeValue} where id=#{id}
     </update>
 
-    <!--find user by userid-->
+    <!--根据用户ID查询用户-->
     <select id="getUserById" parameterType="Integer" resultMap="UserMap" >
         select * from users where id=#{id}
     </select>
 
-    <!--find user by account number-->
+    <!--根据账号查询用户-->
     <select id="getUserByAccount" parameterType="String" resultType="UserEntity">
         select * from users where account = #{account}
     </select>

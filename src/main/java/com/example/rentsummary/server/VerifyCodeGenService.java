@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * verfy code input
+ * 验证码生成接口
  */
 public interface VerifyCodeGenService {
     /**
-     * Generate the verification code and return the code, and write the picture into the os
+     * 生成验证码并返回code，将图片写的os中
      *
      * @param width
      * @param height
@@ -22,7 +22,7 @@ public interface VerifyCodeGenService {
     String generate(int width, int height, OutputStream os) throws IOException;
 
     /**
-     * Generate verification code object
+     * 生成验证码对象
      *
      * @param width
      * @param height
