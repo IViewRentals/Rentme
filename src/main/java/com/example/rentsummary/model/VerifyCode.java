@@ -3,7 +3,7 @@ package com.example.rentsummary.model;
 import lombok.Data;
 
 /**
- * 验证码类
+ * verifty code
  */
 public class VerifyCode {
     private String code;

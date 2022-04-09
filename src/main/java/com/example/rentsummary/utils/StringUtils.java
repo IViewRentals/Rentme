@@ -4,23 +4,23 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * 字符串工具类
+ * String utility
  *
  * @author ruoyi
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils
 {
-    /** 空字符串 */
+    /** empty string */
     private static final String NULLSTR = "";
 
-    /** 下划线 */
+    /** underscore */
     private static final char SEPARATOR = '_';
 
     /**
-     * 获取参数不为空值
+     * Get parameter is not null
      *
-     * @param value defaultValue 要判断的value
-     * @return value 返回值
+     * @param value defaultValue judge value
+     * @return value
      */
     public static <T> T nvl(T value, T defaultValue)
     {
@@ -28,10 +28,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
-     * * 判断一个Collection是否为空， 包含List，Set，Queue
+     * * Determine whether a Collection is empty, including List, Set, Queue
      *
-     * @param coll 要判断的Collection
-     * @return true：为空 false：非空
+     * @param coll Collection to judge
+     * @return true：empty false: not empty
      */
     public static boolean isEmpty(Collection<?> coll)
     {
@@ -39,10 +39,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
-     * * 判断一个Collection是否非空，包含List，Set，Queue
+     * * Determine whether a Collection is not empty, including List, Set, Queue
      *
-     * @param coll 要判断的Collection
-     * @return true：非空 false：空
+     * @param coll Collection to judge
+     * @return true：empty false: not empty
      */
     public static boolean isNotEmpty(Collection<?> coll)
     {
@@ -50,10 +50,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
-     * * 判断一个对象数组是否为空
+     * * Check if an array of objects is empty
      *
-     * @param objects 要判断的对象数组
-     ** @return true：为空 false：非空
+     * @param objects Array of objects to judge
+     ** @return true：empty false: not empty
      */
     public static boolean isEmpty(Object[] objects)
     {
@@ -61,10 +61,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
-     * * 判断一个对象数组是否非空
+     * * Check if an array of objects is not empty
      *
-     * @param objects 要判断的对象数组
-     * @return true：非空 false：空
+     * @param objects Array of objects to judge
+     * @return true：empty false: not empty
      */
     public static boolean isNotEmpty(Object[] objects)
     {
