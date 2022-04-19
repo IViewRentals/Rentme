@@ -27,13 +27,13 @@
 		 * @type string
          * @default 'cn'
 		 */
-		lang: 'cn',
+		lang: 'en',
 		/**
          * Multiple select mode(tags)
 		 * @type boolean
          * @default false
 		 */
-		multiple: false,
+		multiple: true,
         /**
          * pagination or not
          * @type boolean

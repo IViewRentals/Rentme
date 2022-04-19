@@ -81,35 +81,35 @@ public class RentController extends BaseController {
         if (null !=result) {
             // Division
             for (Division division:result.getDivision()) {
-                if(division.getName().split(",")[1].contains("ACT")) {
+//                if(division.getName().split(",")[1].contains("ACT")) {
                     CommonBean item = new CommonBean();
                     item.setId(division.getValue());
                     item.setName(division.getName());
                     item.setType(division.getType());
                     commonBeanList.add(item);
-                }
+//                }
             }
 
             // Region
             for (Region region:result.getRegion()) {
-                if(region.getName().split(",")[1].contains("ACT")) {
+//                if(region.getName().split(",")[1].contains("ACT")) {
                     CommonBean item = new CommonBean();
                     item.setId(region.getValue());
                     item.setName(region.getName());
                     item.setType(region.getType());
                     commonBeanList.add(item);
-                }
+//                }
             }
 
             // District
             for (District district:result.getDistrict()) {
-                if(district.getName().split(",")[1].contains("ACT")) {
+//                if(district.getName().split(",")[1].contains("ACT")) {
                     CommonBean item = new CommonBean();
                     item.setId(district.getValue());
                     item.setName(district.getName());
                     item.setType(district.getType());
                     commonBeanList.add(item);
-                }
+//                }
             }
         }
 
