@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : rentme数据库
  Source Server Type    : MySQL
- Source Server Version : 80026
- Source Host           : localhost:3306
+ Source Server Version : 50650
+ Source Host           : 47.114.170.77:3306
  Source Schema         : rentme
 
  Target Server Type    : MySQL
- Target Server Version : 80026
+ Target Server Version : 50650
  File Encoding         : 65001
 
- Date: 26/03/2022 21:49:29
+ Date: 22/04/2022 12:49:57
 */
 
 SET NAMES utf8mb4;
@@ -22,13 +22,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `area`;
 CREATE TABLE `area`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `area` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `city_id` int NULL DEFAULT NULL,
+  `city_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `city_state_id`(`city_id`) USING BTREE,
   CONSTRAINT `area_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `state` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 92 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of area
@@ -39,13 +39,13 @@ CREATE TABLE `area`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `city`;
 CREATE TABLE `city`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `state_id` int NULL DEFAULT NULL,
+  `state_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `city_state_id`(`state_id`) USING BTREE,
   CONSTRAINT `city_state_id` FOREIGN KEY (`state_id`) REFERENCES `state` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 93 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of city
@@ -148,10 +148,10 @@ INSERT INTO `city` VALUES (92, 'Canberra\r\n', 8);
 -- ----------------------------
 DROP TABLE IF EXISTS `state`;
 CREATE TABLE `state`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of state
@@ -170,24 +170,34 @@ INSERT INTO `state` VALUES (8, 'ACT');
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `account` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `phone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `city_id` int NULL DEFAULT NULL,
+  `city_id` int(11) NULL DEFAULT NULL,
   `base_search` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `search_input_val` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `search_input_text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `hid_type_val` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `email_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `users_city_id`(`city_id`) USING BTREE,
   CONSTRAINT `users_city_id` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 106 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (13, 'admin', '111', '18079838928', '20393489@qq.com', 27, 'allhomes:Apartment,propertyTypes:UNIT,Bedrooms:,Bathrooms:,Parking:,', '', '', '');
+INSERT INTO `users` VALUES (13, 'admin', '111', '18079838928', '20393489@qq.com', 27, 'allhomes:,propertyTypes:,Bedrooms:,Bathrooms:,Parking:,', '18010', 'Canberra, ACT, 2601-DIVISION', 'DIVISION', NULL);
+INSERT INTO `users` VALUES (54, 'jph19970612', 'a20070326', '0478385518', '164256101@163.com', 92, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (55, 'wangmingxuan', 'wangmingxuan', '12345678912', '123@123.com', 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (56, 'wangmingxuan', 'wangmingxuan', '123123123', '123123123', 2, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (57, '19971103', '19971103', '123123123', '123123123', 2, 'propertyTypes:TOWNHOUSE,Bedrooms:,Bathrooms:,Parking:,', '', '', '', NULL);
+INSERT INTO `users` VALUES (58, 'a20070326', 'a20070326', '478385518', 'u6654495@163.com', 92, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (59, 'David', '1245qwrt', '55449894', '1111111@qq.com', 70, 'propertyTypes:,Bedrooms:,Bathrooms:,Parking:,', '14837,19485', 'Bonner, ACT, 2914-DIVISION,Beard, ACT, 2620-DIVISION', 'DIVISION', NULL);
+INSERT INTO `users` VALUES (60, 'abc123', 'abc123', '123456', '123456@qq.com', 4, 'propertyTypes:,Bedrooms:,Bathrooms:,Parking:,', '', '', 'DIVISION', NULL);
+INSERT INTO `users` VALUES (88, 'admin123', 'admi123', '1234324', '230904903@qq.com', 43, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (105, 'hbx', 'ACAD123', '1805798934', '2480311253@qq.com', 59, 'propertyTypes:,Bedrooms:,Bathrooms:,Parking:,', '', '', '', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

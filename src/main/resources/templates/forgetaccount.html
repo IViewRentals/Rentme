@@ -1,0 +1,477 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Login&Register</title>
+    <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Make the image fully responsive */
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f6f5f7;
+            display: flex;
+
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 95vh;
+            margin: -20px 0 50px;
+        }
+
+        h1 {
+            font-family: "MV Boli";
+            font-weight: bold;
+            margin: 0;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: .5px;
+            margin: 20px 0 30px;
+        }
+
+        span {
+            font-size: 12px;
+        }
+
+        a {
+            color: #333;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 15px 0;
+        }
+
+        .dowebok {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22);
+            position: relative;
+            overflow: hidden;
+            width: 668px;
+            max-width: 100%;
+            min-height: 340px;
+            margin-top: 100px;
+        }
+
+        .form-container .login-form {
+            height: calc(100% - 58px);
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 0 50px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .social-container a {
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 5px;
+            height: 40px;
+            width: 40px;
+        }
+
+        .social-container a:hover {
+            background-color: #eee;
+        }
+
+        .form-container input {
+            background: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 60%;
+            outline: none;
+        }
+
+        button {
+            margin-top: 15px;
+            border-radius: 20px;
+            border: 1px solid lightseagreen;
+            background: lightseagreen;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(.95);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button.ghost {
+            background: transparent;
+            border-color: #fff;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all .6s ease-in-out;
+        }
+
+        .sign-in-container {
+            left: 0;
+            width: 100%;
+            z-index: 2;
+        }
+
+        /* Move signin to right */
+        .dowebok.right-panel-active .sign-in-container {
+            transform: translateY(100%);
+        }
+
+        /* Move overlay to left */
+        .dowebok.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        /* Bring signup over signin */
+        .dowebok.right-panel-active .sign-up-container {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+        }
+
+        /* Move overlay back to right */
+        .dowebok.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        /* Bring back the text to center */
+        .dowebok.right-panel-active .overlay-left {
+            transform: translateY(0);
+        }
+
+        /* Same effect for right */
+        .dowebok.right-panel-active .overlay-right {
+            transform: translateY(20%);
+        }
+
+        .login-tip {
+            margin: 20px 0 10px 0;
+        }
+        .login-tip a {
+            margin-right: 20px;
+        }
+
+        .login-input {
+            width: 80%;
+        }
+
+        #nextBtn {
+            margin-top: 20px;
+        }
+
+        .send {
+            display: inline-block;
+            padding: 12px 15px;
+            width: 21%;
+            line-height: inherit;
+            border: 1px solid lightseagreen;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            cursor: pointer;
+        }
+
+        #lEmail {
+            cursor: not-allowed;
+
+        }
+        #lEmailCode {
+            width: 38%;
+            margin-left: 27%;
+        }
+        .popover-body {
+            color: red;
+        }
+
+        .disable {
+            cursor: not-allowed;
+        }
+
+    </style>
+</head>
+
+<script type="text/javascript" th:inline="javascript">
+    var email = "";
+    var account = "";
+    var time = 60;
+    $(function () {
+        $("#user-form").show();
+        $("#check-form").hide();
+        $("#change-pwd-form").hide();
+    })
+
+    // 更改密码
+    function changePwd() {
+        let password = $("#password");
+        let passwordConfirm = $("#passwordConfirm");
+        let pwd = password.val();
+        let pwdConfirm = passwordConfirm.val();
+        if (isNull(pwd)) {
+            password.popover('show');
+        } else if (isNull(pwdConfirm)) {
+            passwordConfirm.popover('show');
+        } else if (!regPwd(pwd) || !regPwd(pwdConfirm)){
+        } else if (pwd !== pwdConfirm) {
+            alert("Entered passwords differ!");
+        } else {
+            $.ajax({
+                type: "post",
+                url: "/changePassword",
+                data: {account,"password" : pwd},
+                dataType: "json",
+                async: false,
+                success: function (res) {
+                    if (res.flag === 1) {
+                        alert("Password is changed!");
+                        window.location.href="/toLogin";
+                    }
+                },
+                error: function (msg) {
+                    alert("This is a bad request!");
+                }
+            })
+        }
+
+        clearPopover();
+    }
+
+    // 账号查找
+    function nextStep() {
+        const username = $("#lUsername").val();
+        if (!isNull(username)) {
+            $.ajax({
+                type: "get",
+                url: "/checkAccount",
+                async: false,
+                data: {"account": username},
+                dataType: "json",
+                success: function (res) {
+                    if (res.flag === 0) {
+                        // 此用户存在，则跳转下一页面
+                        account = username;
+                        email = res.user.email;
+                        let emailTmp = email;
+                        let atIndex = emailTmp.indexOf("@");
+                        let xin = "";
+                        for (let i = 0; i < atIndex-3; i++) {
+                            xin+="*";
+                        }
+                        emailTmp = emailTmp.substring(0,3) + xin.concat(emailTmp.substring(atIndex));
+
+                        $("#check-form").slideDown(300);
+                        $("#user-form").slideUp(300);
+                        $("#lEmail").val(emailTmp);
+                    } else {
+                        alert("User does not exist！");
+                    }
+                }
+            })
+        } else {
+            if (isNull(username)) {
+                $("#lUsername").popover('show')
+            }
+            setTimeout(function () {
+                $('[data-toggle="popover"]').each(function () {
+                    $(this).popover('hide');
+                })
+            }, 3000);
+        }
+    }
+
+    // 邮箱验证
+    function confirm() {
+        if (isNull(email)) {
+            alert("Please enter account first!");
+            $("#user-form").slideDown(300);
+            $("#check-form").slideUp(300);
+        } else {
+            $.ajax({
+                type: "get",
+                url: "/checkAccountByEmailCode",
+                data: {email},
+                dataType: "json",
+                async: false,
+                success: function (res) {
+                    $("#check-form").slideUp(300);
+                    $("#change-pwd-form").slideDown(300);
+                },
+                error: function (msg) {
+                    alert("This is a bad request!");
+                }
+            })
+        }
+    }
+
+    // 发送邮箱验证码
+    function send() {
+        $.ajax({
+            type: "get",
+            url: "/findAccountByEmailCode",
+            data: {email},
+            dataType: "json",
+            beforeSend: function (){
+                let sendBtn = $(".send");
+                sendBtn.html("Sending");
+                /* 禁用Send按钮 */
+                sendBtn.attr("disabled", true);
+                sendBtn.addClass("disable");
+            },
+            success: function (res) {
+                countTime($(".send"));
+            },
+            error: function (msg) {
+                alert("This is a bad request!");
+            }
+        })
+    }
+
+    // 倒计时
+    function countTime(obj) {
+        if (time === 1) {
+            obj.attr("disabled", false);
+            obj.removeClass("disable");
+            obj.html("Resend");
+            time = 60;
+            return;
+        } else {
+            obj.attr("disabled", true);
+            obj.addClass("disable");
+            obj.html(time);
+            time--;
+        }
+        setTimeout(function () {
+            countTime(obj);
+        }, 1000);
+    }
+
+    // 清除警告框
+    function clearPopover() {
+        setTimeout(function () {
+            $('[data-toggle="popover"]').each(function () {
+                $(this).popover('hide');
+            })
+        }, 3000);
+    }
+
+    // 密码校验
+    function regPwd(password) {
+        password = password.toString();
+        if (password.length < 6) {
+            alert("The password must be more than six characters long!")
+            return false;
+        }
+        const regExp = /^[A-Za-z0-9]+$/
+        const reg = new RegExp(regExp);
+        if (!reg.test(password)) {
+            alert("The password must contain numbers and letters!")
+            return false;
+        }
+
+        if (new RegExp(/^[0-9]+$/).test(password)) {
+            alert("The password must contain numbers and letters!")
+            return false;
+        }
+        if (new RegExp(/^[A-Za-z]+$/).test(password)) {
+            alert("The password must contain numbers and letters!")
+            return false;
+        }
+
+        return true;
+    }
+    function isNull(obj) {
+        return obj === null || obj === "" || obj === '0' || obj === 0;
+    }
+</script>
+<body>
+    <div id="msg"></div>
+
+    <div class="dowebok" id="dowebok">
+        <div class="form-container sign-in-container">
+            <div id="user-form" class="login-form">
+                <h1 style="margin:30px 0">Rent me</h1>
+                <div class="login-input">Username：<input type="text" id="lUsername" placeholder="Username"
+                                                         data-container="body" data-toggle="popover"
+                                                         data-placement="right"
+                                                         data-trigger="manual"
+                                                         data-content="This bar could not be empty!"></div>
+                <button id="nextBtn" onclick="nextStep()">Next Step</button>
+                <div class="login-tip">
+                    <a href="/toLogin" style="margin-left: 30px">
+                        <i>Account Login</i>
+                    </a>
+                    <a href="/toRegister"><i>Account registration</i></a>
+                </div>
+            </div>
+
+            <div id="check-form" class="login-form">
+                <h1 style="margin:30px 0">Rent me</h1>
+                <div class="login-input"><i style="margin-left: 21px"></i>Email Address  <b style="margin: 0 5px"></b>
+                    <input
+                            type="text" id="lEmail" disabled>
+                </div>
+                <div class="login-input"><i style="margin-left: 21px"></i>
+                    <input
+                            type="text" id="lEmailCode" placeholder="Verification code" data-trigger="manual"
+                            data-container="body" data-toggle="popover" data-placement="right"
+                            data-content="This bar could not be empty!" >
+                    <button class="send" onclick="send()">Send</button>
+                </div>
+                <button id="confirm" onclick="confirm()">Confirm</button>
+            </div>
+
+            <div id="change-pwd-form" class="login-form">
+                <h1 style="margin:30px 0">Rent me</h1>
+                <div class="login-input"><i style="margin-left: 21px"></i>New Password <span style="margin: 0 5px"></span>
+                    <input
+                            type="password" id="password" placeholder="new password" data-trigger="manual"
+                            data-container="body" data-toggle="popover" data-placement="right"
+                            data-content="This bar could not be empty!" >
+                </div>
+                <div class="login-input"><i style="margin-left: 42px"></i>Input Again <span style="margin: 0 5px"></span>
+                    <input
+                            type="password" id="passwordConfirm" placeholder="input again" data-trigger="manual"
+                            data-container="body" data-toggle="popover" data-placement="right"
+                            data-content="This bar could not be empty!" >
+                </div>
+                <button id="changePwd" onclick="changePwd()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

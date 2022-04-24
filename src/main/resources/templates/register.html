@@ -62,7 +62,7 @@
             position: relative;
             width: 668px;
             max-width: 100%;
-            min-height: 800px;
+            min-height: 890px;
         }
 
         .form-container .form {
@@ -182,7 +182,7 @@
 
         #verifyCode {
             width: 30%;
-            margin-left: 91px;
+            margin-left: 21%;
         }
 
         .popover {
@@ -191,10 +191,36 @@
             border: 1px solid rgba(255, 0, 0, .5);
             color: red;
         }
+
+        .send {
+            display: inline-block;
+            padding: 12px 15px;
+            width: 21%;
+            line-height: inherit;
+            border: 1px solid lightseagreen;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            cursor: pointer;
+        }
+
+
+        #lEmailCode {
+            width: 38%;
+            margin-left: 28%;
+        }
+
+        .disable {
+            cursor: not-allowed;
+        }
     </style>
 </head>
 
 <script type="text/javascript" th:inline="javascript">
+    var time = 60; // 倒计时
     $(function () {
         $.ajax({
             type: "get",
@@ -208,8 +234,125 @@
         })
 
         getCode();
-        changeInput()
-    })
+        changeInput();
+        sendEmailCode();
+        listenEmail();
+        listenAccountInput();
+    });
+
+
+    // 清除警告框
+    function clearPopover() {
+        setTimeout(function () {
+            $('[data-toggle="popover"]').each(function () {
+                $(this).popover('hide');
+            })
+        }, 3000);
+    }
+
+    // 监听账号输入框，输入账号正确则启用发送按钮否则禁用
+    function listenAccountInput() {
+        $("#lUsername").on('blur', function () {
+            const value = $(this).val();
+            if (isNull(value)) {
+                $("#lUsername").popover('show');
+            } else if (!regUserName(value)) {
+                $("#registerBtn").attr("disabled", true);
+                $("#registerBtn").addClass("disable");
+            } else {
+                $("#registerBtn").attr("disabled", false);
+                $("#registerBtn").removeClass("disable");
+                $.ajax({
+                    type: "get",
+                    url: "/checkAccount",
+                    data: {"account": value},
+                    dataType: "json",
+                    success: function (res) {
+                        if (res.flag === 0) {
+                            // 用户名已存在
+                            alert("This account already exists");
+                            $("#registerBtn").attr("disabled", true);
+                            $("#registerBtn").addClass("disable");
+                        } else {
+                            $("#registerBtn").attr("disabled", false);
+                            $("#registerBtn").removeClass("disable");
+                        }
+                    }
+                })
+            }
+        });
+        clearPopover();
+    }
+
+    // 重新输入邮箱时，重置按钮文本
+    function listenEmail() {
+        $("#lEmail").on('change', function () {
+            $(".send").html("Send");
+            $(".send").attr("disabled", false);
+            $(".send").removeClass("disable");
+        });
+    }
+
+    // click Send Email verification Code
+    function sendEmailCode() {
+        $(".send").on('click', function () {
+            const btnTxt = $(this).val();
+            const value = $("#lEmail").val();
+            if (isNull(value)) {
+                $("#lEmail").popover('show');
+            } else if (!regMail(value)) {
+            } else {
+                $.ajax({
+                    type: "get",
+                    url: "/registerByEmailCode",
+                    data: {"email": value},
+                    dataType: "json",
+                    beforeSend: function (){
+                        $(".send").html("Sending");
+                        $(".send").attr("disabled", true);
+                        $(".send").addClass("disable");
+                    },
+                    success: function (res) {
+                        if (res.flag === 0) {
+                            // 邮箱已存在
+                            alert("This email already exists");
+                            $(".send").html("Send");
+                            $(".send").attr("disabled", false);
+                            $(".send").removeClass("disable");
+                        } else {
+                            countTime($(".send"));
+                        }
+                    },
+                    error: function (msg) {
+                        alert("This email does not exist");
+                        $(".send").html("Send");
+                        $(".send").attr("disabled", false);
+                        $(".send").removeClass("disable");
+                    }
+                })
+            }
+            clearPopover();
+        })
+    }
+
+    // 倒计时
+    function countTime(obj) {
+        if (time === 1) {
+            obj.attr("disabled", false);
+            obj.removeClass("disable");
+            obj.html("Resend");
+            time = 60;
+            return;
+        } else {
+            obj.attr("disabled", true);
+            obj.addClass("disable");
+            obj.html(time);
+            time--;
+        }
+        setTimeout(function () {
+            countTime(obj);
+        }, 1000);
+    }
 
     // Listen for option change events
     function changeInput() {
@@ -240,6 +383,7 @@
         const city = $("#city").val();
         const phone = $("#lPhone").val();
         const email = $("#lEmail").val();
+        const emailCode = $("#lEmailCode").val();
         const verifyCode = $("#verifyCode").val();
 
         if (!regUserName(username) || !regPwd(password) || !regPhoneNumber(phone) || !regMail(email)) {
@@ -250,7 +394,7 @@
             $.ajax({
                 type: "post",
                 url: "/register",
-                data: {"account": username, "password": password, "cityId": city, "phone": phone, "email": email,verifyCode},
+                data: {"account": username, "password": password, "cityId": city, "phone": phone, "email": email,verifyCode,emailCode},
                 dataType: "json",
                 async: false,
                 success: function (res) {
@@ -284,11 +428,7 @@
                 $("#verifyCode").popover('show')
             }
 
-            setTimeout(function () {
-                $('[data-toggle="popover"]').each(function () {
-                    $(this).popover('hide');
-                })
-            }, 3000);
+            clearPopover();
         }
     }
 
@@ -317,7 +457,6 @@
         return true;
     }
 
-
     function regPhoneNumber(phoneNum){
         const regExp = /(^(\d{2,4}[-_－—]?)?\d{3,8}([-_－—]?\d{3,8})?([-_－—]?\d{1,7})?$)|(^0?1[35]\d{9}$)/;
         const reg = new RegExp(regExp);
@@ -327,7 +466,6 @@
         }
         return true;
     }
-
 
     function regMail(mail) {
         const reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
@@ -432,9 +570,16 @@
             </div>
             <div class="login-input"><i style="margin-left: 21px"></i>Email Address<b class="b-red">*</b>
                 <input
-                    type="text" id="lEmail" placeholder="Email Address" data-trigger="manual"
-                    data-container="body" data-toggle="popover" data-placement="right"
-                    data-content="This bar could not be empty!">
+                        type="text" id="lEmail" placeholder="Email Address" data-trigger="manual"
+                        data-container="body" data-toggle="popover" data-placement="right"
+                        data-content="This bar could not be empty!" >
+            </div>
+            <div class="login-input"><i style="margin-left: 21px"></i>
+                <input
+                        type="text" id="lEmailCode" placeholder="Verification code" data-trigger="manual"
+                        data-container="body" data-toggle="popover" data-placement="right"
+                        data-content="This bar could not be empty!" >
+                <button class="send">Send</button>
             </div>
             <div class="login-input">
                 <input type="text" id="verifyCode" placeholder="verify code"
@@ -444,7 +589,7 @@
                 <!-- 验证码 显示 -->
                 <img onclick="getCode()" id="verifyImg" alt="verify code" src=""/>
             </div>
-            <button onclick="register()">Register</button>
+            <button id="registerBtn" onclick="register()">Register</button>
             <div style="margin: 30px 0 0 0 ">If you already acquired an account, please proceed to the <a
                     href="/toLogin" style="color: blue">login</a> page.
             </div>

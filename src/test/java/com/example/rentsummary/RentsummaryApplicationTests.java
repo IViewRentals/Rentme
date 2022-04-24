@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.sql.DataSource;
 import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
+import java.util.UUID;
 
 @SpringBootTest
 class RentsummaryApplicationTests {
