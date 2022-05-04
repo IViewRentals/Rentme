@@ -21,6 +21,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -128,6 +129,7 @@ public class RentContextGet {
         CloseableHttpResponse response = null;
         // 2. Create a get request, which equals enter URL in a browser
         String url="https://www.domain.com.au/rent/";
+        System.out.println(queryPara);
         url=url+queryPara;
 
         // e.g., https://www.domain.com.au/rent/st-leonards-vic-3223/house/?bedrooms=2-any&bathrooms=1-any&price=0-2000&availableto=2021-03-23&excludedeposittaken=1&carspaces=3-any&landsize=100-any&keywords=vic
@@ -215,6 +217,7 @@ public class RentContextGet {
                 // 5. Get the response content
                 HttpEntity httpEntity = response.getEntity();
                 String html = EntityUtils.toString(httpEntity, "utf-8");
+                System.out.println(html);
                 System.out.println("Realestate get!!!");
                 return html;
             } else {
@@ -241,11 +244,56 @@ public class RentContextGet {
 
         // bedrooms__gte=1&bathrooms__gte=1&parking__gte=1
 
-        String url="https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease"+
-                "&surrounding=true&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&view_as=list"+categories+"&address_suburb=";
-        url=url+java.net.URLEncoder.encode(queryPara,"utf-8")+"&page="+currentPage;
+        System.out.println("the categories is "+categories);
 
-        // https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&address_suburb=Acton%2C+2601%2C+ACT&surrounding=true&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&page=1
+        //check the categories - if have categories (should get the first feature); if not have categories - it should be empty
+        if(categories.charAt(1) == 'c'){
+            String[] catelist = categories.split("&");
+            categories = "&"+catelist[1];
+            if(categories.contains("ALL")){
+                categories = "";
+            }
+        }else {
+            categories = "";
+        }
+
+        System.out.println("the categories is "+categories);
+
+        System.out.println("the queryPara is "+queryPara);
+        System.out.println("the queryPara encode is "+java.net.URLEncoder.encode(queryPara,"utf-8"));
+        //categories： &price__gte=0&price__lte=1412
+        String url="https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&view_as=list&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&page=1" +
+                java.net.URLEncoder.encode(queryPara,"utf-8")+categories;
+                //"https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&address_suburb="+java.net.URLEncoder.encode(queryPara,"utf-8");
+        //url=url+"&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&view_as=list&filters="+currentPage;
+
+        //the categories is &categories=HOUSE&bedrooms__gte=2&bedrooms__lte=2&bathrooms__gte=1&bathrooms__lte=1&parking__gte=2&parking__lte=2&price__gte=0&price__lte=822
+        //the queryPara is Beard, 2620, ACTprice__gte=0&price__lte=822&&bedrooms__gte=2&bedrooms__lte=2&bathrooms__gte=1&bathrooms__lte=1&parking__gte=2&parking__lte=2
+
+        //最后生成的url
+        //https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&
+        // surrounding=true&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&view_as=list&price__gte=0&price__lte=1412&address_suburb=Dickson%2C+2602%2C+ACTprice__gte%3D0%26price__lte%3D1412%26&page=1
+
+        //https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&
+        // address_suburb=Dickson%2C+2602%2C+ACT&surrounding=true&bathrooms__gte=1&price__gte=50&price__lte=8000
+        // &categories=House
+        // &order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&page=1&bathrooms__lte=1
+        // &view_as=list&filters=1
+
+        // https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&address_suburb=
+        // Dickson,+2602,+ACT&surrounding=true&bedrooms__gte=2&bathrooms__gte=1&parking__gte=0&price__gte=50&price__lte=4500&categories=House
+        // &order_by=price&property_status_groups=current,underOffer,includePrivate&bedrooms__lte=3&bathrooms__lte=1&view_as=list&filters=1&page=1
+
+        //https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&
+        // address_suburb=Casey%2C+2913%2C+ACT
+        // price__gte%3D0%26price__lte%3D1296%26
+        // &order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&view_as=list&filters=1
+
+        //https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&address_postcode=2601&surrounding=true&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&page=1
+
+        //https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&address_suburb=Acton%2C+2601%2C+ACT&surrounding=true&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&page=1
+
+
 
         System.out.println("get rent inf from ZangoURL:"+url);
         HttpGet request = new HttpGet(url);

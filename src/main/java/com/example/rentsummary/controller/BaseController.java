@@ -275,6 +275,7 @@ public class BaseController {
             }
         }
 
+        para.append("&");
         // Set rent
         para.append("price__gte="+ minprice);
         para.append("&");

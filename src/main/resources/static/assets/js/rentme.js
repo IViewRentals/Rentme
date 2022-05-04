@@ -388,7 +388,7 @@ function initZangoData(paramList,currentPage,id,name,type){
                     objHtml.push('<div class="property-grid-box mb-xl-20">');
                     objHtml.push('<div class="property-grid-wrapper">');
                     objHtml.push('<div class="property-img animate-img">');
-                    objHtml.push('<a href="https://zango.com.au/'+listing.url_path+'" target="_blank" style="height: 190px;background-color: #f2f5f7;color: #7e8594">');
+                    objHtml.push('<a href="https://zango.com.au'+listing.url_path+'" target="_blank" style="height: 190px;background-color: #f2f5f7;color: #7e8594">');
                     if (listing.images.length >0) {
                         // objHtml.push('<img src="assets/images/homepage-1/recent-350x235.jpg" class="img-fluid full-width" alt="#">');
                         objHtml.push('<img src="'+listing.images[0].image.image_320_240+'" class="img-fluid full-width" alt="#" style="height: 190px" alt="#"/></a>');
