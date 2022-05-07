@@ -249,7 +249,7 @@ public class RentContextGet {
         //check the categories - if have categories (should get the first feature); if not have categories - it should be empty
         if(categories.charAt(1) == 'c'){
             String[] catelist = categories.split("&");
-            categories = "&"+catelist[1];
+            categories = catelist[1];
             if(categories.contains("ALL")){
                 categories = "";
             }
@@ -260,10 +260,16 @@ public class RentContextGet {
         System.out.println("the categories is "+categories);
 
         System.out.println("the queryPara is "+queryPara);
+
+        //form the queryPara
+        String[] queryList = queryPara.split(",");
+        String newQueryList = queryList[0]+"%2C"+queryList[1].substring(1)+"%2C"+queryList[2].substring(1);
+        System.out.println("the newQeuryList is" + newQueryList);
         System.out.println("the queryPara encode is "+java.net.URLEncoder.encode(queryPara,"utf-8"));
         //categories： &price__gte=0&price__lte=1412
-        String url="https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&view_as=list&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&page=1" +
-                java.net.URLEncoder.encode(queryPara,"utf-8")+categories;
+
+        String url="https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&view_as=list&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&page=1&address_suburb=" +
+                newQueryList+categories;
                 //"https://zango.com.au/api/pages/70/?property_class=rental&listing_type=lease&address_suburb="+java.net.URLEncoder.encode(queryPara,"utf-8");
         //url=url+"&order_by=price&property_status_groups=current%2CunderOffer%2CincludePrivate&view_as=list&filters="+currentPage;
 
