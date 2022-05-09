@@ -452,7 +452,12 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-8" style="font-weight: bold">
                     <!--加个搜索结果汇总，从下方的函数中直接取数-->
-                    <div class="text-search-result" style="color: #0b0b0b;float: left;margin-right: 5px">Having found</div><div class="text-search-result" id="houseNum" style="color: #0ea800;float: left"></div><div class="text-search-result" style="color: #0b0b0b;float: left;margin-left: 5px">houses for you!</div>
+                    <div class="text-search-result" style="color: #0b0b0b;float: left;margin-right: 5px">Having found</div>
+                    <div class="text-search-result" id="houseNum" style="color: #0ea800;float: left"></div>
+                    <div class="text-search-result" id="houseNum2" style="color: #0ea800;float: left"></div>
+                    <div class="text-search-result" id="houseNum3" style="color: #0ea800;float: left"></div>
+                    <div class="text-search-result" id="houseNum4" style="color: #0ea800;float: left"></div>
+                    <div class="text-search-result" style="color: #0b0b0b;float: left;margin-left: 5px">houses for you!</div>
 
                 </div>
                 <!--直接刷新页面的清除筛选条件-->
@@ -875,7 +880,7 @@
                     if (totalHits == 0) {
                         $("#page404").css({display: "block"})
                     }
-                    document.getElementById("houseNum").innerHTML = totalHits;
+                    document.getElementById("houseNum").innerHTML = totalHits + " in Allhomes,";
                     // 分页组件初始化
                     if (currentPage == 1 && numPages > 0) {
                          initPage("#pagebar",obj.query.page,5,numPages);

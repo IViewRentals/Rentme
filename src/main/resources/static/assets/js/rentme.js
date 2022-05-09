@@ -224,6 +224,8 @@ function initDomainData(paramList,currentPage,id,name,type){
                 // 总记录数
                 var totalListings =obj.props.totalListings;
 
+                document.getElementById("houseNum2").innerHTML = " " +totalListings + " in Domain, ";
+
                 // 分页组件初始化
                 if (currentPage ==1) {
                    // initPage(obj.props.currentPage,5,numPages);
@@ -367,6 +369,7 @@ function initZangoData(paramList,currentPage,id,name,type){
                 var  numPages =obj.results.meta.total_pages;
                 // 总记录数
                 var totalListings =obj.results.meta.total_results;
+                document.getElementById("houseNum3").innerHTML = " " +totalListings + " in Zango, ";
                 // if (totalListings==0) {
                 //     $("#page40413").css({ display: "block"})
                 // }
@@ -511,6 +514,7 @@ function initRealestateData(paramList,currentPage,id,name,type){
                 var  numPages =obj.data.rentSearch.results.pagination.maxPageNumberAvailable;
                 // 总记录数
                 var totalListings =obj.data.rentSearch.results.totalResultsCount;
+                document.getElementById("houseNum4").innerHTML = " " +totalListings + " in Realestate ";
                 // if (totalListings==0) {
                 //     $("#page40414").css({ display: "block"})
                 // }
